@@ -17,8 +17,8 @@ if(!require(devtools)){
     install.packages("devtools")
 }
 
-if(!require(gridpckgname)){
-    devtools::install_github("Tai-Rocha/gridpckgname")
+if(!require(occMagnet)){
+    devtools::install_github("Tai-Rocha/occMagnet")
 }
 
 ```
