@@ -11,8 +11,12 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
+    dplyr,
+    magrittr,
     raster,
+    rgdal,
     rgee,
+    rmapshaper,
     rvest,
     sp
 URL: https://github.com/Tai-Rocha/gridpckgname

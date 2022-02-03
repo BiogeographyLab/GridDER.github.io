@@ -2,7 +2,7 @@
 % Please edit documentation in R/ee_stdDev.R
 \name{ee_stdDev}
 \alias{ee_stdDev}
-\title{Standard deviation}
+\title{Compute standard deviation}
 \usage{
 ee_stdDev(x, y, by = 1000, scale = 1000)
 }
@@ -11,13 +11,13 @@ ee_stdDev(x, y, by = 1000, scale = 1000)
 
 \item{y}{ee$Geometry$*, ee$Feature, ee$FeatureCollection or sf objects.}
 
-\item{by}{Numerical input. numbers of features}
+\item{by}{Numerical input. Numbers of features.}
 
 \item{scale}{A nominal scale in meters of the Image projection to work in. By default 1000.}
 }
 \value{
-a sf object
+a sf object.
 }
 \description{
-Standard deviation
+Given a grid system and environmental data this function compute the standard deviation for each feature of the grid system.
 }

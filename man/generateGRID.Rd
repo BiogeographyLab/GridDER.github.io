@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate_grid.R
 \name{generateGRID}
 \alias{generateGRID}
-\title{Create grid}
+\title{Generate a grid system}
 \usage{
 generateGRID(
   res_x = 10,
@@ -21,13 +21,13 @@ generateGRID(
 )
 }
 \arguments{
-\item{res_x}{A numeric input of longitude resolution}
+\item{res_x}{A numeric input of longitude resolution.}
 
-\item{res_y}{A numeric input of latitude resolution}
+\item{res_y}{A numeric input of latitude resolution.}
 
-\item{unit}{Character vector of unite in minute ("minute") or kilometre ("km")}
+\item{unit}{Character vector of unite in minute ("minute") or kilometre ("km").}
 
-\item{flag_crs}{Logical. Flag the CRS}
+\item{flag_crs}{Logical. Flag the CRS.}
 
 \item{extent_unit}{Character vector. It can be "crs_web_extent" for... or "crs_countryPolygon" for..}
 
@@ -41,9 +41,5 @@ generateGRID(
 
 }
 \description{
-Create grid
-}
-\examples{
-
-
+This function is used to generate(simulate) a grid system based on metadata we have used our metadata to simulate some grid systems (2_simulate_grid.Rmd).
 }

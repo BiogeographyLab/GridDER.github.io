@@ -1,13 +1,10 @@
-
-# this function is used to generate(simulate) a grid system based on metadata
-# we have used our metadata to simulate some grid systems (2_simulate_grid.Rmd).
-
-#' Create grid
+#' @title  Generate a grid system
+#' @description This function is used to generate(simulate) a grid system based on metadata we have used our metadata to simulate some grid systems (2_simulate_grid.Rmd).
 #'
-#' @param res_x A numeric input of longitude resolution
-#' @param res_y A numeric input of latitude resolution
-#' @param unit Character vector of unite in minute ("minute") or kilometre ("km")
-#' @param flag_crs Logical. Flag the CRS
+#' @param res_x A numeric input of longitude resolution.
+#' @param res_y A numeric input of latitude resolution.
+#' @param unit Character vector of unite in minute ("minute") or kilometre ("km").
+#' @param flag_crs Logical. Flag the CRS.
 #' @param extent_unit Character vector. It can be "crs_web_extent" for... or "crs_countryPolygon" for..
 #' @param input_extent
 #' @param country Character vector of countries. Ex.: "Germany"
@@ -23,8 +20,6 @@
 #' @import raster sp
 #'
 #' @examples
-#'
-#'
 generateGRID = function(res_x = 10,
                         res_y = 10,
                         unit = "km",# minute
