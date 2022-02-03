@@ -8,15 +8,15 @@
 #'
 #' @return a sf object.
 #' @export
-#' @import rgee
+#' @import dplyr rgdal rgee rmapshaper
 #'
 #' @examples
-#' #' #Read a base map and transform in sf object
-#' base_map <- rgdal::readOGR("./data/0_basemap/ne_10m_admin_0_countries.shp") |>
+#' # Read a base map and transform in sf object
+#' base_map <- raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp) |>
 #' sf::st_as_sf()
 #'
 #' # Read a grid system transform in sf object
-#' gridID_26 <- rgdal::readOGR("./data/South_Africa/grid_id_26/v2_grid_id_26.shp") |>
+#' gridID_26 <- raster::shapefile("data/South_Africa/grid_id_26/v2_grid_id_26.shp") |>
 #' sf::st_as_sf()
 #'
 #' # Select a region of interest
@@ -25,7 +25,7 @@
 #' sf::st_intersection(gridID_26) |>
 #' dplyr::select(ADMIN, geometry)
 #'
-#' #Simplify the geometry
+#' # Simplify the geometry
 #' South_Africa_s <-  South_Africa |>
 #' rmapshaper::ms_simplify(keep = 0.001,keep_shapes = TRUE)
 #'
