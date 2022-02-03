@@ -9,6 +9,12 @@ Currently **modleR** can be installed from GitHub:
 
 # Without vignette
 
-remotes::install_github("Model-R/modleR", build = TRUE)
+if(!require(devtools)){
+    install.packages("devtools")
+}
+
+if(!require(gridpckgname)){
+    devtools::install_github("Tai-Rocha/gridpckgname")
+}
 
 ```
