@@ -1,6 +1,7 @@
 # occMagnet  <img src='man/figures/logo.png' align="right" height="250" />
 
-ps.: in development
+PS 1: in development
+PS 2: this logo definitively is not final :neutral_face: . Suggestions are welcome :blush:  
 
 occMagnet can serve as a tool to not only screen for gridded points, but to quantify the geographic and environmental uncertainties associated with these records, which can be used to inform models and analyses that utilize these data, including those pertaining to global change.
 
