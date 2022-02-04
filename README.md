@@ -1,10 +1,7 @@
 # occMagnet
 The package find a grid system 
 
-<img src="https://user-images.githubusercontent.com/11633554/152386786-cda0b538-d13d-475c-a535-c6b8ee323391.png"
-     alt="temp logo"
-     width="100"
-     style="float: right;" />
+<img src='man/figures/logo.png' align="right" height="139" />
 # Installing
 
 Currently **modleR** can be installed from GitHub:
