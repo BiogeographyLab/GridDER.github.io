@@ -37,7 +37,7 @@ The workflow consists of mainly N functions that should be ....
 <img src='inst/workflow.png' align="center" height="450" />
 
 
-`generateGRID()` has a large number of parameters:
+`generateGRID()` has the following parameters
 
 ``` r
 generateGRID(res_x = 10,
