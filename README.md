@@ -27,34 +27,31 @@ if(!require(occMagnet)){
 
 The workflow consists of mainly N functions that should be ....
 
+
 <img src='inst/workflow.png' align="center" height="450" />
 
-
-
-
-## The example dataset
-
-
-## Simulating a grind system: `generateGRID()`
-
-The first step of the workflow is to setup the data, that is, to
-partition it according to each project needs, to sample background
-pseudoabsences and to apply some data cleaning procedures, as well as
-some filters. This is done by function `setup_sdmdata()`
 
 `generateGRID()` has a large number of parameters:
 
 ``` r
-args(generateGRID)
-#> function (species_name, occurrences, predictors, lon = "lon", 
-#>     lat = "lat", models_dir = "./models", real_absences = NULL, 
-#>     buffer_type = NULL, dist_buf = NULL, env_filter = FALSE, 
-#>     env_distance = "centroid", buffer_shape = NULL, min_env_dist = NULL, 
-#>     min_geog_dist = NULL, write_buffer = FALSE, seed = NULL, 
-#>     clean_dupl = FALSE, clean_nas = FALSE, clean_uni = FALSE, 
-#>     geo_filt = FALSE, geo_filt_dist = NULL, select_variables = FALSE, 
-#>     cutoff = 0.8, sample_proportion = 0.8, png_sdmdata = TRUE, 
-#>     n_back = 1000, partition_type = c("bootstrap"), boot_n = 1, 
-#>     boot_proportion = 0.7, cv_n = NULL, cv_partitions = NULL) 
-#> NULL
+generateGRID(res_x = 10,
+                        res_y = 10,
+                        unit = "km",# minute
+                        #num_x = 10,
+                        #num_y = 5,
+                        flag_crs=TRUE,
+                        extent_unit= NULL,#"crs_web_extent",# "crs_countryPolygon"
+                        input_extent = NULL,
+                        country = NULL,#"Germany",
+                        crs_num = NULL,
+                        crs_obj = NULL,
+                        #flag_maskToCountry=NULL,
+                        flag_offset=NULL,
+                        flag_maskByCountry=FALSE,
+                        flag_buffer=2,
+                        #flag_center=FALSE
+                        flag_loadCountryPolygon = TRUE
+)
 ```
+
+
