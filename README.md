@@ -5,7 +5,7 @@ occMagnet can serve as a tool to not only screen for gridded points, but to quan
 
 # Installing
 
-Currently **modleR** can be installed from GitHub:
+Currently **occMagnet** can be installed from GitHub:
 
 ``` r
 
