@@ -10,6 +10,8 @@ put citation here
 
 # Installing
 
+PS.: We need to decide the final host
+
 Currently **occMagnet** can be installed from GitHub:
 
 ``` r
