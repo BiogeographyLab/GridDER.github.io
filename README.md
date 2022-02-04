@@ -6,6 +6,8 @@ occMagnet can serve as a tool to not only screen for gridded points, but to quan
 
 # Citation
 
+put citation here
+
 # Installing
 
 Currently **occMagnet** can be installed from GitHub:
