@@ -1,6 +1,5 @@
-#  this function is used by generateGRID function, for auto extracting information from epsg website
-
-#' Find CRS extent
+#' @title  Find CRS
+#' @description This function is used by generateGRID function, for auto extracting information from epsg website
 #'
 #' @param crs_num
 #'
