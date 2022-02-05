@@ -20,13 +20,9 @@ Currently **occMagnet** can be installed from GitHub:
 
 # Without vignette
 
-if(!require(devtools)){
-    install.packages("devtools")
-}
+remotes::install_github("Tai-Rocha/occMagnet",
+                        auth_token = "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")
 
-if(!require(occMagnet)){
-    devtools::install_github("Tai-Rocha/occMagnet")
-}
 
 ```
 ## The workflow
