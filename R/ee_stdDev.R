@@ -11,6 +11,7 @@
 #' @import dplyr rgdal rgee rmapshaper
 #'
 #' @examples
+#' \dontrun{
 #' # Read a base map and transform in sf object
 #' base_map <- raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp) |>
 #' sf::st_as_sf()
@@ -40,6 +41,7 @@
 #'
 #' # Compute stdDev
 #' stdDev <-  ee_stdDev(x = nasadem,y = SA_grid26_ee)
+#' }
 ee_stdDev = function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
   for (i in seq(1, y_len, by)) {
