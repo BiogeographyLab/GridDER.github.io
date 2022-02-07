@@ -11,7 +11,7 @@
 #' @import dplyr rgdal rgee rmapshaper
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Read a base map and transform in sf object
 #' base_map <- raster::shapefile("./data/0_basemap/ne_10m_admin_0_countries.shp) |>
 #' sf::st_as_sf()
