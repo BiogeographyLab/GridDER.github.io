@@ -42,6 +42,7 @@
 #' # Compute stdDev
 #' stdDev <-  ee_stdDev(x = nasadem,y = SA_grid26_ee)
 #' }
+#'
 ee_stdDev = function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
   for (i in seq(1, y_len, by)) {
