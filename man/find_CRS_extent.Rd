@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_CRS_extent.R
 \name{find_CRS_extent}
 \alias{find_CRS_extent}
-\title{Find CRS extent}
+\title{Find CRS}
 \usage{
 find_CRS_extent(crs_num = "2154")
 }
@@ -13,5 +13,5 @@ find_CRS_extent(crs_num = "2154")
 
 }
 \description{
-Find CRS extent
+This function is used by generateGRID function, for auto extracting information from epsg website
 }
