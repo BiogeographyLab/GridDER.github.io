@@ -16,31 +16,6 @@
 #' base_map <- raster::shapefile("./data/0_basemap/ne_10m_admin_0_countries.shp) |>
 #' sf::st_as_sf()
 #'
-#' # Read a grid system transform in sf object
-#' gridID_26 <- raster::shapefile("./data/South_Africa/grid_id_26/v2_grid_id_26.shp") |>
-#' sf::st_as_sf()
-#'
-#' # Select a region of interest
-#' South_Africa <- base_map |>
-#' dplyr::filter(ADMIN=="South Africa") |>
-#' sf::st_intersection(gridID_26) |>
-#' dplyr::select(ADMIN, geometry)
-#'
-#' # Simplify the geometry
-#' South_Africa_s <-  South_Africa |>
-#' rmapshaper::ms_simplify(keep = 0.001,keep_shapes = TRUE)
-#'
-#' # Initilize rgee
-#' rgee::ee_Initialize()
-#'
-#' # sf object to featurecollection
-#' SA_grid26_ee <- rgee::sf_as_ee(South_Africa_s)
-#'
-#' # Load image of interest
-#' nasadem<- rgee::ee$Image('NASA/NASADEM_HGT/001')$select('elevation')
-#'
-#' # Compute stdDev
-#' stdDev <-  ee_stdDev(x = nasadem,y = SA_grid26_ee)
 #' }
 #'
 ee_stdDev = function(x, y, by = 1000,scale = 1000) {
