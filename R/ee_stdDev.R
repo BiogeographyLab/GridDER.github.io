@@ -13,11 +13,11 @@
 #' @examples
 #' \dontrun{
 #' # Read a base map and transform in sf object
-#' base_map <- raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp) |>
+#' base_map <- raster::shapefile("./data/0_basemap/ne_10m_admin_0_countries.shp) |>
 #' sf::st_as_sf()
 #'
 #' # Read a grid system transform in sf object
-#' gridID_26 <- raster::shapefile("data/South_Africa/grid_id_26/v2_grid_id_26.shp") |>
+#' gridID_26 <- raster::shapefile("./data/South_Africa/grid_id_26/v2_grid_id_26.shp") |>
 #' sf::st_as_sf()
 #'
 #' # Select a region of interest
