@@ -52,7 +52,7 @@ rmapshaper::ms_simplify(keep = 0.001,keep_shapes = TRUE) |>
 rgee::sf_as_ee()
 
 # Compute standard deviation
-stdDev_stat <-  ee_stdDev_stat(x = nasadem,y = ZA_gridID_26)
+stdDev_stat <-  ee_stdDev(x = nasadem,y = ZA_gridID_26)
 }
 }
 \seealso{

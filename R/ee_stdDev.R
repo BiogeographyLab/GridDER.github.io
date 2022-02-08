@@ -39,7 +39,7 @@
 #' rgee::sf_as_ee()
 #'
 #' # Compute standard deviation
-#' stdDev_stat <-  ee_stdDev_stat(x = nasadem,y = ZA_gridID_26)
+#' stdDev_stat <-  ee_stdDev(x = nasadem,y = ZA_gridID_26)
 #' }
 ee_stdDev <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
