@@ -1,4 +1,3 @@
-
 #' @title  Generate a grid system
 #' @description This function is used to generate(simulate) a grid system based on metadata we have used our metadata to simulate some grid systems (2_simulate_grid.Rmd).
 #'

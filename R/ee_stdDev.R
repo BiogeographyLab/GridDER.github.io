@@ -6,15 +6,26 @@
 #' @param by Numerical input. Numbers of features.
 #' @param scale A nominal scale in meters of the Image projection to work in. By default 1000.
 #'
-#' @return this funtion resturns a sf object.
+#' @return
 #' @export
-#' @import dplyr rgdal rgee rmapshaper
+#'
 #' @examples
-# Read a base map and transform in sf object
-base_map <- raster::shapefile("./data/0_basemap/ne_10m_admin_0_countries.shp") |>
-  sf::st_as_sf()
-
-ee_stdDev = function(x, y, by = 1000,scale = 1000) {
+#' \dontrun{
+#' # Read the grid system of interest
+#' gridID_26 <- rgdal::readOGR("./data/South_Africa/grid_id_26/v2_grid_id_26.shp") |>
+#' sf::st_as_sf()
+#'
+#' # Countries Map Base
+#' base_map <- rgdal::readOGR("./data/0_basemap/ne_10m_admin_0_countries.shp") |>
+#' sf::st_as_sf()
+#'
+#' #Select a Region of Interest
+#' South_Africa <- base_map |>
+#' dplyr::filter(ADMIN=="South Africa") |>
+#' sf::st_intersection(gridID_26) |>
+#' dplyr::select(ADMIN, geometry
+#' }
+ee_stdDev_stat <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
   for (i in seq(1, y_len, by)) {
     index <- i - 1
