@@ -8,11 +8,11 @@
 #'
 #' @return The function returns a sf object with column called "elevation" with standard deviation for each feature.
 #' @note The functions with prefix "ee_" is based on rgee, a package for interacting with Google Earth Engine (GEE). To run this functions or anything relates to GEE, users must have:
-#' \item 1- Google account with Earth Engine activated \cr
-#' \item Python >= v3.5 \cr
-#' \item EarthEngine Python API (Python package) \cr
+#' \item 1- Google account with Earth Engine activated
+#' \item Python >= v3.5
+#' \item EarthEngine Python API (Python package)
 #' If the strict dependencies are not installed, rgee just will not work. It highly recommended seeing the installations and activation instructions in \href{https://cran.r-project.org/web/packages/rgee/vignettes/rgee01.html}{rgee} documentation
-#' @seealso
+#' @seealso \href{https://csaybar.github.io/rgee-examples/}{rgee examples}
 #' @export
 #'
 #' @examples
