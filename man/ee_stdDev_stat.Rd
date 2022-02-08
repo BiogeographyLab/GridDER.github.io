@@ -16,25 +16,43 @@ ee_stdDev_stat(x, y, by = 1000, scale = 1000)
 \item{scale}{A nominal scale in meters of the Image projection to work in. By default 1000.}
 }
 \value{
-
+The function returns a sf object with column called "elevation" with standard deviation for each feature.
 }
 \description{
 Given a grid system and environmental data this function compute the standard deviation for each feature of the grid system.
 }
+\note{
+The functions with prefix "ee_" is based on rgee, a package for interacting with Google Earth Engine (GEE). To run this functions or anything relates to GEE, users must have:
+\item 1- Google account with Earth Engine activated \cr
+\item Python >= v3.5 \cr
+\item EarthEngine Python API (Python package) \cr
+If the strict dependencies are not installed, rgee just will not work. It highly recommended seeing the installations and activation instructions in \href{https://cran.r-project.org/web/packages/rgee/vignettes/rgee01.html}{rgee} documentation
+}
 \examples{
 \dontrun{
-# Read the grid system of interest
-gridID_26 <- rgdal::readOGR("./data/South_Africa/grid_id_26/v2_grid_id_26.shp") |>
+# Load the grid system of interest
+gridID_26 <- raster::shapefile("./data/South_Africa/grid_id_26/v2_grid_id_26.shp") |>
 sf::st_as_sf()
+
+# Load ImageCollection of interest
+nasadem<- rgee::ee$Image('NASA/NASADEM_HGT/001')$select('elevation')
 
 # Countries Map Base
-base_map <- rgdal::readOGR("./data/0_basemap/ne_10m_admin_0_countries.shp") |>
+base_map <- raster::shapefile("./data/0_basemap/ne_10m_admin_0_countries.shp") |>
 sf::st_as_sf()
 
-#Select a Region of Interest
-South_Africa <- base_map |>
+#Select a region of interest and simplify the geometries
+ZA_gridID_26 <- base_map |>
 dplyr::filter(ADMIN=="South Africa") |>
 sf::st_intersection(gridID_26) |>
-dplyr::select(ADMIN, geometry
+dplyr::select(ADMIN, geometry) |>
+rmapshaper::ms_simplify(keep = 0.001,keep_shapes = TRUE) |>
+rgee::sf_as_ee()
+
+# Compute standard deviation
+stdDev_stat <-  ee_stdDev_stat(x = nasadem,y = ZA_gridID_26)
 }
+}
+\seealso{
+
 }
