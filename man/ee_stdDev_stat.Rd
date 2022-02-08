@@ -23,7 +23,7 @@ Given a grid system and environmental data this function compute the standard de
 }
 \note{
 The functions with prefix "ee_" is based on rgee, a package for interacting with Google Earth Engine (GEE). To run this functions or anything relates to GEE, users must have:
-\item 1- Google account with Earth Engine activated
+\item Google account with Earth Engine activated
 \item Python >= v3.5
 \item EarthEngine Python API (Python package)
 If the strict dependencies are not installed, rgee just will not work. It highly recommended seeing the installations and activation instructions in \href{https://cran.r-project.org/web/packages/rgee/vignettes/rgee01.html}{rgee} documentation
