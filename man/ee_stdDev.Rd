@@ -22,7 +22,7 @@ The function returns a sf object with column called "elevation" with standard de
 Given a grid system and environmental data this function compute the standard deviation for each feature of the grid system.
 }
 \note{
-The functions with prefix "ee_" is based on rgee, a package for interacting with Google Earth Engine (GEE). To run this functions or anything relates to GEE, users must have:
+The functions with prefix "ee_" is based on rgee, a package for interacting with Google Earth Engine (GEE). To run these functions or anything related to GEE, users must have:
 \itemize{
 \item{Google account with Earth Engine activated}
 \item{Python >= v3.5}
