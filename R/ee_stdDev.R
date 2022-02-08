@@ -8,9 +8,11 @@
 #'
 #' @return The function returns a sf object with column called "elevation" with standard deviation for each feature.
 #' @note The functions with prefix "ee_" is based on rgee, a package for interacting with Google Earth Engine (GEE). To run this functions or anything relates to GEE, users must have:
-#' \item Google account with Earth Engine activated
-#' \item Python >= v3.5
-#' \item EarthEngine Python API (Python package)
+#'  \itemize{
+#' \item{Google account with Earth Engine activated}
+#' \item{Python >= v3.5}
+#' \item{EarthEngine Python API (Python package)}
+#' }
 #' If the strict dependencies are not installed, rgee just will not work. It highly recommended seeing the installations and activation instructions in \href{https://cran.r-project.org/web/packages/rgee/vignettes/rgee01.html}{rgee} documentation
 #' @seealso \href{https://csaybar.github.io/rgee-examples/}{rgee examples}
 #' @export
@@ -39,7 +41,7 @@
 #' # Compute standard deviation
 #' stdDev_stat <-  ee_stdDev_stat(x = nasadem,y = ZA_gridID_26)
 #' }
-ee_stdDev_stat <- function(x, y, by = 1000,scale = 1000) {
+ee_stdDev <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
   for (i in seq(1, y_len, by)) {
     index <- i - 1
