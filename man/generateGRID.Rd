@@ -31,15 +31,73 @@ generateGRID(
 
 \item{extent_unit}{Character vector. It can be "crs_web_extent" for... or "crs_countryPolygon" for..}
 
-\item{country}{Character vector of countries. Ex.: "Germany"}
+\item{country}{Character vector of country name where the grid system is from, e.g. "Germany", it can be used to extract spatial extent and the final grid could be masked by country polygons.}
 
-\item{crs_num}{Character of CRS code . Ex.: "4326"}
+\item{crs_num}{Character, which is a crs number for the grid system, e.g. "4326".}
 
-\item{flag_loadCountryPolygon}{}
+\item{crs_obj}{, an crs object for the grid system.}
+
+\item{flag_offset}{Do any adjustment of the grid system, a vector of two numbers, represent adjustment of the origin along x,y.}
+
+\item{flag_maskByCountry}{Logical. Mask the grid system by country polygon.}
+
+\item{flag_buffer}{Draw an additional buffer (e.g. 2 additional grids) along the simulated grid system, this can help cover the areas along the coastal line.}
+
+\item{flag_loadCountryPolygon}{Load Natural Earth 10meter country polygon ne_10m_admin_0_countries.shp).}
 }
 \value{
-
+The function returns a shapefile.
 }
 \description{
 This function is used to generate(simulate) a grid system based on metadata we have used our metadata to simulate some grid systems (2_simulate_grid.Rmd).
+}
+\examples{
+ \dontrun{
+# Load a shapefile of countries
+country_shp <- raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp")
+
+#Load metadata information
+grid_metadata <- gsheet::gsheet2tbl('https://docs.google.com/spreadsheets/d/1mSad3lUL5eMgtwH311Bo8PUWIqJkvgxUfG99NiuRLjo/edit#gid=166945453') |>
+as.data.frame() |>
+subset(!grepl("del_", grid_ID))
+
+# Select the Netherlands data
+iii= which(grid_metadata$grid_ID==24)
+grid_metadata$country_name[iii]
+crs_num = grid_metadata$crs_code[iii]
+crs_num
+
+if(grid_metadata$extent_unit[iii]=="empirical_occ_extent"){
+empirical_occ_extent = gsub('"',"",grid_metadata$extent[[iii]])
+empirical_occ_extent = as.numeric(strsplit(empirical_occ_extent,",")[[1]])
+}
+
+# Simulate grid system
+NL_grid <- occMagnet::generateGRID(res_x = as.numeric(grid_metadata$resolution_x[iii]),
+                res_y = as.numeric(grid_metadata$resolution_y[iii]),
+                unit = grid_metadata$resolution_unit[iii],
+                flag_crs=TRUE,
+                extent_unit=grid_metadata$extent_unit[iii],
+                input_extent=empirical_occ_extent,
+                country = grid_metadata$country_name[iii],
+                crs_num = grid_metadata$crs_code[iii],
+                flag_maskByCountry = T,
+                flag_buffer=10
+                )
+
+# Load occurrence data
+gbif_occ_proj <- load_occ("data-raw/Netherlands/gridID_24/0047643-210914110416597.csv") |>
+spTransform(CRS(paste0("+init=epsg:",crs_num)))
+
+# Plot
+plot(NL_grid)
+plot(NL_grid,
+xlim=c(extent(gbif_occ_proj)[1],
+       extent(gbif_occ_proj)[1]+3),
+       ylim=c(extent(gbif_occ_proj)[3],
+              extent(gbif_occ_proj)[3]+3))
+plot(gbif_occ_proj,add=T,col="red")
+
+
+ }
 }
