@@ -20,7 +20,7 @@ Currently **occMagnet** can be installed from GitHub:
 
 # Without vignette
 
-remotes::install_github("Tai-Rocha/occMagnet",
+remotes::install_github("BiogeographyLab/occMagnet",
                         auth_token = "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")
 
 
