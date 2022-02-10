@@ -22,6 +22,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Will change. Not run!
 #' # Load the grid system of interest
 #' gridID_26 <- raster::shapefile("./data/South_Africa/grid_id_26/v2_grid_id_26.shp") |>
 #' sf::st_as_sf()

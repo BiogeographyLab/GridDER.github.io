@@ -2,16 +2,21 @@
 % Please edit documentation in R/find_CRS_extent.R
 \name{find_CRS_extent}
 \alias{find_CRS_extent}
-\title{Find CRS}
+\title{Find extent given a coordinate reference system.}
 \usage{
 find_CRS_extent(crs_num = "2154")
 }
 \arguments{
-\item{crs_num}{}
+\item{crs_num}{Character vector of crs number, e.g. "4326"}
 }
 \value{
-
+The function returns the extent bounds (xmin,ymin,xmax,ymax)
 }
 \description{
-This function is used by generateGRID function, for auto extracting information from epsg website
+This function extracting the extent of coordinate reference systems (crs) from \href{https://epsg.io/}{epsg website}. The extent is required for generateGRID function.
+}
+\examples{
+\dontrun{
+crs <- find_CRS_extent(crs_num = "2154")
+}
 }

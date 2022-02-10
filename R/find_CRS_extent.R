@@ -5,9 +5,12 @@
 #'
 #' @return The function returns the extent bounds (xmin,ymin,xmax,ymax)
 #' @export
-#' @import rvest data
+#' @import rvest
 #'
 #' @examples
+#' \dontrun{
+#' crs <- find_CRS_extent(crs_num = "2154")
+#' }
  find_CRS_extent = function(crs_num = "2154"){
   library(rvest)
   simple <- read_html(paste0("https://epsg.io/",crs_num))

@@ -22,6 +22,7 @@
 #'
 #' @examples
 #'  \dontrun{
+#' # Will change. Not run!
 #' # Load a shapefile of countries
 #' country_shp <- raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp")
 #'

@@ -25,7 +25,7 @@ generateGRID(
 
 \item{res_y}{A numeric input of latitude resolution.}
 
-\item{unit}{Character vector of unite in minute ("minute") or kilometre ("km").}
+\item{unit}{Character vector of unite in arc-minute ("minute") or kilometre ("km").}
 
 \item{flag_crs}{Logical. Flag the CRS.}
 
@@ -53,6 +53,7 @@ This function is used to generate(simulate) a grid system based on metadata we h
 }
 \examples{
  \dontrun{
+# Will change. Not run!
 # Load a shapefile of countries
 country_shp <- raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp")
 

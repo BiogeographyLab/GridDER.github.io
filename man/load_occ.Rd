@@ -19,6 +19,7 @@ This function read in a GBIF dataset, then return the unique coordinates in spat
 }
 \examples{
 \dontrun{
+# Will change. Not run!
 unique_records <- load_occ("data-raw/Netherlands/gridID_24/0047643-210914110416597.csv")
 }
 }
