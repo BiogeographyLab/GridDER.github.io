@@ -1,4 +1,6 @@
-### This code covert shapefiles to Rdata (all data examples of packages in /data directory should be a .Rdata )
+### This code covert shapefiles to Rdata (all data examples of packages in /data directory should be a .Rdata)
+
+## For while I do not put the raw data at repo package (.csv or .shp), once data that will use as examples is provided by the package in .RData format
 
 
 grid_ID_2_polygon_masked <- raster::shapefile("inst/extdata/grid_id_2/grid_ID_2_polygon_masked.shp")

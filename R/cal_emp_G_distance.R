@@ -12,6 +12,11 @@
 #'
 #' @import ggplot2 sp
 #' @examples
+#' \dontrun{
+#' test1 <- cal_emp_G_distance(input_grid = "data/2_clean_grid/grid_ID_2_polygon_masked.shp",
+#' input_occ_grid = "data/france_datasetID10/0068190-210914110416597.csv",
+#' input_occ_random = "data/iNaturalist_20211205/0071565-210914110416597.csv")
+#' }
 cal_emp_G_distance <- function(input_grid,
                                input_occ_grid,
                                input_occ_random,
