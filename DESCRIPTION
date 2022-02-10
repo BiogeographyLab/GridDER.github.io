@@ -24,3 +24,6 @@ Imports:
     sp
 URL: https://github.com/Tai-Rocha/gridpckgname
 BugReports: https://github.com/Tai-Rocha/gridpckgname/issues
+Depends: 
+    R (>= 2.10)
+LazyData: true

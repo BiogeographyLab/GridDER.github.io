@@ -3,7 +3,7 @@
 #'
 #' @param res_x A numeric input of longitude resolution.
 #' @param res_y A numeric input of latitude resolution.
-#' @param unit Character vector of unite in minute ("minute") or kilometre ("km").
+#' @param unit Character vector of unite in arc-minute ("minute") or kilometre ("km").
 #' @param flag_crs Logical. Flag the CRS.
 #' @param extent_unit Character vector. It can be "crs_web_extent" for... or "crs_countryPolygon" for..
 #' @param input_extent
