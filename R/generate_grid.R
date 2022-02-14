@@ -70,7 +70,7 @@
 #'
 #'
 #'  }
-generateGRID = function(res_x = 10,
+generate_grid = function(res_x = 10,
                         res_y = 10,
                         unit = "km",# minute
                         #num_x = 10,
