@@ -37,3 +37,6 @@ grid_matching(
 \description{
 This function calculate nearest distance between a set of occurrences and a set of grid systems.
 }
+\author{
+Xiao Feng
+}

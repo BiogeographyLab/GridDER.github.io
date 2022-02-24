@@ -12,7 +12,7 @@ load_occ(path, crs_num = NULL)
 \item{crs_num}{Character. Crs of the output spatial data points.}
 }
 \value{
-Unique records
+Unique records.
 }
 \description{
 This function read in a GBIF dataset, then return the unique coordinates in spatial format.
@@ -22,4 +22,7 @@ This function read in a GBIF dataset, then return the unique coordinates in spat
 # Will change. Not run!
 unique_records <- load_occ("data-raw/Netherlands/gridID_24/0047643-210914110416597.csv")
 }
+}
+\author{
+Xiao Feng
 }

@@ -1,5 +1,6 @@
 #' @title Compute nearest distance
 #' @description This function calculate nearest distance between a set of occurrences and a set of grid systems.
+#' @author Xiao Feng
 #'
 #' @param input_occ Input occurrences (shapefile or .txt/.csv data with decimalLongitude & decimalLatitude).
 #' @param input_grid A list of spatial polygons, each represent one grid system flag_degree, res_x,res_y,res_unit, input_metadata=,~~~~ to fix.
@@ -13,6 +14,7 @@
 #'
 #' @return
 #' @export
+#' @import raster gsheet
 #'
 #' @examples
 grid_matching = function(input_occ,
