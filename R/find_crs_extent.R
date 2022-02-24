@@ -1,5 +1,6 @@
 #' @title  Find extent given a coordinate reference system.
 #' @description This function extracting the extent of coordinate reference systems (crs) from \href{https://epsg.io/}{epsg website}. The extent is required for generateGRID function.
+#' @author Xiao Feng
 #'
 #' @param crs_num Character vector of crs number, e.g. "4326"
 #'

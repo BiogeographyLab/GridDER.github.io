@@ -20,3 +20,6 @@ This function extracting the extent of coordinate reference systems (crs) from \
 crs <- find_CRS_extent(crs_num = "2154")
 }
 }
+\author{
+Xiao Feng
+}
