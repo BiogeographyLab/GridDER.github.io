@@ -1,10 +1,11 @@
-# occMagnet  <img src='man/figures/logo.png' align="right" height="250" />
+# gridder  <img src='man/figures/logo.png' align="right" height="250" />
 
 PS 1: in development
 
 PS 2: this logo definitively is not the final logo :neutral_face: . Suggestions are welcome :blush:  
 
-occMagnet can serve as a tool to not only screen for gridded points, but to quantify the geographic and environmental uncertainties associated with these records, which can be used to inform models and analyses that utilize these data, including those pertaining to global change.
+gridder identifies collection records that have been designated locations on widely used gridding systems. Our tool also estimates the degree of environmental heterogeneity associated with grid systems, allowing users to make informed decisions about how to use occurrence data in global change studies.  
+
 
 # Citation
 
