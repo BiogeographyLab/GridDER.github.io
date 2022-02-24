@@ -1,5 +1,6 @@
-#' @title Compute standard deviation
+#' @title Compute variation of environmental conditions.
 #' @description Given a grid system and environmental data this function compute the standard deviation for each feature of the grid system.
+#' @author Tainá Rocha
 #'
 #' @param x ee$Image or ee$ImageCollection objects with a single band.
 #' @param y ee$Geometry$*, ee$Feature, ee$FeatureCollection or sf objects.
@@ -45,7 +46,7 @@
 #' # Compute standard deviation
 #' stdDev <-  ee_stdDev(x = nasadem,y = ZA_gridID_26)
 #' }
-ee_stdDev <- function(x, y, by = 1000,scale = 1000) {
+assess_env_uncertainty <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
   for (i in seq(1, y_len, by)) {
     index <- i - 1
