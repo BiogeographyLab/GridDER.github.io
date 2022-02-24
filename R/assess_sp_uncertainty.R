@@ -1,5 +1,7 @@
-#' @title Compute the distance between a grid system and occurrences
-#' @description The function compute the
+#' @title Assess the Spatial Uncertainty
+#' @description The function computes spatial uncertainty of a grid system by calculating the distance between grid centroids toward gridded coordinates and non-gridded coordinates (e.g. iNaturalist data).
+
+#' @author Xiao Feng
 #'
 #' @param input_grid Character vector. Path of a grid system (shapefile).
 #' @param input_occ_grid Character vector. Path of gridded occurrences (shapefile).
@@ -18,7 +20,7 @@
 #' input_occ_grid = "data/france_datasetID10/0068190-210914110416597.csv",
 #' input_occ_random = "data/iNaturalist_20211205/0071565-210914110416597.csv")
 #' }
-cal_emp_G_distance <- function(input_grid,
+assess_sp_uncertainty <- function(input_grid,
                                input_occ_grid,
                                input_occ_random,
                                flag_degree = FALSE,
