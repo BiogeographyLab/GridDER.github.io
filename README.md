@@ -1,4 +1,4 @@
-# gridder  <img src='man/figures/logo.png' align="right" height="250" />
+# gridder  <img src='man/figures/temp_logo' align="right" height="250" />
 
 PS 1: in development
 
