@@ -1,5 +1,5 @@
-Package: occMagnet
-Title: A Multiscale Grid Network Evaluation Tool
+Package: gridder
+Title: grid detection and evaluation in R
 Version: 0.0.0.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
