@@ -1,5 +1,6 @@
 #' @title  Generate a grid system
-#' @description This function is used to generate(simulate) a grid system based on metadata we have used our metadata to simulate some grid systems (2_simulate_grid.Rmd).
+#' @description This function is used to generate(simulate) a grid system based on metadata. We have used our metadata to simulate some grid systems (2_simulate_grid.Rmd).
+#' @author Xiao Feng
 #'
 #' @param res_x A numeric input of longitude resolution.
 #' @param res_y A numeric input of latitude resolution.
@@ -70,7 +71,7 @@
 #'
 #'
 #'  }
-generate_grid = function(res_x = 10,
+grid_generation = function(res_x = 10,
                         res_y = 10,
                         unit = "km",# minute
                         #num_x = 10,

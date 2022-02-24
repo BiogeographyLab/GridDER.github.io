@@ -3,7 +3,7 @@
 export(cal_emp_G_distance)
 export(ee_stdDev)
 export(find_crs_extent)
-export(generate_grid)
+export(grid_generation)
 export(grid_matching)
 export(load_occ)
 import(data.table)
