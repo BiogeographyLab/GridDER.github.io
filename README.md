@@ -45,6 +45,8 @@ assess_env_uncertainty(x, y, by = 1000, scale = 1000)
 
 `scale` A nominal scale in meters of the Image projection to work in. Default set to 1000.
 
+
+
 - `assess_sp_uncertainty` assess the environmental uncertainty of a grid system, by calculating the variation of environmental conditions (e.g. 30m elevation) within each grid. The functions has followed parameters :
 ``` r
 assess_sp_uncertainty(input_grid, input_occ_grid, input_occ_random, flag_degree = FALSE, flag_plot = FALSE)
