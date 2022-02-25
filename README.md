@@ -47,7 +47,6 @@ assess_env_uncertainty(x, y, by = 1000, scale = 1000)
 
 <br />
 <br />
-<br />
 
 - `assess_sp_uncertainty` assess the environmental uncertainty of a grid system, by calculating the variation of environmental conditions (e.g. 30m elevation) within each grid. The functions has followed parameters :
 ``` r
