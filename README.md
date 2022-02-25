@@ -34,10 +34,7 @@ The workflow consists of mainly N functions that should be ....
 
 `assess_env_uncertainty()` compute variation of environmental conditions for each feature of the grid system. The functions has followed parameters :
 ``` r
-assess_env_uncertainty (x,
-                        y,
-                        by = 1000, 
-                        scale = 1000)	
+assess_env_uncertainty (x, y, by = 1000, scale = 1000)	
 ```
 
 - `x` ee$Image or ee$ImageCollection objects with a single band.
