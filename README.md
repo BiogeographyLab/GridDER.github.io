@@ -32,8 +32,7 @@ The workflow consists of mainly N functions that should be ....
 <img src='inst/workflow.png' align="center" height="450" />
 
 
-`assess_env_uncertainty()` has the following parameters:
-
+`assess_env_uncertainty()` compute variation of environmental conditions for each feature of the grid system. The functions has followed parameters :
 ``` r
 assess_env_uncertainty (x,
                         y,
