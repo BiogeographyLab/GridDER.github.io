@@ -2,7 +2,7 @@
 
 PS 1: in development
 
-PS 2: this logo definitively is not the final logo :neutral_face: . Suggestions are welcome :blush:  
+PS 2: I guess this logo may be the final version. Suggestions are welcome :blush:  
 
 gridder identifies collection records that have been designated locations on widely used gridding systems. Our tool also estimates the degree of environmental heterogeneity associated with grid systems, allowing users to make informed decisions about how to use occurrence data in global change studies.  
 
