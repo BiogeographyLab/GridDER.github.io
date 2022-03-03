@@ -7,13 +7,11 @@ gridder identifies collection records that have been designated locations on wid
 
 # Citation
 
-put citation here
+citation here 
 
 # Installing
 
-PS.: We need to decide the final host
-
-Currently **occMagnet** can be installed from GitHub:
+Currently **gridder** can be installed from GitHub:
 
 ``` r
 
@@ -61,9 +59,5 @@ assess_sp_uncertainty(input_grid, input_occ_grid, input_occ_random, flag_degree 
 `flag_degree` Logical. Parameter passed to raster::pointDistance.
 
 `flag_plot` Logical. If TRUE, coordinates (based on the crs of the grid system) should be in degrees; else they should represent planar ('Euclidean') space (e.g. units of meters). Default is FALSE.
-
-
-
-
 
 
