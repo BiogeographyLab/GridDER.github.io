@@ -1,10 +1,10 @@
 #' @title Infer Origin
-#' @description Find the minimum and maximum of occurrence. Here the minimum and maximum should match the resolution of the grid
+#' @description Find the minimum and maximum of occurrence. Here the minimum and maximum should match the resolution of the grid.
 #' @author Xiao Feng
 #'
 #' @param input_occ
 #' @param fun
-#' @param flag_unit Character. Should be a string; default value is meter It also can "degree","minute","second"
+#' @param flag_unit Character. Should be a string; default value is meter It also can "degree","minute","second".
 #
 #' @param filters
 #'

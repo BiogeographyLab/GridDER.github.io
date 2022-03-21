@@ -12,7 +12,7 @@ infer_origin(
 )
 }
 \arguments{
-\item{flag_unit}{Character. Should be a string; default value is meter It also can "degree","minute","second"}
+\item{flag_unit}{Character. Should be a string; default value is meter It also can "degree","minute","second".}
 
 \item{filters}{}
 }
@@ -20,7 +20,7 @@ infer_origin(
 
 }
 \description{
-Find the minimum and maximum of occurrence. Here the minimum and maximum should match the resolution of the grid
+Find the minimum and maximum of occurrence. Here the minimum and maximum should match the resolution of the grid.
 }
 \author{
 Xiao Feng
