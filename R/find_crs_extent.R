@@ -19,8 +19,6 @@
     html_nodes(css ="p") |>
     html_nodes(css = "[class=caption]")  |>  html_text()
   which(temp1=="Projected bounds:")
-  #html_nodes(css = "br")#%>%
-  #html_text()
 
   temp1= simple |>
     html_nodes(css ='[class="col3 minimap-pad"]') |>

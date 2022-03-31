@@ -35,7 +35,6 @@ infer_extent = function(method= "",
         country = gsub('"',"",country)
         country = strsplit(country,",")[[1]]
       }
-      # load country polygon
       country_shp = load("data/ne_10m_admin_0_countries.rda")
       one_country = subset(country_shp,ADMIN %in% country)
       one_country = spTransform(one_country,
@@ -82,7 +81,6 @@ infer_extent = function(method= "",
       crs_ext_full[4] = ext_temp[4]
 
 
-      ### further refine the origin coordinate
       if(flag_adjust_origin){
 
         if( !is.null(res_x)  & !is.null(res_y) ){

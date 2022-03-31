@@ -41,11 +41,8 @@ grid_matching = function(input_occ,
   }
 
 
-  #input_occ@data = data.frame(id = 1:nrow(input_occ@coords))
   input_occ$id = 1:nrow(input_occ@coords)
   printf("input %d occ \n", nrow(input_occ@coords) )
-
-  # find country names by occurrences
 
 
   if(class(input_grid)=="list"){
@@ -72,8 +69,7 @@ grid_matching = function(input_occ,
       country = temp_country
     } else {}
 
-    # read google doc
-    # library(gsheet)
+
     if(is.null(grid_metadata) ){
       grid_metadata = gsheet::gsheet2tbl('https://docs.google.com/spreadsheets/d/1Qp5KOpLSVnF2t16uIbNwKwK5ZBXt4k5unONp7eopPzI/edit?usp=sharing')
       grid_metadata = data.frame(grid_metadata)
@@ -82,8 +78,6 @@ grid_matching = function(input_occ,
 
     sel_metadata = grid_metadata
     if(!is.null(country) ){
-      #sel_metadata = subset(sel_metadata,country_name %in% country)
-      # this is used to handle one cell (from the metadata table) has multiple country names
       text_c_index = lapply(country, FUN=function(x){ which(grepl(x,sel_metadata$country_name))})
       text_c_index = unlist(text_c_index)
       text_c_index = sort(unique(text_c_index) )
@@ -100,7 +94,6 @@ grid_matching = function(input_occ,
     N_grid = nrow(sel_metadata)
   }
 
-  # diff grid has to be used independently, because of diff crs, diff unit
   output = data.frame(input_occ@coords)
   output$id = 1: nrow(output)
   output$latlon = paste0(as.character(input_occ@coords[,1]),
@@ -124,7 +117,6 @@ grid_matching = function(input_occ,
                                      full.names = T)
         }
 
-        #print(path_grid_shp)
         one_grid = raster::shapefile(path_grid_shp)
       } else if( N_grid == 1){
         one_grid= input_grid
@@ -133,7 +125,6 @@ grid_matching = function(input_occ,
       }
 
 
-      # this step is added to avoid error during projection(Inf values of coordinates)
       temp_ext = as(extent(one_grid),"SpatialPolygons")
       crs(temp_ext) = crs(one_grid)
       temp_ext_prj = spTransform(temp_ext,   crs(input_occ))
@@ -145,14 +136,13 @@ grid_matching = function(input_occ,
       }
 
       occ_prj = sp::spTransform(input_occ_temp,crs(one_grid))
-      occ_prj = occ_prj[one_grid,] # only keep the ones that are inside the grid polygons
+      occ_prj = occ_prj[one_grid,]
 
       temp_over = sp::over(one_grid,occ_prj,returnList = F)
 
       if(  is.null( dim(temp_over)) ){
         one_grid = one_grid[!is.na(temp_over),]
       } else{
-        # if temp_over is a data frame, then find the NA column
         one_grid = one_grid[!is.na(temp_over[,1]),]
       }
 
@@ -161,15 +151,11 @@ grid_matching = function(input_occ,
       }
       one_grid_center = rgeos::gCentroid(one_grid, byid=T)
 
-      # if(flag_input_shapefile){
-      #   #res_unit
-      #   grid_ID = "noID"
-      # } else{
       res_x = as.numeric(sel_metadata$resolution_x[i])
       res_y = as.numeric(sel_metadata$resolution_y[i])
       res_unit = sel_metadata$resolution_unit[i]
       grid_ID = sel_metadata$grid_ID[i]
-      #}
+
 
       if(res_unit %in% c("km","m")) {
         flag_degree = FALSE
@@ -183,19 +169,13 @@ grid_matching = function(input_occ,
                                        p2=one_grid_center,
                                        lonlat = flag_degree,
                                        allpairs = T)
-      #dim(d_matrix_inaturalist)
-      #nrow(d_matrix_inaturalist)
-      #if(length(d_matrix)==1){
+
       if(is.vector(d_matrix)){
         if(length(d_matrix)==1){d_min = min(d_matrix)} else{d_min = d_matrix}
 
       } else{
         d_min = apply(d_matrix,1,FUN=min)
       }
-      #hist(d_min_inaturalist)
-      #mean(d_min_inaturalist)#3848.058
-      #sd(d_min_inaturalist)  #1419.272
-      #summary(d_min_inaturalist)
 
 
       if (res_unit == "m"){
@@ -219,8 +199,7 @@ grid_matching = function(input_occ,
       temp_out = data.frame(id=occ_prj$id,
                             d_min=d_min )
       output = merge(output,temp_out,by="id",all.x=T)
-      # ~~~~~~~~~~ here is a bug, have to merge back by id
-      # output = cbind(output,d_min)
+
 
       names(output)[ncol(output)] = paste0("absD_grid_ID_",grid_ID)
 
@@ -232,17 +211,10 @@ grid_matching = function(input_occ,
                              d_min=d_min_relative )
       output = merge(output,temp_out2,
                      by="id",all.x=T)
-      #output = cbind(output,d_min_relative)
 
       names(output)[ncol(output)] = paste0("relD_grid_ID_",grid_ID)
     }
   }
-
-  # output will be a matrix, rows-> occ records,  columns -> grid systems
-
-  # to add a probability of each grid?
-  # to add best grid?
-  # add sp & env uncertainty [this shall be precalculated for each grid?]
 
   find_min = function(temp_v){
     if(  all(is.na(temp_v))  ){
@@ -254,28 +226,17 @@ grid_matching = function(input_occ,
 
   temp_col_i = grep("relD_grid_ID_",names(output) )
 
-  # if(length(temp_col_i)==1){
-  #   temp_which_min = rep(1,nrow(output))
-  #   temp_which_min[is.na(output[ ,temp_col_i])] = NA #"notFound" #
-  # } else{
-  # temp_which_min = apply(output[ ,temp_col_i],1,FUN=find_min)
-  # }
+
   temp_which_min = apply(output[ ,temp_col_i,drop=F],1,FUN=find_min)
 
 
   output$grid_closest_relative_id = names(output)[temp_col_i][ temp_which_min ]
-  #print(output[,temp_col_i,drop=F])
-  #print(temp_which_min)
+
   output$grid_closest_relative_value = apply(output[ ,temp_col_i,drop=F],1,FUN=min)
 
 
   temp_col_i = grep("absD_grid_ID_",names(output) )
-  # if(length(temp_col_i)==1){
-  #   temp_which_min = rep(1,nrow(output))
-  #   temp_which_min[is.na(output[ ,temp_col_i])] = NA #"notFound" #
-  # } else{
-  # temp_which_min = apply(output[ ,temp_col_i],1,FUN=find_min)
-  # }
+
   temp_which_min = apply(output[ ,temp_col_i,drop=F],1,FUN=find_min)
 
   output$grid_closest_absolute_id = names(output)[temp_col_i][ temp_which_min ]
@@ -288,28 +249,21 @@ grid_matching = function(input_occ,
 
 
 
-  #~~~~~~~~~ to move outside for loop
-  #output$grid_closest_absolute_value
-  #output$grid_closest_relative_value
   output$flag=""
   output$flag[is.na(output$grid_closest_relative_id )] = "out"
 
-  if( !is.null(flag_relativeTHD) ){  # remove points over 1/10 of the diag distance
-    #d_min[d_min>(one_unit_D/flag_over_XPer)] = NA
-
-    #output$grid_closest_relative_value[output$grid_closest_relative_value>flag_over_XPer]
+  if( !is.null(flag_relativeTHD) ){
     bad_index = (output$grid_closest_relative_value>flag_relativeTHD)  &
       (!is.na(output$grid_closest_relative_value))
     output$flag[bad_index] = paste(output$flag[bad_index],"aboveRelativeTHD",sep = ",")
   }
 
-  if( !is.null(flag_absoluteTHD)){# remove points a certain distance
-    #d_min[d_min>flag_user_threshold] = NA
+  if( !is.null(flag_absoluteTHD)){
     bad_index = (output$grid_closest_absolute_value>flag_absoluteTHD)  &
       (!is.na(output$grid_closest_absolute_value))
     output$flag[bad_index] = paste(output$flag[bad_index],"aboveAbsoluteTHD",sep = ",")
   }
-  if(flag_rm_Large_outlier){ # remove outliers
+  if(flag_rm_Large_outlier){
 
     temp_values = output$grid_closest_absolute_value
 
@@ -319,7 +273,6 @@ grid_matching = function(input_occ,
       if(length(length(i_big))>0){
         thd_big = min(temp_outlier[i_big])
         index_outlier = which(temp_values>=thd_big)
-        #d_min[d_min>=thd_big] = NA
 
         output$flag[index_outlier] = paste(output$flag[index_outlier],
                                            "outlierAbsolute",sep = ",")
@@ -333,7 +286,6 @@ grid_matching = function(input_occ,
       if(length(length(i_big))>0){
         thd_big = min(temp_outlier[i_big])
         index_outlier = which(temp_values>=thd_big)
-        #d_min[d_min>=thd_big] = NA
         output$flag[index_outlier] = paste(output$flag[index_outlier],
                                            "outlierRelative",sep = ",")
       }
@@ -353,23 +305,11 @@ grid_matching = function(input_occ,
   output$grid_closest_both_id[flag1] = output$grid_closest_absolute_id[flag1]
 
 
-  # join grid metadata to the results
-  # sel_metadata$grid_ID_string = paste0("grid_ID_",sel_metadata$grid_ID)
-  # output= merge(output,
-  #               sel_metadata[c("resolution_x",
-  #                              "resolution_y",
-  #                              "resolution_unit",
-  #                              "grid_ID_string")],
-  #               by.x="grid_closest",
-  #               by.y="grid_ID_string",
-  #               all.x=T)
 
   output = output[order(output$id),]
 
   output_occ = sp::SpatialPointsDataFrame(coords=input_occ,data = output,
                                           match.ID=FALSE)
-  #plot(output_occ[output_occ$resolution_x==1,])
-  #plot(output_occ[output_occ$resolution_x==4,],add=T,col="green")
 
   return(output_occ)
 }

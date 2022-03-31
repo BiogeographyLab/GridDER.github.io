@@ -16,7 +16,6 @@ infer_origin = function(input_occ,
                         fun=min,
                         flag_unit="meter",
                         filters = sort(c (10^(2:10), 10^(3:10)/2  ))
-                        #c(1000000,100000,10000,5000, 1000, 100, 10)
 ){
   if (flag_unit=="minute") {
     input_occ@coords = input_occ@coords * 60
@@ -36,8 +35,6 @@ infer_origin = function(input_occ,
   M_y_group = unique( c ( round( M_y),
                           ceiling( M_y),
                           floor( M_y) ) )
-  #here the logic is that, 5000 is better than 5500, better than 5550, better than 5555
-  # the filters shall be modified in the future
   for (p in filters_y){
     temp_reminder = M_y_group %% p == 0
     if(  any( temp_reminder )   ){

@@ -76,7 +76,6 @@ assess_sp_uncertainty <- function(input_grid,
   iNaturalist_subset_prj <- spTransform(iNaturalist_subset, crs(input_grid))
   iNaturalist_subset_prj <- iNaturalist_subset_prj[input_grid_subset, ]
 
-  # if too many iNaturalist data, then randon sample
   if (nrow(iNaturalist_subset_prj@coords) > 10000) {
     set.seed(1)
     iNaturalist_subset_prj <- iNaturalist_subset_prj[sample(nrow(iNaturalist_subset_prj@coords), 10000), ]

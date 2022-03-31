@@ -13,44 +13,35 @@
 #'
 #' @examples
 infer_resolution = function(input_coord,digits=1,
-                            flag_unit="meter",#"meter","degree","minute","second"
-                            # should be a string; default value is m
+                            flag_unit="meter",
                             ...){
-  demo = input_coord #  using x & y
+  demo = input_coord
   myD = dist( demo )
   myD = as.matrix(myD)
   myD[myD==0] = NA
-  #myD_near= apply(myD, 1, FUN = min,na.rm = TRUE)
-  #myD_near_which= apply(myD, 1, FUN = which.min)
 
-  #also consider the top four nearest points from up/down/left/right
-  #... to do...
-  #
   occ_i = 1
   distance_4 = matrix(NA,nrow = 4,ncol = nrow(input_coord) )
   angle_4 = matrix(NA,nrow = 4,ncol = nrow(input_coord) )
   for(occ_i in 1: nrow(input_coord)  ){
-    # first find the near 10 points
     top_i = kit::topn(myD[,occ_i],n=12,decreasing=F)
     top_angle = rep(NA,length(top_i))
     j=1
-    # get the angle of the 10 points
     for(j in 1:length(top_i)){
       top_angle[j]= cal_angle(input_coord[occ_i,],
                               input_coord[top_i[j],])
     }
-    # seperate them into 4 directions
     s_angle = 1
     up_i = which(   top_angle>= (315+s_angle) |
                       ( top_angle>=0 & top_angle <=(45-s_angle)   ) |
                       top_angle<=0   & top_angle >=(-45+s_angle)
-    ) # up
-    right_i = which(top_angle>=(45+s_angle) & top_angle <=(135-s_angle)  ) # right
-    bottom_i = which(top_angle>=(135+s_angle) & top_angle <=(225-s_angle) ) # bottom
+    )
+    right_i = which(top_angle>=(45+s_angle) & top_angle <=(135-s_angle)  )
+    bottom_i = which(top_angle>=(135+s_angle) & top_angle <=(225-s_angle) )
     left_i = which(
       (top_angle>=(225+s_angle) & top_angle <= (315-s_angle) ) |
         (top_angle>=(-135+s_angle) & top_angle <= (-45-s_angle)  )
-    ) # left
+    )
     distance_4[,occ_i] = c(ifelse(length(up_i)==0, NA, min( myD[top_i[up_i],occ_i]     )),
                            ifelse(length(right_i)==0, NA, min( myD[top_i[right_i],occ_i]  )),
                            ifelse(length(bottom_i)==0, NA, min( myD[top_i[bottom_i],occ_i] )),
@@ -62,15 +53,12 @@ infer_resolution = function(input_coord,digits=1,
                         ifelse(length(left_i)==0, NA,top_angle [ left_i[ which.min(myD[top_i[left_i],occ_i]) ] ] )  )
 
   }
-  #distance_on_y_freq = get_freq_table(input_v = distance_4[1,] )
-  #distance_on_x_freq = get_freq_table(distance_4[2,] )
 
   getmode <- function(v) {
     uniqv <- unique(v)
     uniqv[which.max(tabulate(match(v, uniqv)))]
   }
 
-  #temp_v = signif (distance_4[1,],digits  = 1)
   if(flag_unit=="meter"){
     y_s = signif (distance_4[1,],digits  = 1)
     x_s = signif (distance_4[2,],digits  = 1)
