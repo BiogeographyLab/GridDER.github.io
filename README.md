@@ -18,7 +18,7 @@ Currently **gridder** can be installed from GitHub:
 # Without vignette
 
 remotes::install_github("BiogeographyLab/gridder",
-                        auth_token = "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")
+                        auth_token = "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")
 
 
 ```
