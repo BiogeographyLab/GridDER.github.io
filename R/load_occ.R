@@ -19,7 +19,9 @@ load_occ = function(path,crs_num=NULL){
   library(raster)
   library(sp)
   library(data.table)
-  temp_occ = data.table::fread(path,sep="\t",header = T)
+  # temp_occ = data.table::fread(path,sep="\t",header = T)
+  temp_occ = data.table::fread(path,header = T)
+
   sel_col = c("decimalLatitude","decimalLongitude")
   temp_occ_narrow = unique(temp_occ[,..sel_col])
   temp_occ_narrow = temp_occ_narrow[!is.na(decimalLongitude) & !is.na(decimalLatitude)]
