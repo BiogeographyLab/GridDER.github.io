@@ -100,6 +100,12 @@ infer_resolution = function(input_coord,digits=1,
     distance_on_y_freq = getmode( y_s )
     distance_on_x_freq = getmode( x_s )
 
+    } else if (flag_unit=="degree") {
+    y_s = signif (distance_4[1,],digits  = 1)
+    x_s = signif (distance_4[2,],digits  = 1)
+    distance_on_y_freq = getmode(y_s )
+    distance_on_x_freq = getmode(x_s )   
+    
   } else if (flag_unit=="minute") {
     y_s = signif (distance_4[1,]*60,digits  = 1)
     x_s = signif (distance_4[2,]*60,digits  = 1)
