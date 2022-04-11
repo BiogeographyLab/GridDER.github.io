@@ -108,6 +108,9 @@ grid_matching = function(input_occ,
 
 
       if(!flag_input_shapefile){
+        
+        download_demoGrid()  # download the previously generated grid shapefiles        
+        
         path_grid_shp = list.files(   paste0(system.file(package="gridder"), "/data/2_clean_grid/"  )  ,
                                    pattern=paste0("grid_ID_",
                                                                        sel_metadata$grid_ID[i],"_",".*.shp"),full.names = T)
