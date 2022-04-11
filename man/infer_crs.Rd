@@ -10,7 +10,7 @@ infer_crs(
   flag_saveTemp = TRUE,
   flag_newCal = TRUE,
   temp_path = "data/3_infer_grid_crs/prj_occ_temp_v2/",
-  cup_num = 10,
+  cup_num = 2,
   flag_debug = -1
 )
 }
@@ -25,13 +25,15 @@ infer_crs(
 
 \item{temp_path}{Character. Path to save.}
 
-\item{flag_debug}{}
+\item{cup_num}{Numerical. To define the number of cores to use. Default is 2.}
+
+\item{flag_debug}{Numerical. Default -1.}
 }
 \value{
 
 }
 \description{
-This function will prj occ to a list of ~6600 crs, find  nearest 4 points, find the angle to the 4 points, then take reminder \%\%90, the smaller the better also find the distance to the 4 points, then all the distance is standardized to 0 mean and 1sd  then do a histogram, and calculate the freq of each bin,  pick the bin with highest freq ideally, the true crs will lead to the highest freq in that bin.
+This function will project occurrences to a list of ~6600 crs, find  nearest 4 points, find the angle to the 4 points, then take reminder \%\%90, the smaller the better also find the distance to the 4 points, then all the distance is standardized to 0 mean and 1sd  then do a histogram, and calculate the freq of each bin,  pick the bin with highest freq ideally, the true crs will lead to the highest freq in that bin.
 }
 \note{
 Using 15 cores, it took ~10-20 minutes to finish this workflow.

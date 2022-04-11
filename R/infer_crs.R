@@ -1,5 +1,5 @@
 #' @title Infer Crs
-#' @description This function will prj occ to a list of ~6600 crs, find  nearest 4 points, find the angle to the 4 points, then take reminder %%90, the smaller the better also find the distance to the 4 points, then all the distance is standardized to 0 mean and 1sd  then do a histogram, and calculate the freq of each bin,  pick the bin with highest freq ideally, the true crs will lead to the highest freq in that bin.
+#' @description This function will project occurrences to a list of ~6600 crs, find  nearest 4 points, find the angle to the 4 points, then take reminder %%90, the smaller the better also find the distance to the 4 points, then all the distance is standardized to 0 mean and 1sd  then do a histogram, and calculate the freq of each bin,  pick the bin with highest freq ideally, the true crs will lead to the highest freq in that bin.
 #' @author Xiao Feng
 #'
 #' @param occ_path Character. A string, path of input occurrences, should have decimalLongitude & decimalLatitude.
@@ -7,8 +7,8 @@
 #' @param flag_saveTemp Logical. If "True", save the middle output.
 #' @param flag_newCal Logical. If "True" do the distance calculation again.
 #' @param temp_path Character. Path to save.
-#' @param cup_num
-#' @param flag_debug
+#' @param cup_num Numerical. To define the number of cores to use. Default is 2.
+#' @param flag_debug Numerical. Default -1.
 #'
 #' @return
 #' @export
@@ -22,7 +22,7 @@ infer_crs = function(occ_path,
                      flag_saveTemp=TRUE,
                      flag_newCal=TRUE,
                      temp_path = "data/3_infer_grid_crs/prj_occ_temp_v2/",
-                     cup_num = 10,
+                     cup_num = 2,
                      flag_debug=-1
 ){
   library(data.table)
