@@ -41,7 +41,7 @@ infer_crs = function(occ_path,
   dir.create(temp_path)
 
   occ1 = load_occ(occ_path)
-  crs_list = readRDS("data/crs_list_prj.rds")
+  crs_list = load("data/crs_list_prj.rda")
   if(any(flag_debug>0) )crs_list = crs_list[flag_debug,]
 
   if(!is.na(truth_crs_num)){
