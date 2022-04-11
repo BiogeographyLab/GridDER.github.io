@@ -2,6 +2,7 @@
 
 export(assess_env_uncertainty)
 export(assess_sp_uncertainty)
+export(download_demoGrid)
 export(find_crs_extent)
 export(get_dist_freq)
 export(grid_adjustment)
