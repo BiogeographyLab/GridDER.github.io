@@ -45,7 +45,7 @@ infer_crs = function(occ_path,
   if(any(flag_debug>0) )crs_list = crs_list[flag_debug,]
 
   if(!is.na(truth_crs_num)){
-    to_add = crs_list[1,]
+    to_add = crs_list[1]
     to_add[] = NA
     to_add$code = truth_crs_num
     to_add$note = "truth"
