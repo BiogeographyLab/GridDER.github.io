@@ -29,8 +29,8 @@ infer_crs = function(occ_path,
   library(raster)
   library(rgdal)
 
-  source("/1_source_seek_occ_pattern.R")
-  source("/grid_generation.R")
+  source("inst/extdata/1_source_seek_occ_pattern.R")
+  source("inst/extdata/grid_generation.R")
   catf <- function(..., file="temp/temp.log", append=TRUE){
     cat(..., file=file, append=append)
   }
