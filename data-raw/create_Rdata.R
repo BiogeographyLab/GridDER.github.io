@@ -2,7 +2,7 @@
 
 ## For while I do not put the raw data at repo package (.csv or .shp), once data that will use as examples is provided by the package in .RData format
 
-
+## Note : Creating data for the package as Internal (see some infos at: https://coolbutuseless.github.io/2018/12/10/r-packages-internal-and-external-data/)
 grid_ID_2_polygon_masked <- raster::shapefile("inst/extdata/grid_id_2/grid_ID_2_polygon_masked.shp", )
 usethis::use_data(grid_ID_2_polygon_masked, internal = TRUE, overwrite = TRUE)
 
