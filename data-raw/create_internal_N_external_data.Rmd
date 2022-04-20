@@ -40,11 +40,18 @@ grid_ID_9 <- sf::st_read("inst/extdata/grid_id_9/grid_ID_9.kml")
 
 ```
 
+## Unique occurences  
 
-## GBIF occurrences of gird_id_9 system
+```{r}
+occs_unique <- readr::read_csv("inst/extdata/occs_unique/occs_unique.csv")
+
+```
+
+
+## GBIF occurrences of gird_id_9 system - Not work 
 
 ```{r occurrences}
-occs_grid_id_9 <- readr::read_csv("inst/extdata/grid_id_9/0060040-210914110416597.csv")
+# occs_grid_id_9 <- readr::read_csv("inst/extdata/grid_id_9/0060040-210914110416597.csv")
 
 ```
 
@@ -61,7 +68,7 @@ crs_list_prj <- readRDS("data-raw/crs_list_prj.rds")
 ## Take all DATA and put as INTERNAL data into a gridder package
 
 ```{r internal data }
-usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_grid_id_9,crs_list_prj, internal = TRUE, overwrite = TRUE)
+usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_unique,crs_list_prj, internal = TRUE, overwrite = TRUE)
 
 ```
 
@@ -69,11 +76,11 @@ usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,
 ## To access the data after installation use
 
 ```{r acess grid_id_9 after installation}
-gridder:::grid_id_9
+gridder:::occs_unique
 
 #or 
 
-str (grid_ID_9)
+str (occs_unique)
 ```
 
 
@@ -83,7 +90,7 @@ str (grid_ID_9)
 ## Take all DATA and put as EXTERNAL data into a gridder package
 
 ```{r external data}
-usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_grid_id_9,crs_list_prj, internal = FALSE, overwrite = TRUE)
+usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_unique,crs_list_prj, internal = FALSE, overwrite = TRUE)
 
 ```
 
@@ -91,11 +98,11 @@ usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,
 
 
 ```{r}
-str (grid_ID_9)
+str (occs_unique)
 
 #or
 
-gridder::grid_id_9
+gridder::occs_unique
 ```
 
 

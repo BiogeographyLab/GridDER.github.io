@@ -19,9 +19,14 @@ ne_10m_admin_0_countries <- raster::shapefile("inst/extdata/0_basemap/ne_10m_adm
 
 grid_ID_9 <- sf::st_read("inst/extdata/grid_id_9/grid_ID_9.kml")
 
-## GBIF occurrences of gird_id_9 system
+## Unique occurences
 
-occs_grid_id_9 <- readr::read_csv("inst/extdata/grid_id_9/0060040-210914110416597.csv")
+occs_unique <- readr::read_csv("inst/extdata/occs_unique/occs_unique.csv")
+
+
+## GBIF occurrences of gird_id_9 system # Not work
+
+### occs_grid_id_9 <- readr::read_csv("inst/extdata/grid_id_9/0060040-210914110416597.csv")
 
 ## CRS List object
 
@@ -29,20 +34,20 @@ crs_list_prj <- readRDS("data-raw/crs_list_prj.rds")
 
 
 ## Take all DATA and put as INTERNAL data into a gridder package
-usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_grid_id_9,crs_list_prj, internal = TRUE, overwrite = TRUE)
+usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_unique,crs_list_prj, internal = TRUE, overwrite = TRUE)
 
 ## To acess the data afetr installation use
 
-# ```gridder:::grid_id_9```
+# ```gridder:::occs_unique```
 
 ## External data : External data is data contained in the package that is made available to the user, but is not (generally) available to the functions within the package. Once the package is loaded, the dataset will be made available to the user. To create external use ``` usethis::use_data```  and set  internal= FALSE
 
 
 ## Take all DATA and put as EXTERNAL data into a gridder package
-usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_grid_id_9,crs_list_prj, internal = FALSE, overwrite = TRUE)
+usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_unique,crs_list_prj, internal = FALSE, overwrite = TRUE)
 
 ## to access the data use
 
-# ``str (grid_ID_9)`` or gridder::grid_id_9
+# ``str (occs_unique)`` or gridder::occs_unique
 
 
