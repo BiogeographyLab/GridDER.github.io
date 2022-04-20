@@ -22,6 +22,28 @@ remotes::install_github("BiogeographyLab/gridder",
 
 
 ```
+
+
+## Load library and verify internal files and directories
+
+library(gridder)
+
+`system.file(package = "gridder")`
+
+`dir(system.file(package = "gridder"))`
+
+## To see the the internal data use the fution `str()`
+
+`str(crs_list_prj)` : lisf of crs <br>
+
+`str(grid_ID_9)` : sf dataframe of grid system <br>
+
+`str(ne_10m_admin_0_countries)` : SpatialPolygonsDataFrame of all countries <br>
+
+`str(occs_grid_id_9)` :dataframe of occurences 
+
+
+
 ## The workflow
 
 The workflow consists of mainly N functions that should be ....
