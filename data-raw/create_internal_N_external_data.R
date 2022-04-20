@@ -28,8 +28,21 @@ occs_grid_id_9 <- readr::read_csv("inst/extdata/grid_id_9/0060040-21091411041659
 crs_list_prj <- readRDS("data-raw/crs_list_prj.rds")
 
 
-## Take all and put as internal data inj a package
+## Take all DATA and put as INTERNAL data into a gridder package
 usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_grid_id_9,crs_list_prj, internal = TRUE, overwrite = TRUE)
 
+## To acess the data afetr installation use
 
-## External data
+# ```gridder:::grid_id_9```
+
+## External data : External data is data contained in the package that is made available to the user, but is not (generally) available to the functions within the package. Once the package is loaded, the dataset will be made available to the user. To create external use ``` usethis::use_data```  and set  internal= FALSE
+
+
+## Take all DATA and put as EXTERNAL data into a gridder package
+usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_grid_id_9,crs_list_prj, internal = FALSE, overwrite = TRUE)
+
+## to access the data use
+
+# ``str (grid_ID_9)`` or gridder::grid_id_9
+
+
