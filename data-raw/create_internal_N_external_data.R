@@ -8,29 +8,28 @@
 
 ## I Thus first I create the dataset in internal mood in order to test the package functions
 
+## Description of dataset
 grid_ID_2_polygon_masked <- raster::shapefile("inst/extdata/grid_id_2/grid_ID_2_polygon_masked.shp", )
-usethis::use_data(grid_ID_2_polygon_masked, internal = TRUE, overwrite = TRUE)
 
+## Description of dataset
 ne_10m_admin_0_countries <- raster::shapefile("inst/extdata/0_basemap/ne_10m_admin_0_countries.shp")
-usethis::use_data(ne_10m_admin_0_countries, internal = TRUE, overwrite = TRUE)
 
 
 ## Grid_id_9 (Flora of Vladimir- Russia)
 
 grid_ID_9 <- sf::st_read("inst/extdata/grid_id_9/grid_ID_9.kml")
-usethis::use_data(grid_ID_9, internal = TRUE, overwrite = TRUE)
 
 ## GBIF occurrences of gird_id_9 system
 
 occs_grid_id_9 <- readr::read_csv("inst/extdata/grid_id_9/0060040-210914110416597.csv")
-usethis::use_data(occs_grid_id_9, internal = TRUE, overwrite = TRUE)
-
 
 ## CRS List object
 
 crs_list_prj <- readRDS("data-raw/crs_list_prj.rds")
 
-usethis::use_data(crs_list_prj, internal = TRUE, overwrite = TRUE)
+
+## Take all and put as internal data inj a package
+usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_grid_id_9,crs_list_prj, internal = TRUE, overwrite = TRUE)
 
 
 ## External data
