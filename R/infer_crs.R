@@ -39,7 +39,7 @@ infer_crs = function(occ_path,
   dir.create(temp_path)
 
   occ1 = load_occ(occ_path)
-  crs_list = load("R/crs_list_prj.rda")
+  crs_list = data("data/crs_list_prj.rda", envir=environment())
   crs_list = crs_list_prj
     if(any(flag_debug>0) )crs_list = crs_list[flag_debug,]
 
