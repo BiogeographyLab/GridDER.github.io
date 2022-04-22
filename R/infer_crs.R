@@ -6,7 +6,7 @@
 #' @param truth_crs_num Character. A string, epsg code of the true crs if known.
 #' @param flag_saveTemp Logical. If "True", save the middle output.
 #' @param flag_newCal Logical. If "True" do the distance calculation again.
-#' @param temp_path Character. Path to save.
+#' @param temp_path Character. Define a path to save.
 #' @param cup_num Numerical. To define the number of cores to use. Default is 2.
 #' @param flag_debug Numerical. Default -1.
 #'

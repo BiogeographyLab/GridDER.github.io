@@ -23,7 +23,7 @@ infer_crs(
 
 \item{flag_newCal}{Logical. If "True" do the distance calculation again.}
 
-\item{temp_path}{Character. Path to save.}
+\item{temp_path}{Character. Define a path to save.}
 
 \item{cup_num}{Numerical. To define the number of cores to use. Default is 2.}
 
