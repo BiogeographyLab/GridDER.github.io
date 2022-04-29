@@ -102,9 +102,21 @@ grid_generation = function(res_x = 10,
     sizex =  res_x*1000
     sizey =  res_y*1000
   }
+  if (unit == "meter" | unit == "m"){
+    sizex =  res_x
+    sizey =  res_y
+  }
   if (unit == "minute"){
     sizex =  res_x/60
     sizey =  res_y/60
+  }
+  if (unit == "second"){
+    sizex =  res_x
+    sizey =  res_y
+  }
+  if (unit == "degree"){
+    sizex =  res_x/3600
+    sizey =  res_y/3600
   }
   print(sizex)
   print(sizey)
