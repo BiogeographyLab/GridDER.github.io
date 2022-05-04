@@ -133,7 +133,7 @@ grid_generation = function(res_x = 10,
     #country_shp = raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp")
     country_shp = data("data/ne_10m_admin_0_countries.rda", envir=environment())
 
-    one_country = subset(country_shp,ADMIN %in% country)
+    one_country = subset(country_shp,ADMIN %in% country_shp$ADMIN)
 
     one_country = spTransform(one_country,crs_grid)
 
