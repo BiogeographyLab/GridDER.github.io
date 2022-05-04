@@ -130,7 +130,9 @@ grid_generation = function(res_x = 10,
   }
   if(flag_loadCountryPolygon){
     country_shp = data("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
-    country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
+    load(country_shp)
+    #country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
+    #country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
     #country_shp = load(country_shp)
     #country_shp = raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp")
     #country_shp = data("data/ne_10m_admin_0_countries.rda", envir=environment())
