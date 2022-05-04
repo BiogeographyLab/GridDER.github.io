@@ -129,7 +129,7 @@ grid_generation = function(res_x = 10,
     flag_loadCountryPolygon= TRUE
   }
   if(flag_loadCountryPolygon){
-    country_shp = data("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
+    country_shp = data("data/ne_10m_admin_0_countries.rda", envir=environment())
     load(country_shp)
     #country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
     #country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
