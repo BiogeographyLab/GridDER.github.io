@@ -171,7 +171,7 @@ grid_generation = function(res_x = 10,
     }
 
     if(extent_unit=="crs_web_extent"){
-      crs_ext = find_CRS_extent(crs_num)
+      crs_ext = find_crs_extent(crs_num)
       crs_ext_full = crs_ext
       crs_ext_full[1] = crs_ext[1] - crs_ext[1]%%sizex
       crs_ext_full[2] = crs_ext[2] - crs_ext[2]%%sizey
