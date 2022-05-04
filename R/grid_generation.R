@@ -102,9 +102,21 @@ grid_generation = function(res_x = 10,
     sizex =  res_x*1000
     sizey =  res_y*1000
   }
+  if (unit == "meter" | unit == "m"){
+    sizex =  res_x
+    sizey =  res_y
+  }
   if (unit == "minute"){
     sizex =  res_x/60
     sizey =  res_y/60
+  }
+  if (unit == "second"){
+    sizex =  res_x
+    sizey =  res_y
+  }
+  if (unit == "degree"){
+    sizex =  res_x/3600
+    sizey =  res_y/3600
   }
   print(sizex)
   print(sizey)
@@ -117,7 +129,12 @@ grid_generation = function(res_x = 10,
     flag_loadCountryPolygon= TRUE
   }
   if(flag_loadCountryPolygon){
+<<<<<<< HEAD
     country_shp = data("data/ne_10m_admin_0_countries.rda")
+=======
+    #country_shp = raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp")    
+    country_shp = load("data/ne_10m_admin_0_countries.rda")
+>>>>>>> 7f2536a1885abb53e6371d30bf9eeba0c35d00fd
 
     one_country = subset(country_shp,ADMIN %in% country)
 
