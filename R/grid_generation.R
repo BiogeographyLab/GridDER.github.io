@@ -117,7 +117,7 @@ grid_generation = function(res_x = 10,
     flag_loadCountryPolygon= TRUE
   }
   if(flag_loadCountryPolygon){
-    country_shp = raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp")
+    country_shp = data("data/ne_10m_admin_0_countries.rda")
 
     one_country = subset(country_shp,ADMIN %in% country)
 
