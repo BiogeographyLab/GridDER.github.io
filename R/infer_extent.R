@@ -35,7 +35,9 @@ infer_extent = function(method= "",
         country = gsub('"',"",country)
         country = strsplit(country,",")[[1]]
       }
-      country_shp = load("data/ne_10m_admin_0_countries.rda")
+      data(ne_10m_admin_0_countries, package = 'gridder',envir=environment())
+      country_shp = ne_10m_admin_0_countries
+      #country_shp = load("data/ne_10m_admin_0_countries.rda")
       one_country = subset(country_shp,ADMIN %in% country)
       one_country = spTransform(one_country,
                                 crs(paste0("+init=epsg:",
