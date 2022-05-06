@@ -21,7 +21,8 @@ infer_crs = function(occ_path,
                      truth_crs_num = NA,
                      flag_saveTemp=TRUE,
                      flag_newCal=TRUE,
-                     temp_path = "data/3_infer_grid_crs/prj_occ_temp_v2/",
+                     #temp_path = "data/3_infer_grid_crs/prj_occ_temp_v2/",
+                     temp_path = "data/3_infer_grid_crs/",
                      cup_num = 2,
                      flag_debug=-1
 ){
