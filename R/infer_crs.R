@@ -35,12 +35,12 @@ infer_crs = function(occ_path,
   }
 
 
-
+if(!file.exists(temp_path) ){
   dir.create(dirname(temp_path))
   dir.create(temp_path)
-
+}
   occ1 = load_occ(occ_path)
-  crs_list = data("data/crs_list_prj.rda", envir=environment())
+  crs_list = data(crs_list_prj,package = 'gridder', envir=environment())
   crs_list = crs_list_prj
     if(any(flag_debug>0) )crs_list = crs_list[flag_debug,]
 
