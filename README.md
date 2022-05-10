@@ -40,7 +40,7 @@ library(gridder)
 
 `str(ne_10m_admin_0_countries)` : SpatialPolygonsDataFrame of all countries <br>
 
-`str(occs_grid_id_9)` : dataframe of occurences 
+`str(occs_grid_id_9)` : dataframe of occurrences 
 
 
 
