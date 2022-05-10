@@ -74,7 +74,7 @@ empirical_occ_extent = as.numeric(strsplit(empirical_occ_extent,",")[[1]])
 }
 
 # Simulate grid system
-NL_grid <- occMagnet::generateGRID(res_x = as.numeric(grid_metadata$resolution_x[iii]),
+NL_grid <- gidder::generateGRID(res_x = as.numeric(grid_metadata$resolution_x[iii]),
                 res_y = as.numeric(grid_metadata$resolution_y[iii]),
                 unit = grid_metadata$resolution_unit[iii],
                 flag_crs=TRUE,
