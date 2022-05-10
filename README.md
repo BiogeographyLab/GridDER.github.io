@@ -32,7 +32,7 @@ library(gridder)
 
 `dir(system.file(package = "gridder"))`
 
-## To see the the internal data use the fution `str()`
+## To see the internal data use the fution `str()`
 
 `str(crs_list_prj)` : lisf of crs <br>
 
