@@ -1,16 +1,16 @@
 #' @title  Generate a grid system
-#' @description This function is used to generate(simulate) a grid system based on metadata. We have used our metadata to simulate some grid systems (2_simulate_grid.Rmd).
+#' @description This function is used to generate (simulate) a grid system based on metadata. We have used our metadata to simulate some grid systems (2_simulate_grid.Rmd).
 #' @author Xiao Feng
 #'
 #' @param res_x A numeric input of longitude resolution.
 #' @param res_y A numeric input of latitude resolution.
 #' @param unit Character vector of unite in arc-minute ("minute") or kilometre ("km").
 #' @param flag_crs Logical. Flag the CRS.
-#' @param extent_unit Character vector. It can be "crs_web_extent" for... or "crs_countryPolygon" for..
+#' @param extent_unit Character vector. It can be "crs_countryPolygon", "crs_web_extent", "empirical_occ_extent", "shapefile_extent", "shifted_shapefile_extent".
 #' @param input_extent
 #' @param country Character vector of country name where the grid system is from, e.g. "Germany", it can be used to extract spatial extent and the final grid could be masked by country polygons.
 #' @param crs_num Character, which is a crs number for the grid system, e.g. "4326".
-#' @param crs_obj , an crs object for the grid system.
+#' @param crs_obj An crs object for the grid system.
 #' @param flag_offset Do any adjustment of the grid system, a vector of two numbers, represent adjustment of the origin along x,y.
 #' @param flag_maskByCountry Logical. Mask the grid system by country polygon.
 #' @param flag_buffer Draw an additional buffer (e.g. 2 additional grids) along the simulated grid system, this can help cover the areas along the coastal line.
