@@ -29,13 +29,15 @@ grid_generation(
 
 \item{flag_crs}{Logical. Flag the CRS.}
 
-\item{extent_unit}{Character vector. It can be "crs_web_extent" for... or "crs_countryPolygon" for..}
+\item{extent_unit}{Character vector. It can be "crs_countryPolygon", "crs_web_extent", "empirical_occ_extent", "shapefile_extent", "shifted_shapefile_extent".}
+
+\item{input_extent}{A vector of 4 numbers c(xmin,ymin,xmax,ymax).}
 
 \item{country}{Character vector of country name where the grid system is from, e.g. "Germany", it can be used to extract spatial extent and the final grid could be masked by country polygons.}
 
 \item{crs_num}{Character, which is a crs number for the grid system, e.g. "4326".}
 
-\item{crs_obj}{, an crs object for the grid system.}
+\item{crs_obj}{An crs object for the grid system.}
 
 \item{flag_offset}{Do any adjustment of the grid system, a vector of two numbers, represent adjustment of the origin along x,y.}
 
@@ -43,13 +45,13 @@ grid_generation(
 
 \item{flag_buffer}{Draw an additional buffer (e.g. 2 additional grids) along the simulated grid system, this can help cover the areas along the coastal line.}
 
-\item{flag_loadCountryPolygon}{Load Natural Earth 10meter country polygon ne_10m_admin_0_countries.shp).}
+\item{flag_loadCountryPolygon}{Load Natural Earth 10meter country polygon data (ne_10m_admin_0_countries).}
 }
 \value{
 The function returns a shapefile.
 }
 \description{
-This function is used to generate(simulate) a grid system based on metadata. We have used our metadata to simulate some grid systems (2_simulate_grid.Rmd).
+This function is used to generate (simulate) a grid system based on metadata. The gridder package provided an example metadata to simulate some grid systems (2_simulate_grid.Rmd). To access the metadata file using download_demoGrid function.
 }
 \examples{
  \dontrun{
@@ -74,7 +76,7 @@ empirical_occ_extent = as.numeric(strsplit(empirical_occ_extent,",")[[1]])
 }
 
 # Simulate grid system
-NL_grid <- gidder::generateGRID(res_x = as.numeric(grid_metadata$resolution_x[iii]),
+NL_grid <- occMagnet::generateGRID(res_x = as.numeric(grid_metadata$resolution_x[iii]),
                 res_y = as.numeric(grid_metadata$resolution_y[iii]),
                 unit = grid_metadata$resolution_unit[iii],
                 flag_crs=TRUE,

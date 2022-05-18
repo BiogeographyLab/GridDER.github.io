@@ -9,9 +9,6 @@ download_demoGrid(downloadNew = F)
 \arguments{
 \item{downloadNew}{Logical. TRUE to download the zip file containing all grid systems}
 }
-\value{
-
-}
 \description{
 This functions load from Zenodo all grid systems compiled
 }

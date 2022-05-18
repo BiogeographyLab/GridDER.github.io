@@ -29,9 +29,6 @@ infer_crs(
 
 \item{flag_debug}{Numerical. Default -1.}
 }
-\value{
-
-}
 \description{
 This function will project occurrences to a list of ~6600 crs, find  nearest 4 points, find the angle to the 4 points, then take reminder \%\%90, the smaller the better also find the distance to the 4 points, then all the distance is standardized to 0 mean and 1sd  then do a histogram, and calculate the freq of each bin,  pick the bin with highest freq ideally, the true crs will lead to the highest freq in that bin.
 }

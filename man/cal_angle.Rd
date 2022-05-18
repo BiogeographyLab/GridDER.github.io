@@ -9,9 +9,6 @@ cal_angle(M, N)
 \arguments{
 \item{N}{}
 }
-\value{
-
-}
 \description{
 Cal Angle funtion
 }

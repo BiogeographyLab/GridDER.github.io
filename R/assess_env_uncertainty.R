@@ -11,7 +11,7 @@
 #' @import dplyr
 #'
 #' @return The function returns a sf object with column called "elevation" with standard deviation for each feature.
-#' @note The functions with prefix "ee_" is based on rgee, a package for interacting with Google Earth Engine (GEE). To run these functions or anything related to GEE, users must have:
+#' @note The functions with prefix "ee_" is based on rgee package for interacting with Google Earth Engine (GEE). To run these functions or anything related to rgee/GEE, users must have:
 #'  \itemize{
 #' \item{Google account with Earth Engine activated}
 #' \item{Python >= v3.5}
@@ -23,30 +23,34 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Will change. Not run!
-#' # Load the grid system of interest
-#' gridID_26 <- raster::shapefile("./data/South_Africa/grid_id_26/v2_grid_id_26.shp") |>
-#' sf::st_as_sf()
+#' ## As this function is based on rgee package , the following commands must be executed:
+#' rgee::ee_install() # Create virtual environmental at local machine to install the necessary dependencies
+#' rgee::ee_Initialize() # Initialize
 #'
-#' # Load ImageCollection of interest
+#' # Load ImageCollection of interest i.e, an environmental layer
+#'
 #' nasadem<- rgee::ee$Image('NASA/NASADEM_HGT/001')$select('elevation')
 #'
-#' # Countries Map Base
-#' base_map <- raster::shapefile("./data/0_basemap/ne_10m_admin_0_countries.shp") |>
-#' sf::st_as_sf()
+#'# Hypothetical grid system
+#'lat_lon_grid <- structure(list(ID = 758432:758443,
+#'                               lat = c(-14.875, -14.875, -14.625, -14.625, -14.875, -14.875, -14.625, -14.625, -14.375, -14.375, -14.125, -14.125),
+#'                               lon = c(-42.875, -42.625, -42.625, -42.875, -42.375, -42.125, -42.125, -42.375, -42.375, -42.125, -42.125, -42.375)),
+#'                          class = "data.frame", row.names = c(NA, -12L))
 #'
-#' #Select a region of interest and simplify the geometries
-#' ZA_gridID_26 <- base_map |>
-#' dplyr::filter(ADMIN=="South Africa") |>
-#' sf::st_intersection(gridID_26) |>
-#' dplyr::select(ADMIN, geometry) |>
-#' rmapshaper::ms_simplify(keep = 0.001,keep_shapes = TRUE) |>
-#' rgee::sf_as_ee()
+#' grid_to_raster <- raster::rasterFromXYZ(lat_lon_grid [, c('lon', 'lat', 'ID')], crs = '+proj=longlat +datum=WGS84 +no_defs')
 #'
-#' # Compute standard deviation
-#' stdDev <-  ee_stdDev(x = nasadem,y = ZA_gridID_26)
+#' grid <- raster::rasterToPolygons(grid_to_raster, fun=NULL, na.rm=TRUE, dissolve=FALSE) |>
+#'  sf::st_as_sf() |>
+#'  rgee::sf_as_ee()
+#'
+#' #Plot
+#' rgee::Map$addLayer(grid)
+
+# Compute standard deviation
+#'std_dev <- gridder::assess_env_uncertainty(x= nasadem, y= grid)
 #' }
 assess_env_uncertainty <- function(x, y, by = 1000,scale = 1000) {
+  rgee::ee_Initialize()
   y_len <- y$size()$getInfo()
   for (i in seq(1, y_len, by)) {
     index <- i - 1

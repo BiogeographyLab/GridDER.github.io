@@ -14,7 +14,7 @@
 #' @export
 #' @note Using 15 cores, it took ~10-20 minutes to finish this workflow.
 #'
-#' @import data.table
+#' @import data.table, doParallel
 #' @import raster rgdal
 #' @examples
 infer_crs = function(occ_path,
@@ -23,7 +23,7 @@ infer_crs = function(occ_path,
                      flag_newCal=TRUE,
                      #temp_path = "data/3_infer_grid_crs/prj_occ_temp_v2/",
                      temp_path = "data/3_infer_grid_crs_temp/",
-                     temp_path = "data/3_infer_grid_crs/",
+                     #temp_path = "data/3_infer_grid_crs/",
                      #temp_path = "data/3_infer_grid_crs/",
                      cup_num = 2,
                      flag_debug=-1

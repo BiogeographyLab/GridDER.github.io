@@ -31,9 +31,6 @@ grid_matching(
 
 \item{gridID}{Character vector. A string or a vector of strings; grid ID to be used in the calculation (gridID from G sheet or user provied dataframe).}
 }
-\value{
-
-}
 \description{
 This function calculate nearest distance between a set of occurrences and a set of grid systems.
 }

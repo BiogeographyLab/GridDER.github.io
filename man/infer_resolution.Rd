@@ -9,11 +9,8 @@ infer_resolution(input_coord, digits = 1, flag_unit = "meter", ...)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
-
+Infer Resolution
 }
 \author{
 Xiao Feng

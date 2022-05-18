@@ -16,9 +16,6 @@ infer_origin(
 
 \item{filters}{}
 }
-\value{
-
-}
 \description{
 Find the minimum and maximum of occurrence. Here the minimum and maximum should match the resolution of the grid.
 }

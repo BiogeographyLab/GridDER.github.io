@@ -11,9 +11,6 @@ get_dist_freq(input_v, round_num = 0)
 
 \item{round_num}{Numeric}
 }
-\value{
-
-}
 \description{
 Find the distance of x(or y), then return a frequency table
 }

@@ -23,16 +23,13 @@ assess_sp_uncertainty(
 
 \item{flag_plot}{Logical. If TRUE, coordinates (based on the crs of the grid system) should be in degrees; else they should represent planar ('Euclidean') space (e.g. units of meters). Default is FALSE.}
 }
-\value{
-
-}
 \description{
 The function computes spatial uncertainty of a grid system by calculating the distance between grid centroids toward gridded coordinates and non-gridded coordinates (e.g. iNaturalist data).
 }
 \examples{
 \dontrun{
-# Will change. Not run!
-test1 <- cal_emp_G_distance(input_grid = "data/2_clean_grid/grid_ID_2_polygon_masked.shp",
+
+distance <- cal_emp_G_distance(input_grid = "data/2_clean_grid/grid_ID_2_polygon_masked.shp",
 input_occ_grid = "data/france_datasetID10/0068190-210914110416597.csv",
 input_occ_random = "data/iNaturalist_20211205/0071565-210914110416597.csv")
 }
