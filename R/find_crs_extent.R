@@ -12,24 +12,47 @@
 #' \dontrun{
 #' crs <- find_CRS_extent(crs_num = "2154")
 #' }
- find_crs_extent = function(crs_num = "2154"){
+
+find_crs_extent = function (crs_num = "2154") 
+{
   library(rvest)
-  simple <- read_html(paste0("https://epsg.io/",crs_num))
-  temp1 = simple |>
-    html_nodes(css ="p") |>
-    html_nodes(css = "[class=caption]")  |>  html_text()
-  which(temp1=="Projected bounds:")
-
-  temp1= simple |>
-    html_nodes(css ='[class="col3 minimap-pad"]') |>
-    html_nodes("p") |>  html_text()
-
-  temp2 = temp1[grep("Projected bounds",temp1)]
-  temp3 = strsplit(temp2,"\n")[[1]]
-  xmin = as.numeric(  strsplit(trim(temp3[3])," ")[[1]][1] )
-  ymin = as.numeric(  strsplit(trim(temp3[3])," ")[[1]][2] )
-  xmax = as.numeric(  strsplit(trim(temp3[4])," ")[[1]][1] )
-  ymax = as.numeric(  strsplit(trim(temp3[4])," ")[[1]][2] )
-
-  return(  c(xmin,ymin,xmax,ymax ))
+  simple <- read_html(paste0("https://epsg.io/", crs_num))
+  temp1 = html_text(html_nodes(html_nodes(simple, css = "p"), 
+                               css = "[class=caption]"))
+  
+  if(  any(grepl("Projected bounds:",temp1))  ){
+    #which(temp1 == "Projected bounds:")
+    temp1 = html_text(html_nodes(html_nodes(simple, css = "[class=\"col3 minimap-pad\"]"), 
+                                 "p"))
+    temp2 = temp1[grep("Projected bounds", temp1)]
+    
+    temp3 = strsplit(temp2, "\n")[[1]]
+    xmin = as.numeric(strsplit(trimws(temp3[3]), " ")[[1]][1])
+    ymin = as.numeric(strsplit(trimws(temp3[3]), " ")[[1]][2])
+    xmax = as.numeric(strsplit(trimws(temp3[4]), " ")[[1]][1])
+    ymax = as.numeric(strsplit(trimws(temp3[4]), " ")[[1]][2])
+    
+    
+  } else if (any(grepl("WGS84 bounds:",temp1))   ) {
+    temp1 = html_text(html_nodes(html_nodes(simple, css = "[class=\"col3 minimap-pad\"]"), 
+                                 "p"))
+    temp2 = temp1[grep("WGS84 bounds:", temp1)]
+    
+    temp3 = strsplit(temp2, "\n")[[1]]
+    xmin = as.numeric(strsplit(trimws(temp3[6]), " ")[[1]][1])
+    ymin = as.numeric(strsplit(trimws(temp3[6]), " ")[[1]][2])
+    xmax = as.numeric(strsplit(trimws(temp3[7]), " ")[[1]][1])
+    ymax = as.numeric(strsplit(trimws(temp3[7]), " ")[[1]][2])
+    
+  }
+  
+  
+  #temp3 = strsplit(temp2, "\n")[[1]]
+  #xmin = as.numeric(strsplit(glue::trim(temp3[3]), " ")[[1]][1])
+  #ymin = as.numeric(strsplit(glue::trim(temp3[3]), " ")[[1]][2])
+  #xmax = as.numeric(strsplit(glue::trim(temp3[4]), " ")[[1]][1])
+  #ymax = as.numeric(strsplit(glue::trim(temp3[4]), " ")[[1]][2])
+  return(c(xmin, ymin, xmax, ymax))
 }
+
+
