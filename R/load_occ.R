@@ -1,5 +1,5 @@
 #' @title Load Occurrence Records
-#' @description This function read in a GBIF dataset, then return the unique coordinates in spatial format.
+#' @description This function read a GBIF dataset, then return the unique coordinates in spatial format.
 #' @author Xiao Feng
 #'
 #' @param path Character vector. Path of occurrences data, should have decimalLongitude & decimalLatitude.

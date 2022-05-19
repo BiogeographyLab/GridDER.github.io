@@ -15,7 +15,7 @@ load_occ(path, crs_num = NULL)
 Unique records.
 }
 \description{
-This function read in a GBIF dataset, then return the unique coordinates in spatial format.
+This function read a GBIF dataset, then return the unique coordinates in spatial format.
 }
 \examples{
 \dontrun{
