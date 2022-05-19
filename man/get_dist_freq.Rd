@@ -12,7 +12,7 @@ get_dist_freq(input_v, round_num = 0)
 \item{round_num}{Numeric}
 }
 \description{
-Find the distance of x(or y), then return a frequency table
+Find the distance of x(or y), then return a frequency table.
 }
 \author{
 Xiao Feng

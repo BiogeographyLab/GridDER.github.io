@@ -13,7 +13,7 @@ find_crs_extent(crs_num = "2154")
 The function returns the extent bounds (xmin,ymin,xmax,ymax)
 }
 \description{
-This function extracting the extent of coordinate reference systems (crs) from \href{https://epsg.io/}{epsg website}. The extent is required for generateGRID function.
+This function extracting the extent of coordinate reference systems (crs) from \href{https://epsg.io/}{epsg website}. The extent is required for grid_generation function.
 }
 \examples{
 \dontrun{

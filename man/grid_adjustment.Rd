@@ -15,7 +15,7 @@ grid_adjustment(input_grid, input_occ_grid)
 The function returns the grid adjusted (shapefile).
 }
 \description{
-Given a grid system and occurrences, this function try to shift the grid system, in order to minimize the distance between the grid system and input occurrences i.e. doing some small adjustment of the grid system.
+Given a grid system and occurrences, this function tries to shift the grid system, in order to minimize the distance between the grid system and input occurrences.
 }
 \author{
 Xiao Feng

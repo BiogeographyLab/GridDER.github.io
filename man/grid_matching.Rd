@@ -17,7 +17,7 @@ grid_matching(
 \arguments{
 \item{input_occ}{Input occurrences (shapefile or .txt/.csv data with decimalLongitude & decimalLatitude).}
 
-\item{input_grid}{A list of spatial polygons, each represent one grid system flag_degree, res_x,res_y,res_unit, input_metadata=,~~~~ to fix.}
+\item{input_grid}{A list of spatial polygons, each represent one grid system.}
 
 \item{country}{Character vector. A string or a vector of strings of countries names; can be used to subset known grid systems (G sheet, or a dataframe from user, in which case it should have a similar structure as G sheet).}
 
@@ -25,7 +25,7 @@ grid_matching(
 
 \item{flag_relativeTHD}{Numerical. 0.1 if a relative distance is >0.1 or 10\% of max distance (half of the diagonal line), then make it NA (meaning not from a grid).}
 
-\item{flag_rm_Large_outlier}{Give a pool of distances, the remove outliers (based on R boxplot algorithm)}
+\item{flag_rm_Large_outlier}{Give a pool of distances, then remove outliers (based on R boxplot algorithm).}
 
 \item{flag_absoluteTHD}{Numerical. An absolute distance, beyond of which an occurrence is excluded.}
 

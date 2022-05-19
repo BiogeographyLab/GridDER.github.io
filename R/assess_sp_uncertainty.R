@@ -21,10 +21,10 @@
 #' input_occ_random = "data/iNaturalist_20211205/0071565-210914110416597.csv")
 #' }
 assess_sp_uncertainty <- function(input_grid,
-                               input_occ_grid,
-                               input_occ_random,
-                               flag_degree = FALSE,
-                               flag_plot = FALSE) {
+                                  input_occ_grid,
+                                  input_occ_random,
+                                  flag_degree = FALSE,
+                                  flag_plot = FALSE) {
   if (grepl(".shp", input_occ_grid)) {
     one_occ <- shapefile(input_occ_grid)
   } else {

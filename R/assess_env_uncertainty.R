@@ -23,15 +23,19 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## As this function is based on rgee package , the following commands must be executed:
-#' rgee::ee_install() # Create virtual environmental at local machine to install the necessary dependencies
-#' rgee::ee_Initialize() # Initialize
+#' # As this function is based on rgee package, the following commands must be executed:
+#'
+#' # Create virtual environmental at local machine to install the necessary dependencies
+#' rgee::ee_install()
+#'
+#' # Initialize
+#' rgee::ee_Initialize()
 #'
 #' # Load ImageCollection of interest i.e, an environmental layer
 #'
 #' nasadem<- rgee::ee$Image('NASA/NASADEM_HGT/001')$select('elevation')
 #'
-#'# Hypothetical grid system
+#' # Hypothetical grid system
 #'lat_lon_grid <- structure(list(ID = 758432:758443,
 #'                               lat = c(-14.875, -14.875, -14.625, -14.625, -14.875, -14.875, -14.625, -14.625, -14.375, -14.375, -14.125, -14.125),
 #'                               lon = c(-42.875, -42.625, -42.625, -42.875, -42.375, -42.125, -42.125, -42.375, -42.375, -42.125, -42.125, -42.375)),
@@ -43,14 +47,14 @@
 #'  sf::st_as_sf() |>
 #'  rgee::sf_as_ee()
 #'
-#' #Plot
+#' # Plot
 #' rgee::Map$addLayer(grid)
-
-# Compute standard deviation
-#'std_dev <- gridder::assess_env_uncertainty(x= nasadem, y= grid)
+#'
+#' # Compute standard deviation
+#' std_dev <- gridder::assess_env_uncertainty(x= nasadem, y= grid)
 #' }
-assess_env_uncertainty <- function(x, y, by = 1000,scale = 1000) {
-  rgee::ee_Initialize()
+#'
+assess_env_uncertainty <- function(x, y, by = 1000, scale = 1000) {
   y_len <- y$size()$getInfo()
   for (i in seq(1, y_len, by)) {
     index <- i - 1

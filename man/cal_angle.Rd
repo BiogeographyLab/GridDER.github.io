@@ -2,7 +2,7 @@
 % Please edit documentation in R/cal_angle.R
 \name{cal_angle}
 \alias{cal_angle}
-\title{Cal Angle funtion}
+\title{Cal Angle function}
 \usage{
 cal_angle(M, N)
 }
@@ -10,7 +10,7 @@ cal_angle(M, N)
 \item{N}{}
 }
 \description{
-Cal Angle funtion
+Cal Angle function
 }
 \author{
 Xiao Feng
