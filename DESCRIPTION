@@ -12,7 +12,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
 Imports: 
     dplyr,
-    data.table,
     doParallel,
     ggplot2,
     gsheet,
@@ -24,7 +23,8 @@ Imports:
     rmapshaper,
     rvest,
     sf,
-    sp
+    sp,
+    data.table
 URL: https://github.com/Tai-Rocha/gridpckgname
 BugReports: https://github.com/Tai-Rocha/gridpckgname/issues
 Depends: 
