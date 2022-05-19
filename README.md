@@ -1,15 +1,14 @@
-# gridder  <img src='man/figures/logo.png' align="right" height="250" />
+# GridDER  <img src='man/figures/logo.png' align="right" height="250" />
 
-in development
-
-gridder identifies collection records that have been designated locations on widely used gridding systems. Our tool also estimates the degree of environmental heterogeneity associated with grid systems, allowing users to make informed decisions about how to use occurrence data in global change studies.  
+The package is a tool for identifying biodiversity records that have been designated locations on widely used grid systems. Our tool also estimates the degree of environmental heterogeneity associated with grid systems, allowing users to make informed decisions about how to use such occurrence data in global change studies. We show that a significant proportion (~13.5%; 261 million) of records on GBIF, largest aggregator of natural history collection data, are potentially gridded data, and demonstrate that our tool can reliably identify such records and quantify the associated uncertainties.
 
 
-# Citation
 
-citation here 
+### Citation
 
-# Installing
+
+
+### Installing
 
 Currently **gridder** can be installed from GitHub:
 
@@ -24,15 +23,7 @@ remotes::install_github("BiogeographyLab/gridder",
 ```
 
 
-## Load library and verify internal files and directories
-
-library(gridder)
-
-`system.file(package = "gridder")`
-
-`dir(system.file(package = "gridder"))`
-
-## To see the internal data use the fution `str()`
+### To see the internal data use the fution `data()` or `str()`
 
 `str(crs_list_prj)` : lisf of crs <br>
 
@@ -44,13 +35,12 @@ library(gridder)
 
 
 
-## The workflow
-
-The workflow consists of mainly N functions that should be ....
+### The workflow overview
 
 
 <img src='inst/workflow.png' align="center" height="450" />
-
+<br />
+<br />
 
 - `assess_env_uncertainty()` compute variation of environmental conditions for each feature of the grid system. The functions has followed parameters :
 ``` r
@@ -82,4 +72,60 @@ assess_sp_uncertainty(input_grid, input_occ_grid, input_occ_random, flag_degree 
 
 `flag_plot` Logical. If TRUE, coordinates (based on the crs of the grid system) should be in degrees; else they should represent planar ('Euclidean') space (e.g. units of meters). Default is FALSE.
 
+<br />
+<br />
+
+- `cal_angle()` :
+``` r
+cal_angle(M, N)
+```
+`M` 
+
+`N` 
+
+<br />
+<br />
+
+- `assess_sp_uncertainty()` This functions load from Zenodo all grid systems compiled
+
+``` r
+download_demoGrid(downloadNew = F)
+
+```
+
+<br />
+<br />
+
+- `find_crs_extent()` The function extracts the extent of coordinate reference systems (crs) from epsg website. The extent is required for generateGRID function. 
+``` r
+find_crs_extent(crs_num = "2154")
+```
+`crs_num` Character vector of crs number, e.g. "4326"
+
+<br />
+<br />
+
+- `get_dist_freq` The function finds the distance of x(or y), then return a frequency table
+``` r
+get_dist_freq(input_v, round_num = 0)
+```
+`input_v` Vector? X or Y coordinates
+
+`round_num` Numeric
+
+<br />
+<br />
+
+- `grid_adjustment` Given a grid system and occurrences, this function try to shift the grid system, in order to minimize the distance between the grid system and input occurrences i.e. doing some small adjustment of the grid system.
+```r
+grid_adjustment(input_grid, input_occ_grid)
+```
+`input_grid` Character vector. A string with path of input grid system.
+
+`input_occ_grid` Character vector. A string with path of occurrences data.
+
+<br />
+<br />
+
+- `grid_generation` 
 
