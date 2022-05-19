@@ -6,7 +6,7 @@
 #'
 #' @return The function returns the extent bounds (xmin,ymin,xmax,ymax)
 #' @export
-#' @import rvest
+#' @import rvest data.table
 #'
 #' @examples
 #' \dontrun{

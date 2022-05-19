@@ -14,6 +14,7 @@
 #' @return
 #' @export
 #' @import raster gsheet
+#' @import sp
 #'
 #' @examples
 grid_matching <- function(input_occ,

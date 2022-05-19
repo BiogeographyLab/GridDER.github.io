@@ -19,7 +19,8 @@
 #' @return The function returns a shapefile.
 #' @export
 #' @import raster sp
-#' @import gsheet data.table
+#' @import gsheet
+#' @import data.table
 #'
 #' @examples
 #'  \dontrun{

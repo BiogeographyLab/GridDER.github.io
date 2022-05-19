@@ -21,6 +21,8 @@
 #' @seealso \href{https://csaybar.github.io/rgee-examples/}{rgee examples} and \href{https://cran.r-project.org/web/packages/rgee/vignettes/rgee01.html}{rgee cran documentation}.
 #' @export
 #'
+#' @import rgee raster
+#'
 #' @examples
 #' \dontrun{
 #' # As this function is based on rgee package, the following commands must be executed:

@@ -10,6 +10,7 @@
 #'
 #' @import raster sp
 #' @import data.table
+#'
 #' @examples
 #' \dontrun{
 #' # Will change. Not run!

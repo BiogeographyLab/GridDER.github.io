@@ -13,6 +13,7 @@
 #' @export
 #'
 #' @import ggplot2 sp
+#' @import raster
 #' @examples
 #' \dontrun{
 #'
