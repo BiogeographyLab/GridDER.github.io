@@ -6,9 +6,6 @@
 #' @param y ee$Geometry$*, ee$Feature, ee$FeatureCollection or sf objects.
 #' @param by Numerical input. Numbers of features.
 #' @param scale A nominal scale in meters of the Image projection to work in. By default 1000.
-#' @import rgee rmapshaper
-#' @import raster sf
-#' @import dplyr
 #'
 #' @return The function returns a sf object with column called "elevation" with standard deviation for each feature.
 #' @note The functions with prefix "ee_" is based on rgee package for interacting with Google Earth Engine (GEE). To run these functions or anything related to rgee/GEE, users must have:
@@ -21,7 +18,10 @@
 #' @seealso \href{https://csaybar.github.io/rgee-examples/}{rgee examples} and \href{https://cran.r-project.org/web/packages/rgee/vignettes/rgee01.html}{rgee cran documentation}.
 #' @export
 #'
-#' @import rgee raster
+#' @import rgee rmapshaper
+#' @import raster sf
+#' @import dplyr
+#'
 #'
 #' @examples
 #' \dontrun{
