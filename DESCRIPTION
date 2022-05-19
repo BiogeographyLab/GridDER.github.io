@@ -16,6 +16,7 @@ Imports:
     doParallel,
     ggplot2,
     gsheet,
+    kit,
     magrittr,
     raster,
     rgdal,

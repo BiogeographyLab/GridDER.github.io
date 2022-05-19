@@ -16,6 +16,9 @@
 #' @return
 #' @export
 #'
+#' @import raster rgdal
+#' @import sp
+#'
 #' @examples
 infer_extent <- function(method = "",
                          country = NULL,
