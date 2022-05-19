@@ -14,7 +14,7 @@
 #' @export
 #' @note Using 15 cores, it took ~10-20 minutes to finish this workflow.
 #'
-#' @import data.table, doParallel
+#' @import data.table doParallel
 #' @import raster rgdal
 #' @examples
 infer_crs <- function(occ_path,
