@@ -45,6 +45,10 @@ infer_crs <- function(occ_path,
 #  occ1 <- load_occ(occ_path)
 #}
   occ1 <- load_occ(occ_path)
+  if( any(grepl("data.frame", class(occ_path)))   ){
+      occ_path = "df"
+  }
+  
   crs_list <- data(crs_list_prj, package = "gridder", envir = environment())
   crs_list <- crs_list_prj
   if (any(flag_debug > 0)) crs_list <- crs_list[flag_debug, ]
