@@ -21,10 +21,7 @@ infer_crs <- function(occ_path,
                      truth_crs_num = NA,
                      flag_saveTemp = TRUE,
                      flag_newCal = TRUE,
-                     # temp_path = "data/3_infer_grid_crs/prj_occ_temp_v2/",
                      temp_path = "data/3_infer_grid_crs_temp/",
-                     # temp_path = "data/3_infer_grid_crs/",
-                     # temp_path = "data/3_infer_grid_crs/",
                      cup_num = 2,
                      flag_debug = -1) {
   library(data.table)
@@ -40,7 +37,14 @@ infer_crs <- function(occ_path,
     dir.create(dirname(temp_path))
     dir.create(temp_path)
   }
+  
+ if( any(grepl("data.frame", class(occ_path)))   ){
+  occ1 = occ_path
+}
+if( class(occ_path)=="character"  ){
   occ1 <- load_occ(occ_path)
+}
+  #occ1 <- load_occ(occ_path)
   crs_list <- data(crs_list_prj, package = "gridder", envir = environment())
   crs_list <- crs_list_prj
   if (any(flag_debug > 0)) crs_list <- crs_list[flag_debug, ]
