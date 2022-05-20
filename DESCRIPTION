@@ -1,7 +1,8 @@
 Package: gridder
 Title: grid detection and evaluation in R
 Version: 0.0.0.9000
-Authors@R: gridder
+Authors@R: 
+    person("gridder", "gridder", , "gridder.help@gmail.com", role = c("aut", "cre") )
 Description: gridder
 License: CC BY
 Encoding: UTF-8
