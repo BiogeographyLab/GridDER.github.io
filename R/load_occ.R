@@ -24,6 +24,7 @@ load_occ = function(path,crs_num=NULL){
   
   if (any(grepl("data.frame", class(path)))) {
     temp_occ = path
+    setDT(temp_occ)
   } else if (class(path) == "character") {
     temp_occ = data.table::fread(path,header = T)
   }
