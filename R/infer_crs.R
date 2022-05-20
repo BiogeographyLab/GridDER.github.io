@@ -67,7 +67,7 @@ infer_crs <- function(occ_path,
   out_foreach <- foreach(
     i = 1:NNN,
     .combine = rbind,
-    .errorhandling = "pass",
+    #.errorhandling = "pass",
     .export = c("catf", "cal_angle"),
     .packages = c("raster", "sp", "rgdal")
   ) %dopar% {
