@@ -1,0 +1,31 @@
+---
+title: "GridDER: Grid Detection and Evaluation in R"
+author: "Tainá Rocha"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+author: 
+output:
+    rmarkdown::html_vignette:
+        toc: true
+        number_sections: true
+    md_document:
+      variant: gfm
+vignette: >
+  %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{GridDER: Grid Detection and Evaluation in R}
+  %\VignetteEngine{knitr::rmarkdown}
+    \usepackage[utf8]{inputenc}
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE) # for development
+```
+
+```{r load, echo = FALSE, eval = TRUE, include=FALSE}
+devtools::load_all() # for development
+```
+
+
+<br/><br/>
+
+# Introduction
