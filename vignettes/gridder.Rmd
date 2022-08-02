@@ -29,3 +29,83 @@ devtools::load_all() # for development
 <br/><br/>
 
 # Introduction
+
+## Main features and workflow
+
+
+# Installation and presetting steps 
+
+As this function is based on rgee package, the following commands must be executed:
+
+##### Step 1 
+
+Create virtual environmental to install the necessary dependencies
+
+```{r venv, echo=TRUE, eval=FALSE}
+rgee::ee_install()
+```
+
+If the following error message happen :
+`An error occur when ee_install was creating the Python Environment. Run ee_clean_pyenv() and restart the R session, before trying again`
+
+Then execute the bellow command and R session:
+
+```{r ee_clean_pyenv, echo=TRUE, eval=FALSE}
+rgee::ee_clean_pyenv()
+```
+
+After that you 
+
+
+##### Initialize
+
+```{r initialize, echo=TRUE, eval=FALSE}
+rgee::ee_Initialize()
+```
+
+# Funtions
+
+## assess_env_uncertainty 
+
+
+##### Load ImageCollection of interest (environmental layer)
+
+```{r add image, echo=TRUE, eval=FALSE}
+nasadem<- rgee::ee$Image('NASA/NASADEM_HGT/001')$select('elevation')
+```
+
+
+
+##### Create hypothetical grid system
+
+```{r grid, echo=TRUE, eval= FALSE}
+lat_lon_grid <- structure(list(ID = 758432:758443,
+                              lat = c(-14.875, -14.875, -14.625, -14.625, -14.875, -14.875, -14.625, -14.625, -14.375, -14.375, -14.125, -14.125),
+                              lon = c(-42.875, -42.625, -42.625, -42.875, -42.375, -42.125, -42.125, -42.375, -42.375, -42.125, -42.125, -42.375)),
+                         class = "data.frame", row.names = c(NA, -12L))
+
+grid_to_raster <- raster::rasterFromXYZ(lat_lon_grid [, c('lon', 'lat', 'ID')], crs = '+proj=longlat +datum=WGS84 +no_defs')
+
+grid <- raster::rasterToPolygons(grid_to_raster, fun=NULL, na.rm=TRUE, dissolve=FALSE) |>
+ sf::st_as_sf() |>
+ rgee::sf_as_ee()
+
+```
+
+#### Plot 
+
+```{r plot}
+# Plot
+rgee::Map$addLayer(grid)
+
+```
+
+#### Compute standard deviation
+```{r}
+std_dev <- gridder::assess_env_uncertainty(x= nasadem, y= grid)
+```
+ 
+
+                      
+
+## assess_sp_uncertainty
