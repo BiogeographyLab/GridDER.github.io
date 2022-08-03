@@ -1,6 +1,6 @@
 ---
 title: "GridDER: Grid Detection and Evaluation in R"
-author: "Tainá Rocha"
+author: "Feng et al 2022"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 author: 
 output:
@@ -33,9 +33,13 @@ devtools::load_all() # for development
 ## Main features and workflow
 
 
-# Installation and presetting steps 
+# Installation and presetting steps
 
-As this function is based on rgee package, the following commands must be executed:
+Requirements 
+_Phyton > 3.5 
+-Earth ENgine account and credentials
+
+As the package uses rgee (R package to acessess Google Earth Engine API), the following commands must be executed:
 
 ##### Step 1 
 
@@ -45,36 +49,42 @@ Create virtual environmental to install the necessary dependencies
 rgee::ee_install()
 ```
 
-If the following error message happen :
+If the following message happen :
 `An error occur when ee_install was creating the Python Environment. Run ee_clean_pyenv() and restart the R session, before trying again`
 
-Then execute the bellow command and R session:
+Then execute the bellow command and restart R session:
 
 ```{r ee_clean_pyenv, echo=TRUE, eval=FALSE}
 rgee::ee_clean_pyenv()
 ```
 
-After that you 
+After that you must run Step 1
+
+Tou will resuest to continues and Rstart R seccion choose Yes in both cases 
 
 
 ##### Initialize
 
+The follow command authorizes rgee to manage Earth Engine resources
+
 ```{r initialize, echo=TRUE, eval=FALSE}
 rgee::ee_Initialize()
+```
+##### Check
+
+```{r ee_check, echo=TRUE, eval=FALSE}
+rgee::ee_check()
 ```
 
 # Funtions
 
 ## assess_env_uncertainty 
 
-
 ##### Load ImageCollection of interest (environmental layer)
 
 ```{r add image, echo=TRUE, eval=FALSE}
 nasadem<- rgee::ee$Image('NASA/NASADEM_HGT/001')$select('elevation')
 ```
-
-
 
 ##### Create hypothetical grid system
 
@@ -93,6 +103,7 @@ grid <- raster::rasterToPolygons(grid_to_raster, fun=NULL, na.rm=TRUE, dissolve=
 ```
 
 #### Plot 
+The hypothetical grid is located in Brazil. Use zoom in tool to view. 
 
 ```{r plot}
 # Plot
@@ -103,9 +114,11 @@ rgee::Map$addLayer(grid)
 #### Compute standard deviation
 ```{r}
 std_dev <- gridder::assess_env_uncertainty(x= nasadem, y= grid)
+
+knitr::kable(std_dev)
 ```
  
-
+#### 
                       
 
 ## assess_sp_uncertainty
