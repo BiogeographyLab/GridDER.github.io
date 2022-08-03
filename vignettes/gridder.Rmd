@@ -1,8 +1,7 @@
 ---
 title: "GridDER: Grid Detection and Evaluation in R"
-author: "Feng et al 2022"
+author: "Feng et al. 2022"
 date: "`r format(Sys.time(), '%d %B %Y')`"
-author: 
 output:
     rmarkdown::html_vignette:
         toc: true
@@ -82,13 +81,15 @@ rgee::ee_check()
 
 ##### Load ImageCollection of interest (environmental layer)
 
-```{r add image, echo=TRUE, eval=FALSE}
+```{r add image, echo=TRUE, eval=TRUE}
+
+rgee::ee_Initialize()
 nasadem<- rgee::ee$Image('NASA/NASADEM_HGT/001')$select('elevation')
 ```
 
 ##### Create hypothetical grid system
 
-```{r grid, echo=TRUE, eval= FALSE}
+```{r grid, echo=TRUE, eval= TRUE}
 lat_lon_grid <- structure(list(ID = 758432:758443,
                               lat = c(-14.875, -14.875, -14.625, -14.625, -14.875, -14.875, -14.625, -14.625, -14.375, -14.375, -14.125, -14.125),
                               lon = c(-42.875, -42.625, -42.625, -42.875, -42.375, -42.125, -42.125, -42.375, -42.375, -42.125, -42.125, -42.375)),
@@ -105,20 +106,16 @@ grid <- raster::rasterToPolygons(grid_to_raster, fun=NULL, na.rm=TRUE, dissolve=
 #### Plot 
 The hypothetical grid is located in Brazil. Use zoom in tool to view. 
 
-```{r plot}
-# Plot
+```{r plot, echo=TRUE, eval=TRUE, results='asis', out.width= "100%"}
 rgee::Map$addLayer(grid)
-
 ```
 
 #### Compute standard deviation
-```{r}
+```{r, std_dev, echo=TRUE, eval=TRUE}
 std_dev <- gridder::assess_env_uncertainty(x= nasadem, y= grid)
 
 knitr::kable(std_dev)
 ```
  
-#### 
-                      
 
 ## assess_sp_uncertainty
