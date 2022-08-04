@@ -31,6 +31,11 @@ devtools::load_all() # for development
 
 ## Main features and workflow
 
+```{r workflow image, out.width="100%"}
+knitr::include_graphics(
+)
+```
+
 
 # Installation and presetting steps
 
@@ -76,6 +81,16 @@ rgee::ee_check()
 ```
 
 # Funtions
+
+## infer_crs
+
+```{r infer_crs}
+data("occs_unique")# dataframe of occurrences
+
+#results_crs <- gridder::infer_crs(occ_path = occs_unique,
+#                                  truth_crs_num = "2154", 
+#                                  cup_num = 2)
+```
 
 ## assess_env_uncertainty 
 
