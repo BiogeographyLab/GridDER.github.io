@@ -34,6 +34,9 @@ crs_list_prj <- readRDS("data-raw/crs_list_prj.rds")
 
 
 ## Take all DATA and put as INTERNAL data into a gridder package
+
+usethis::use_data(occs_unique, internal = TRUE, overwrite = TRUE) # update occ_unique (reduce row number) 8/8/2022
+
 usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_unique,crs_list_prj, internal = TRUE, overwrite = TRUE)
 
 ## To acess the data afetr installation use
@@ -44,6 +47,9 @@ usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,
 
 
 ## Take all DATA and put as EXTERNAL data into a gridder package
+
+usethis::use_data(occs_unique, internal = FALSE, overwrite = TRUE) # update occ_unique (reduce row number) 8/8/2022
+
 usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,occs_unique,crs_list_prj, internal = FALSE, overwrite = TRUE)
 
 ## to access the data use
