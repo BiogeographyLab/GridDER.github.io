@@ -29,21 +29,32 @@ devtools::load_all() # for development
 
 # Introduction
 
+The package is a tool for identifying biodiversity records that have been designated locations on widely used grid systems. Our tool also estimates the degree of environmental heterogeneity associated with grid systems, allowing users to make informed decisions about how to use such occurrence data in global change studies. We show that a significant proportion (~13.5%; 261 million) of records on GBIF, largest aggregator of natural history collection data, are potentially gridded data, and demonstrate that our tool can reliably identify such records and quantify the associated uncertainties.
+
 ## Main features and workflow
 
-```{r workflow image, out.width="100%"}
-knitr::include_graphics(
-)
+```{r workflow image, out.width="80%"}
+knitr::include_graphics("inst/workflow.png")
 ```
 
+## Grid systems  examples 
 
+Examples of four grid systems used in France (a), United Kingdom (b), South Africa
+(c), and Australia (d). The four grid systems have different spatial solutions – 10km for (a), 1km
+for (b), 5 arc-minute for (c), and 6 arc-minute for (d). The black points represent the biological
+collections assigned to the centroid of the corresponding grid systems. All maps constructed
+using WGS84.
+
+```{r grid_systems, out.width="80%"}
+knitr::include_graphics("inst/fig_1_temp.png")
+```
 
 
 # Funtions
 
 ## Case 1: Infer the metadata of a grid system
 
-### 1.1 Infer coordinate reference system - Take much time with 2 core. 
+### 1.1 Infer coordinate reference system - We use 4 core. Please certify that you have at least 4 cores available.  
 
 ```{r infer_crs}
 
@@ -51,7 +62,7 @@ data("occs_unique")# dataframe of occurrences
 
 results_crs = gridder::infer_crs(occ_path = occs_unique,
                                   truth_crs_num = "2154", 
-                                  cup_num = 2)
+                                  cup_num = 4)
 ```
 
 ### 1.2  Infer the spatial resolution
