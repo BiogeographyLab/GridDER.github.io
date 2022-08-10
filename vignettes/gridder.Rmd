@@ -27,7 +27,7 @@ devtools::load_all() # for development
 
 <br/><br/>
 
-# Introduction
+## Introduction
 
 The package is a tool for identifying biodiversity records that have been designated locations on widely used grid systems. Our tool also estimates the degree of environmental heterogeneity associated with grid systems, allowing users to make informed decisions about how to use such occurrence data in global change studies. We show that a significant proportion (~13.5%; 261 million) of records on GBIF, largest aggregator of natural history collection data, are potentially gridded data, and demonstrate that our tool can reliably identify such records and quantify the associated uncertainties.
 
@@ -36,7 +36,20 @@ The package is a tool for identifying biodiversity records that have been design
 ```{r workflow image, out.width="80%"}
 knitr::include_graphics("inst/workflow.png")
 ```
+## List of functions 
+```{r table_2}
+table_2 <- readr::read_csv("inst/table_2.csv")
+knitr::kable(table_2)
+```
+## Metada 
+A metadata sheet with all grid systems compiled
+```{r metadata}
+meta_data <- gsheet::gsheet2tbl("https://docs.google.com/spreadsheets/d/1Qp5KOpLSVnF2t16uIbNwKwK5ZBXt4k5unONp7eopPzI/edit#gid=166945453") |> 
+  as_tibble()
 
+meta_data
+
+```
 ## Grid systems  examples 
 
 Examples of four grid systems used in France (a), United Kingdom (b), South Africa
@@ -54,39 +67,44 @@ knitr::include_graphics("inst/fig_1_temp.png")
 
 ## Case 1: Infer the metadata of a grid system
 
-### 1.1 Infer coordinate reference system - We use 4 core. Please certify that you have at least 4 cores available.  
+### 1.1 Infer coordinate reference system 
 
-```{r infer_crs}
+First load the demo occurrence data. This dataset includes a group of gridded coordinates, it was originally downloaded from GBIF, and has been simplified to be spatially unique for easier demonstration.
 
-data("occs_unique")# dataframe of occurrences
 
-results_crs = gridder::infer_crs(occ_path = occs_unique,
-                                  truth_crs_num = "2154", 
-                                  cup_num = 4)
+```{r plot map and occs}
+
+library(ggplot2)
+library(broom)
+
+data("occs_unique") # dataframe of occurrences
+data("ne_10m_admin_0_countries") #wordl countries map
+
+spdf_fortified <- broom::tidy(ne_10m_admin_0_countries, region = "ADMIN")
+
+plot_occs <- 
+ggplot2::ggplot() +
+  geom_polygon(data = spdf_fortified, 
+               aes( x = long, y = lat, group = group), 
+               fill="#69b3a2", color="white") +
+  geom_point(data = occs_unique,
+             aes(x = decimalLongitude, y = decimalLatitude), 
+             size = 2, 
+        shape = 23, fill = "darkred") +
+    coord_sf(xlim = c(-10, 20), ylim = c(40, 60), expand = FALSE) +
+
 ```
-
+The coordinates have been projected to WGS84, which could be different from the CRS where the grid system was defined. So here we use infer_crs() to infer the correct CRS.
 
 ```{r infer_crs}
-library(gridder)
-
-# First load the demo occurrence data. 
-# This dataset includes a group of gridded coordinates, it was originally downloaded from GBIF, and has been simplified to be spatially unique for easier demonstration.
-data("occs_unique")# dataframe of occurrences
-
-plot(occs_unique)# ******Taina, this is not the correct way to plot it, right?
-# The coordinates have been projected to WGS84, which could be different from the CRS where the grid system was defined. So here we use infer_crs() to infer the correct CRS.
-
 results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
-                                  truth_crs_num = "2154",# here we know the true CRS, just add it here for a comparision with the inferred CRS 
-                                  cup_num = 4)# the function will loop through many CRS, so using multiple cores can speed up the process
-
+                                  truth_crs_num = "2154", # here we know the true CRS, just add it here for a comparison with the inferred CRS 
+                                  cup_num = 4)# the function will loop through many CRS, so using multiple cores can speed up the process. The default uses 4 cores, thus certify at least 4 cores are available.
 
 # Now, let's take a look at the output.
+
 head(results_crs)
-
 ```
-
-
 
 
 ### 1.2  Infer the spatial resolution
