@@ -65,6 +65,30 @@ results_crs = gridder::infer_crs(occ_path = occs_unique,
                                   cup_num = 4)
 ```
 
+
+```{r infer_crs}
+library(gridder)
+
+# First load the demo occurrence data. 
+# This dataset includes a group of gridded coordinates, it was originally downloaded from GBIF, and has been simplified to be spatially unique for easier demonstration.
+data("occs_unique")# dataframe of occurrences
+
+plot(occs_unique)# ******Taina, this is not the correct way to plot it, right?
+# The coordinates have been projected to WGS84, which could be different from the CRS where the grid system was defined. So here we use infer_crs() to infer the correct CRS.
+
+results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
+                                  truth_crs_num = "2154",# here we know the true CRS, just add it here for a comparision with the inferred CRS 
+                                  cup_num = 4)# the function will loop through many CRS, so using multiple cores can speed up the process
+
+
+# Now, let's take a look at the output.
+head(results_crs)
+
+```
+
+
+
+
 ### 1.2  Infer the spatial resolution
 
 ```{r infer_resolution}
