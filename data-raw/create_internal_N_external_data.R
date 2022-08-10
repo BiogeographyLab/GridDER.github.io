@@ -57,3 +57,5 @@ usethis::use_data(grid_ID_2_polygon_masked, ne_10m_admin_0_countries, grid_ID_9,
 # ``str (occs_unique)`` or gridder::occs_unique
 
 
+#usethis::use_vignette("my-vignette")
+
