@@ -31,26 +31,27 @@ devtools::load_all() # for development
 
 The package is a tool for identifying biodiversity records that have been designated locations on widely used grid systems. Our tool also estimates the degree of environmental heterogeneity associated with grid systems, allowing users to make informed decisions about how to use such occurrence data in global change studies. We show that a significant proportion (~13.5%; 261 million) of records on GBIF, largest aggregator of natural history collection data, are potentially gridded data, and demonstrate that our tool can reliably identify such records and quantify the associated uncertainties.
 
-## Main features and workflow
+## Workflow for grid simulation and detection
 
 
 ```{r workflow image, echo=FALSE, out.width="80%"}
 knitr::include_graphics("inst/workflow.png")
 ```
-## List of functions 
+
+## Overview of functions in GridDER
+
 ```{r table_2, echo=FALSE}
 table_2 <- readr::read_csv("inst/table_2.csv")
 knitr::kable(table_2)
 ```
-## Metada 
-A metadata sheet with all grid systems compiled
-```{r metadata}
-meta_data <- gsheet::gsheet2tbl("https://docs.google.com/spreadsheets/d/1Qp5KOpLSVnF2t16uIbNwKwK5ZBXt4k5unONp7eopPzI/edit#gid=166945453") |> 
-  as_tibble()
 
-meta_data
+## Install the GridDER package
+
+```{r install package, echo= TRUE,warning=FALSE,eval=FALSE}
+remotes::install_github("BiogeographyLab/gridder")
 
 ```
+
 ## Grid systems  examples 
 
 Examples of four grid systems used in France (a), United Kingdom (b), South Africa
@@ -64,21 +65,27 @@ knitr::include_graphics("inst/fig1.png")
 ```
 
 
-## Funtions
+# Major use cases
 
-### Infer coordinate reference system 
+## Infer coordinate reference system 
 
-First load the demo occurrence data. This dataset includes a group of gridded coordinates, it was originally downloaded from GBIF, and has been simplified to be spatially unique for easier demonstration.
+First load the demo occurrence data. This dataset includes a group of gridded coordinates. It was originally downloaded from GBIF [https://doi.org/10.15468/dl.fp5795; accessed on 29 November 2021], but has been simplified to be spatially unique points for easier demonstration.
 
 
-```{r plot map and occs, fig.width=6,fig.height=6}
+```{r occs_unique,echo=TRUE,eval=FALSE}
+data("occs_unique") # dataframe of occurrences
+nrow(occs_unique)
+```
+
+Plot in geographical space
+
+```{r plot map and occs, echo=FALSE, fig.width=6,fig.height=6}
 library(ggplot2)
 library(broom)
 
-data("occs_unique") # dataframe of occurrences
-data("ne_10m_admin_0_countries") # orld map
+data("ne_10m_admin_0_countries") # world map
 
-spdf_fortified <- broom::tidy(ne_10m_admin_0_countries, region = "ADMIN")
+spdf_fortified = broom::tidy(ne_10m_admin_0_countries, region = "ADMIN")
 
 ggplot2::ggplot() +
   geom_polygon(data = spdf_fortified, 
@@ -92,33 +99,49 @@ ggplot2::ggplot() +
 
 ```
 <br>
-The coordinates have been projected to WGS84, which could be different from the CRS where the grid system was defined. So here we use infer_crs() to infer the correct CRS.
+<br>
+
+The coordinates have been projected to WGS84 (which is the same for occurrences from GBIF), which could be different from the CRS where the grid system was defined. So here we use infer_crs() to infer the correct CRS.
 
 ```{r infer_crs}
-results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
-                                  truth_crs_num = "2154", # here we know the true CRS, just add it here for a comparison with the inferred CRS 
-                                  cup_num = 4)# the function will loop through many CRS, so using multiple cores can speed up the process. The default uses 4 cores, thus certify at least 4 cores are available.
+# results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
+#                                   truth_crs_num = "2154", # (optional) here we know the true CRS, just add it here for a comparison with the inferred CRS ,
+#                                  #flag_debug = c(4363,5451,5981,5982,5991,5992,5425,5424,5422,3901),
+#                                   cup_num = 4)
 
-# Now, let's take a look at the output.
+# The function will loop through many CRS, so using multiple cores can speed up the process. The default uses 2 cores, but you can adjust it to your preferred number. 
 
-#head(results_crs, n=10)
+# You may want to save this output
+# saveRDS(results_crs,"vignettes/results_crs.rds")
+
+# It may take minutes - hours to complete the inference. If you want to quickly look at the output, you can load the results we calculated earlier.
+
+results_crs= readRDS("vignettes/results_crs.rds")
+
+# Now, let's take a look at the output. The CRS code "2154" is ranked the first.
+print(results_crs$selected[1:10, c("code", "note")])
+
 ```
 
 
-### Infer the spatial resolution
+## Infer the spatial resolution
 
 ```{r infer_resolution}
-data("occs_unique")# dataframe of occurrences
+data("occs_unique") # Dataframe of occurrences
 
+# Transform the coordinates to be spatial objects
 input_occ = gridder::load_occ(occs_unique)
+
 input_occ_prj = sp::spTransform(input_occ,crs(paste0("+init=epsg:","2154")))
 result_res = gridder::infer_resolution(input_coord=input_occ_prj@coords,flag_unit="meter")
 print(result_res$res_x)
 print(result_res$res_y)
 
+# The inferred resolution is 10km on x & y axes
+
 ```
 
-### Infer the spatial exten
+## Infer the spatial exten
 
 ```{r infer_extent}
 result_ext = gridder::infer_extent(method="crs_extent",
@@ -127,11 +150,11 @@ result_ext = gridder::infer_extent(method="crs_extent",
                           res_x=result_res$res_x,
                           res_y=result_res$res_y)
 
-result_ext
+print(result_ext)
 ```
 
 
-### Generation of a grid system based on metadata
+## Generation of a grid system based on metadata
 
 ```{r grid_generation}
 
@@ -149,15 +172,45 @@ simulated_grid = gridder::grid_generation(res_x=result_res$res_x,
 
 ```
 
+Check the simulated grid
 
-### Match occ data set against known grid systems
+```{r check simulated grid}
+plot(simulated_grid,
+     #ext=extent(c(extent(input_occ_prj)[1],extent(input_occ_prj)[1]+100000,
+     #           extent(input_occ_prj)[3],extent(input_occ_prj)[3]+100000)))
+      xlim=c(extent(input_occ_prj)[1],extent(input_occ_prj)[1]+110000),
+      ylim=c(extent(input_occ_prj)[3],extent(input_occ_prj)[3]+110000))
+plot(input_occ_prj,add=T,col="red")
+```
+
+## Match occ data set against known grid systems
 
 ```{r grid_matching}
+# take 100 gridded points, and generate 100 random points
 point_grid = input_occ[sample(1:length(input_occ),100),]
 point_nongrid = point_grid
 point_nongrid@coords=point_nongrid@coords+runif(100)
 point_all=rbind(point_grid,point_nongrid)
 
+plot(input_occ)
+plot(point_grid,add=T, col="red")
+plot(point_nongrid,add=T,col="orange")
+```
+
+### Grid metadata   
+
+We have compiled metadata for 34 grid systems, you could take a look at the table below.
+
+```{r metadata}
+meta_data <- gsheet::gsheet2tbl("https://docs.google.com/spreadsheets/d/1Qp5KOpLSVnF2t16uIbNwKwK5ZBXt4k5unONp7eopPzI/edit#gid=166945453") 
+
+meta_data
+
+```
+
+Here, we simulated a grid based on the spatial attributes we just inferred.
+
+```{r grid_matching2 }
 grid_metadata = data.frame(grid_ID=c("88"),
                            resolution_x=c(10000),
                            resolution_y=c(10000),
@@ -169,39 +222,14 @@ temp_result = gridder::grid_matching(input_occ=point_all,
                                      flag_relativeTHD=0.1,
                                      flag_absoluteTHD=10)
 
-table(temp_result@data$grid_closest_both)
+# 100 points were recognized to be gridded coordinates
+print( table(temp_result@data$grid_closest_both))
+
+plot(temp_result,col=as.factor(temp_result@data$grid_closest_both))
 ```
 
+## Compute variation of environmental conditions
 
-Installation and presetting steps
-
-Requirements 
-- Phyton > 3.5 
-<br>
-- Earth Engine account and credentials
-<br>
-
-As the package uses rgee (R package to acessess Google Earth Engine API), the following commands must be executed:
-
-
-```{r setting intalations, echo=TRUE, eval=FALSE}
-
-rgee::ee_install() # Creating virtual environmental to install the necessary dependencies
-
-# If the following message happen : `An error occur when ee_install was creating the Python Environment. Run ee_clean_pyenv() and restart the R session, before trying again`
-
-# Then execute the bellow command and restart R session:
-
-#rgee::ee_clean_pyenv()
-
-# After that you must run `rgee::ee_install()`. You will request to continues and Rstart R seccion choose Yes in all options.
-
-rgee::ee_check() # Checks if everything is OK. Optinal command . 
-
-```
-
-
-### Compute variation of environmental conditions
 
 ```{r add image, echo=TRUE,fig.width=6,fig.height=6, eval=TRUE}
 rgee::ee_Initialize() # The follow command authorizes rgee to manage Earth Engine resources
@@ -231,4 +259,27 @@ ggplot(data = grid_ID_9) +
   scale_fill_viridis_c(option = "plasma", trans = "sqrt")
 
 ```
+
+As the package uses rgee (R package to acessess Google Earth Engine API), the following commands should be executed:
+
+
+```{r setting intalations, echo=TRUE, eval=FALSE}
+
+rgee::ee_install() # Creating virtual environmental to install the necessary dependencies
+
+# If the following message happen : `An error occur when ee_install was creating the Python Environment. Run ee_clean_pyenv() and restart the R session, before trying again`
+
+# Then execute the bellow command and restart R session:
+
+rgee::ee_clean_pyenv()
+
+# After that you must run `rgee::ee_install()`. You will request to continues and Rstart R seccion choose Yes in all options.
+
+rgee::ee_Initialize() # The follow command authorizes rgee to manage Earth Engine resources
+
+rgee::ee_check() # Checks if everything is OK. Optinal command . 
+
+```
+
+
 
