@@ -27,32 +27,33 @@ devtools::load_all() # for development
 
 <br/><br/>
 
-## Introduction
+# Introduction
 
 The package is a tool for identifying biodiversity records that have been designated locations on widely used grid systems. Our tool also estimates the degree of environmental heterogeneity associated with grid systems, allowing users to make informed decisions about how to use such occurrence data in global change studies. We show that a significant proportion (~13.5%; 261 million) of records on GBIF, largest aggregator of natural history collection data, are potentially gridded data, and demonstrate that our tool can reliably identify such records and quantify the associated uncertainties.
 
-## Workflow for grid simulation and detection
+# Workflow for grid simulation and detection
 
 
 ```{r workflow image, echo=FALSE, out.width="80%"}
 knitr::include_graphics("inst/workflow.png")
 ```
 
-## Overview of functions in GridDER
+# Overview of functions in GridDER
 
 ```{r table_2, echo=FALSE}
-table_2 <- readr::read_csv("inst/table_2.csv")
+#table_2 <- readr::read_csv("inst/table_2.csv") # Taina, table_2 is local file, not availaboe from Github.
+table_2 <- gsheet::gsheet2tbl("https://docs.google.com/spreadsheets/d/1gj0EHmPpLNCNHZV09PQqt-ixG526Mvowjegk_z7oPyY/edit#gid=0")
 knitr::kable(table_2)
 ```
 
-## Install the GridDER package
+# Install the GridDER package
 
 ```{r install package, echo= TRUE,warning=FALSE,eval=FALSE}
 remotes::install_github("BiogeographyLab/gridder")
 
 ```
 
-## Grid systems  examples 
+# Grid systems  examples 
 
 Examples of four grid systems used in France (a), United Kingdom (b), South Africa
 (c), and Australia (d). The four grid systems have different spatial solutions – 10km for (a), 1km
@@ -72,18 +73,19 @@ knitr::include_graphics("inst/fig1.png")
 First load the demo occurrence data. This dataset includes a group of gridded coordinates. It was originally downloaded from GBIF [https://doi.org/10.15468/dl.fp5795; accessed on 29 November 2021], but has been simplified to be spatially unique points for easier demonstration.
 
 
-```{r occs_unique,echo=TRUE,eval=FALSE}
+```{r occs_unique,echo=TRUE,eval=TRUE}
 data("occs_unique") # dataframe of occurrences
-nrow(occs_unique)
+print( nrow(occs_unique)  )
+print( head(occs_unique)  )
 ```
 
-Plot in geographical space
+Look at the coordinates on a map
 
 ```{r plot map and occs, echo=FALSE, fig.width=6,fig.height=6}
 library(ggplot2)
 library(broom)
 
-data("ne_10m_admin_0_countries") # world map
+data("ne_10m_admin_0_countries") # load NaturalEarth world map
 
 spdf_fortified = broom::tidy(ne_10m_admin_0_countries, region = "ADMIN")
 
@@ -95,7 +97,8 @@ ggplot2::ggplot() +
              aes(x = decimalLongitude, y = decimalLatitude), 
              size = 2, 
         shape = 23, fill = "darkred") +
-    coord_sf(xlim = c(-10, 20), ylim = c(40, 60), expand = FALSE)
+    #coord_sf(xlim = c(-10, 20), ylim = c(40, 60), expand = FALSE)
+	coord_sf(xlim = c(0, 6), ylim = c(46, 50), expand = FALSE)
 
 ```
 <br>
@@ -103,17 +106,24 @@ ggplot2::ggplot() +
 
 The coordinates have been projected to WGS84 (which is the same for occurrences from GBIF), which could be different from the CRS where the grid system was defined. So here we use infer_crs() to infer the correct CRS.
 
-```{r infer_crs}
+```{r infer_crs, eval=FALSE}
 # results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
 #                                   truth_crs_num = "2154", # (optional) here we know the true CRS, just add it here for a comparison with the inferred CRS ,
 #                                  #flag_debug = c(4363,5451,5981,5982,5991,5992,5425,5424,5422,3901),
 #                                   cup_num = 4)
 
+results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
+                                  truth_crs_num = "2154", # (optional) here we know the true CRS, just add it here for a comparison with the inferred CRS ,
+                                 #flag_debug = c(4363,5451,5981,5982,5991,5992,5425,5424,5422,3901),
+                                  cup_num = 15)# the function will loop through many CRS, so using multiple cores can speed up the process. The default uses 2 cores, but you can adjust it to your preferred number. 
+
+
 # The function will loop through many CRS, so using multiple cores can speed up the process. The default uses 2 cores, but you can adjust it to your preferred number. 
-
 # You may want to save this output
-# saveRDS(results_crs,"vignettes/results_crs.rds")
+saveRDS(results_crs,"vignettes/results_crs.rds")
+```
 
+```{r load_results}
 # It may take minutes - hours to complete the inference. If you want to quickly look at the output, you can load the results we calculated earlier.
 
 results_crs= readRDS("vignettes/results_crs.rds")
@@ -169,6 +179,8 @@ simulated_grid = gridder::grid_generation(res_x=result_res$res_x,
                                                         result_res$res_x*10,0),
                                           crs_num=results_crs$selected$code[1],
                                           flag_maskByCountry=TRUE)
+plot(simulated_grid)
+																																																								
 
 ```
 
