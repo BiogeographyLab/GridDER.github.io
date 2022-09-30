@@ -107,15 +107,15 @@ ggplot2::ggplot() +
 The coordinates have been projected to WGS84 (which is the same for occurrences from GBIF), which could be different from the CRS where the grid system was defined. So here we use infer_crs() to infer the correct CRS.
 
 ```{r infer_crs, eval=FALSE}
-# results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
-#                                   truth_crs_num = "2154", # (optional) here we know the true CRS, just add it here for a comparison with the inferred CRS ,
-#                                  #flag_debug = c(4363,5451,5981,5982,5991,5992,5425,5424,5422,3901),
-#                                   cup_num = 4)
+results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
+                                 truth_crs_num = "2154", # (optional) here we know the true CRS, just add it here for a comparison with the inferred CRS ,
+                                 flag_debug = c(4363,5451,5981,5982,5991,5992,5425,5424,5422,3901),
+                                 cup_num = 4)
 
 results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
-                                  truth_crs_num = "2154", # (optional) here we know the true CRS, just add it here for a comparison with the inferred CRS ,
-                                 #flag_debug = c(4363,5451,5981,5982,5991,5992,5425,5424,5422,3901),
-                                  cup_num = 15)# the function will loop through many CRS, so using multiple cores can speed up the process. The default uses 2 cores, but you can adjust it to your preferred number. 
+                                 truth_crs_num = "2154", # (optional) here we know the true CRS, just add it here for a comparison with the inferred CRS ,
+                                 flag_debug = c(4363,5451,5981,5982,5991,5992,5425,5424,5422,3901),
+                                 cup_num = 15)# the function will loop through many CRS, so using multiple cores can speed up the process. The default uses 2 cores, but you can adjust it to your preferred number. 
 
 
 # The function will loop through many CRS, so using multiple cores can speed up the process. The default uses 2 cores, but you can adjust it to your preferred number. 
@@ -242,18 +242,18 @@ plot(temp_result,col=as.factor(temp_result@data$grid_closest_both))
 
 ## Compute variation of environmental conditions
 
-
-```{r add image, echo=TRUE,fig.width=6,fig.height=6, eval=TRUE}
+```{r Initilize, warning=FALSE, message=FALSE, results= "hide"}
 rgee::ee_Initialize() # The follow command authorizes rgee to manage Earth Engine resources
+```
 
 
+```{r add image, echo=TRUE,fig.width=6,fig.height=6, eval=TRUE,  warning=FALSE}
 # Load ImageCollection of interest (environmental layer)
 
 nasadem = rgee::ee$Image('NASA/NASADEM_HGT/001')$select('elevation') # Global elevation data in 30 meters. We do not plot due to extension and resolution 
 
-
 # Grid Id 9
-data("grid_ID_9")
+data("grid_ID_9") # Grid system example available in the package 
 
 grid = grid_ID_9 |> 
   rgee::sf_as_ee()
@@ -262,7 +262,7 @@ grid = grid_ID_9 |>
 
 std_dev <- gridder::assess_env_uncertainty(x= nasadem, y= grid)
 
-std_dev
+print(std_dev, n=5)
 
 # Plot
 library(ggplot2)
