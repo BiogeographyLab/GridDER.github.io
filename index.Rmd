@@ -29,7 +29,7 @@ devtools::load_all() # for development
 
 # Introduction
 
-The package is a tool for identifying biodiversity records that have been designated locations on widely used grid systems. Our tool also estimates the degree of environmental heterogeneity associated with grid systems, allowing users to make informed decisions about how to use such occurrence data in global change studies. We show that a significant proportion (~13.5%; 261 million) of records on GBIF, largest aggregator of natural history collection data, are potentially gridded data, and demonstrate that our tool can reliably identify such records and quantify the associated uncertainties.
+The package is a tool for identifying biodiversity records that have been designated locations on widely used grid systems. Our tool also estimates the degree of environmental heterogeneity associated with grid systems, allowing users to make informed decisions about how to use such occurrence data in global change studies. We show that a significant proportion (~13.5%; 261 million; accessed November 2021) of records on GBIF, largest aggregator of natural history collection data, are potentially gridded data, and demonstrate that our tool can reliably identify such records and quantify the associated uncertainties.
 
 # Workflow for grid simulation and detection
 
@@ -53,7 +53,7 @@ remotes::install_github("BiogeographyLab/gridder")
 
 ```
 
-# Grid systems  examples 
+# Examples of grid systems   
 
 Examples of four grid systems used in France (a), United Kingdom (b), South Africa
 (c), and Australia (d). The four grid systems have different spatial solutions – 10km for (a), 1km
@@ -68,7 +68,7 @@ knitr::include_graphics("inst/fig1.png")
 
 # Major use cases
 
-## Infer coordinate reference system 
+## Infer CRS (coordinate reference system) 
 
 First load the demo occurrence data. This dataset includes a group of gridded coordinates. It was originally downloaded from GBIF [https://doi.org/10.15468/dl.fp5795; accessed on 29 November 2021], but has been simplified to be spatially unique points for easier demonstration.
 
@@ -81,7 +81,7 @@ print( head(occs_unique)  )
 
 Look at the coordinates on a map
 
-```{r plot map and occs, echo=FALSE, fig.width=6,fig.height=6}
+```{r plot map and occs, echo=TRUE, fig.width=6,fig.height=6}
 library(ggplot2)
 library(broom)
 
@@ -97,7 +97,6 @@ ggplot2::ggplot() +
              aes(x = decimalLongitude, y = decimalLatitude), 
              size = 2, 
         shape = 23, fill = "darkred") +
-    #coord_sf(xlim = c(-10, 20), ylim = c(40, 60), expand = FALSE)
 	coord_sf(xlim = c(0, 6), ylim = c(46, 50), expand = FALSE)
 
 ```
@@ -109,22 +108,16 @@ The coordinates have been projected to WGS84 (which is the same for occurrences 
 ```{r infer_crs, eval=FALSE}
 results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
                                  truth_crs_num = "2154", # (optional) here we know the true CRS, just add it here for a comparison with the inferred CRS ,
-                                 flag_debug = c(4363,5451,5981,5982,5991,5992,5425,5424,5422,3901),
-                                 cup_num = 4)
+                                 #flag_debug = c(4363,5451,5981,5982,5991,5992,5425,5424,5422,3901), # (optional) only evaluate a few CRS
+                                 cup_num = 4) # the function will loop through many CRS, so using multiple cores can speed up the process. The default uses 2 cores, but you can adjust it to your preferred number. 
 
-results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
-                                 truth_crs_num = "2154", # (optional) here we know the true CRS, just add it here for a comparison with the inferred CRS ,
-                                 flag_debug = c(4363,5451,5981,5982,5991,5992,5425,5424,5422,3901),
-                                 cup_num = 15)# the function will loop through many CRS, so using multiple cores can speed up the process. The default uses 2 cores, but you can adjust it to your preferred number. 
-
-
-# The function will loop through many CRS, so using multiple cores can speed up the process. The default uses 2 cores, but you can adjust it to your preferred number. 
 # You may want to save this output
 saveRDS(results_crs,"vignettes/results_crs.rds")
 ```
 
+It may take minutes - hours to complete the inference. If you want to quickly look at the output, you can load the results we calculated earlier.     
+    
 ```{r load_results}
-# It may take minutes - hours to complete the inference. If you want to quickly look at the output, you can load the results we calculated earlier.
 
 results_crs= readRDS("vignettes/results_crs.rds")
 
@@ -136,22 +129,24 @@ print(results_crs$selected[1:10, c("code", "note")])
 
 ## Infer the spatial resolution
 
-```{r infer_resolution}
+```{r infer_resolution,echo=FALSE}
 data("occs_unique") # Dataframe of occurrences
 
 # Transform the coordinates to be spatial objects
 input_occ = gridder::load_occ(occs_unique)
+```
 
+```{r infer_resolution2}
 input_occ_prj = sp::spTransform(input_occ,crs(paste0("+init=epsg:","2154")))
 result_res = gridder::infer_resolution(input_coord=input_occ_prj@coords,flag_unit="meter")
 print(result_res$res_x)
 print(result_res$res_y)
 
-# The inferred resolution is 10km on x & y axes
-
 ```
+The inferred resolution is 10km on x & y axes     
+     
 
-## Infer the spatial exten
+## Infer the spatial extent
 
 ```{r infer_extent}
 result_ext = gridder::infer_extent(method="crs_extent",
@@ -164,21 +159,22 @@ print(result_ext)
 ```
 
 
-## Generation of a grid system based on metadata
+## Generation of a grid system based on its spatial attributes   
 
 ```{r grid_generation}
 
-simulated_grid = gridder::grid_generation(res_x=result_res$res_x,
-                                          res_y=result_res$res_y,
-                                          unit="m",
-                                          flag_crs=TRUE,
-                                          country="France",
+simulated_grid = gridder::grid_generation(res_x=result_res$res_x, # resolution along x-axis
+                                          res_y=result_res$res_y, # resolution along y-axis
+                                          unit="m",               # unit of resolution
+                                          flag_crs=TRUE,          # user provides a CRS code
+					  crs_num=results_crs$selected$code[1], # use the inferred CRS 
+                                          country="France",       # the spatial file will be masked by country
+					  flag_maskByCountry=TRUE,
                                           extent_unit="empirical_occ_extent",
-                                          input_extent=result_ext,
+                                          input_extent=result_ext,# use the inferred spatial extent
                                           flag_offset=c(0,-result_res$res_y*10,
-                                                        result_res$res_x*10,0),
-                                          crs_num=results_crs$selected$code[1],
-                                          flag_maskByCountry=TRUE)
+                                                        result_res$res_x*10,0) # adjustment of the spatial extent                                          
+                                          )
 plot(simulated_grid)
 																																																								
 
@@ -205,8 +201,8 @@ point_nongrid@coords=point_nongrid@coords+runif(100)
 point_all=rbind(point_grid,point_nongrid)
 
 plot(input_occ)
-plot(point_grid,add=T, col="red")
-plot(point_nongrid,add=T,col="orange")
+plot(point_grid,add=T, col="red")      # red is gridded coordinate 
+plot(point_nongrid,add=T,col="orange") # orange is random (nongridded) coordinate
 ```
 
 ### Grid metadata   
@@ -272,8 +268,7 @@ ggplot(data = grid_ID_9) +
 
 ```
 
-As the package uses rgee (R package to acessess Google Earth Engine API), the following commands should be executed:
-
+Note the you need to setup rgee package (R package to acessess Google Earth Engine API) before using assessing the environmental variation (assess_env_uncertainty). You may need to use the following code to do so.
 
 ```{r setting intalations, echo=TRUE, eval=FALSE}
 
