@@ -118,14 +118,11 @@ saveRDS(results_crs,"vignettes/results_crs.rds")
 It may take minutes - hours to complete the inference. If you want to quickly look at the output, you can load the results we calculated earlier.     
     
 ```{r load_results}
-
-results_crs= readRDS("vignettes/results_crs.rds")
-
+results_crs = system.file("extdata", "results_crs.rds", package = "gridder")
+results_crs = readRDS(results_crs)
 # Now, let's take a look at the output. The CRS code "2154" is ranked the first.
 print(results_crs$selected[1:10, c("code", "note")])
-
 ```
-
 
 ## Infer the spatial resolution
 
