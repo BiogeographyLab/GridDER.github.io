@@ -75,8 +75,8 @@ First load the demo occurrence data. This dataset includes a group of gridded co
 
 ```{r occs_unique,echo=TRUE,eval=TRUE}
 data("occs_unique") # dataframe of occurrences
-print( nrow(occs_unique)  )
-print( head(occs_unique)  )
+print(nrow(occs_unique))
+print(head(occs_unique))
 ```
 
 Look at the coordinates on a map
@@ -110,9 +110,6 @@ results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
                                  truth_crs_num = "2154", # (optional) here we know the true CRS, just add it here for a comparison with the inferred CRS ,
                                  #flag_debug = c(4363,5451,5981,5982,5991,5992,5425,5424,5422,3901), # (optional) only evaluate a few CRS
                                  cup_num = 4) # the function will loop through many CRS, so using multiple cores can speed up the process. The default uses 2 cores, but you can adjust it to your preferred number. 
-
-# You may want to save this output
-saveRDS(results_crs,"vignettes/results_crs.rds")
 ```
 
 It may take minutes - hours to complete the inference. If you want to quickly look at the output, you can load the results we calculated earlier.     
@@ -126,7 +123,7 @@ print(results_crs$selected[1:10, c("code", "note")])
 
 ## Infer the spatial resolution
 
-```{r infer_resolution,echo=FALSE}
+```{r infer_resolution,echo=TRUE, message=FALSE, warning=FALSE}
 data("occs_unique") # Dataframe of occurrences
 
 # Transform the coordinates to be spatial objects
