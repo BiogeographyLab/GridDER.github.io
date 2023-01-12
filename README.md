@@ -5,7 +5,8 @@ The package is a tool for identifying biodiversity records that have been design
 
 
 ### Citation
-Feng et al. (2022) GridDER: Grid Detection and Evaluation in R. https://doi.org/10.32942/osf.io/6qy5u
+Xiao Feng, Tainá Rocha, Hanna TThammavong,Rima Tulaiha, Xin Chen,Yingying Xie, Daniel Park (2022) GridDER: Grid Detection and Evaluation in R. https://doi.org/10.32942/osf.io/6qy5u
+
 
 
 ### Installing
@@ -20,6 +21,9 @@ remotes::install_github("BiogeographyLab/gridder")
 
 
 ```
+
+### vignette 
+A short guide of using gridder can be found here: https://biogeographylab.github.io/gridder.github.io/
 
 
 ### To see the internal data use the fution `data()` or `str()`
