@@ -1,15 +1,21 @@
-Package: gridder
-Title: grid detection and evaluation in R
+Package: GridDER
+Title: Grid Detection and Evaluation in R
 Version: 0.0.0.9000
 Authors@R: 
-    person("gridder", "gridder", , "gridder.help@gmail.com", role = c("aut", "cre") )
-Description: gridder
+   c(
+    person("Xiao", "Feng", email = "fengxiao.sci@gmail.com", role = c("aut", "cre")),
+    person("Tainá", "Rocha", email = "taina013@gmail.com", role = c("aut", "cre")),
+    person("Hanna", "Thammavong", email = "hannathamma@gmail.com", role = "aut"),
+    person("Rima", "Tulaiha", email = "rtulaiha@purdue.edu", role = "aut"),
+    person("Xin", "Chen", email = "xchen70@syr.edu", role = "aut"),
+    person("Yingying", "Xie", email = "yingying.xie1@gmail.com", role = "aut"),
+    person("Daniel", "Park", email = "danielpark@purdue.edu", role = "aut")
+Description: A set of funtions for identifying biodiversity records that have beendesignated locations on widely used grid systems and estimation the degree of environmental heterogeneity associated with grid systems
 License: CC BY
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.2
 Imports: 
-    dplyr,
     doParallel,
     ggplot2,
     gsheet,
@@ -20,7 +26,6 @@ Imports:
     rgee,
     rmapshaper,
     rvest,
-    sf,
     sp,
     data.table
 URL: https://github.com/Tai-Rocha/gridpckgname

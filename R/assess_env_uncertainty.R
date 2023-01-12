@@ -20,7 +20,6 @@
 #'
 #' @import rgee rmapshaper
 #' @import raster sf
-#' @import dplyr
 #'
 #'
 #' @examples
