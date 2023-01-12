@@ -28,8 +28,8 @@ Imports:
     rvest,
     sp,
     data.table
-URL: https://github.com/Tai-Rocha/gridpckgname
-BugReports: https://github.com/Tai-Rocha/gridpckgname/issues
+URL: https://biogeographylab.github.io/gridder.github.io/
+BugReports: https://github.com/BiogeographyLab/gridder.github.io/issues
 Depends: 
     R (>= 2.10)
 LazyData: true
