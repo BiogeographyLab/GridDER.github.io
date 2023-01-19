@@ -11,7 +11,7 @@ Authors@R:
     person("Yingying", "Xie", email = "yingying.xie1@gmail.com", role = "aut"),
     person("Daniel", "Park", email = "danielpark@purdue.edu", role = "aut")
 Description: A set of funtions for identifying biodiversity records that have been designated locations on widely used grid systems and estimation the degree of environmental heterogeneity associated with grid systems
-License: CC BY
+License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.2
