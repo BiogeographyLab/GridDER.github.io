@@ -1,6 +1,5 @@
 #' @title Assess the Spatial Uncertainty
 #' @description The function computes spatial uncertainty of a grid system by calculating the distance between grid centroids toward gridded coordinates and non-gridded coordinates (e.g. iNaturalist data).
-
 #' @author Xiao Feng
 #'
 #' @param input_grid Character vector. Path of a grid system (shapefile).
