@@ -3,7 +3,7 @@ Title: Grid Detection and Evaluation in R
 Version: 0.0.0.9000
 Authors@R: 
    c(
-    person("Xiao", "Feng", email = "fengxiao.sci@gmail.com", role = c("aut", "cre")),
+    person("Xiao", "Feng", email = "fengxiao.sci@gmail.com", role = c("aut")),
     person("Tainá", "Rocha", email = "taina013@gmail.com", role = c("aut", "cre")),
     person("Hanna", "Thammavong", email = "hannathamma@gmail.com", role = "aut"),
     person("Rima", "Tulaiha", email = "rtulaiha@purdue.edu", role = "aut"),
