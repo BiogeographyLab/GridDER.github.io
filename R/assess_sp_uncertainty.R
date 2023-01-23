@@ -9,8 +9,6 @@
 #' @param flag_degree Logical. Parameter passed to raster::pointDistance.
 #' @param flag_plot Logical. If TRUE, coordinates (based on the crs of the grid system) should be in degrees; else they should represent planar ('Euclidean') space (e.g. units of meters). Default is FALSE.
 #'
-#' @return
-#' @export
 #'
 #' @import ggplot2 sp
 #' @import raster
