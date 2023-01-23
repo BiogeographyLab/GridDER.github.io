@@ -55,12 +55,11 @@
 #' std_dev <- gridder::assess_env_uncertainty(x= nasadem, y= grid)
 #' }
 #'
-assess_env_uncertainty <- function(x, y, by = 1000, scale = 1000) {
+assess_env_uncertainty <- function(x, y, by = 1000, scale = 1000,) {
   
   #add by xf
-  if( type (x) is a gee object  & flag_GEE ){
-    
-    
+  if( "ee.image.Image" %in% class(x)  ){
+
     y_len <- y$size()$getInfo()
   for (i in seq(1, y_len, by)) {
     index <- i - 1
@@ -91,7 +90,7 @@ assess_env_uncertainty <- function(x, y, by = 1000, scale = 1000) {
     # add by xf
     }# end of for loop
   }# end of gee processing 
-   if(!flag_GEE) {
+   else  {
     #do something locally    
     for (i in seq(1, y_len, 1)) { # loop through every grid polygon
       temp_extractedValue = raster::extract(x,y[i,])
