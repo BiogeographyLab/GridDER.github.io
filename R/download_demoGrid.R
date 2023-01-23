@@ -4,8 +4,6 @@
 #'
 #' @param downloadNew Logical. TRUE to download the zip file containing all grid systems
 #'
-#' @return
-#' @export
 #'
 #' @examples
 download_demoGrid <- function(downloadNew = F) {
