@@ -27,6 +27,7 @@ Imports:
     rgee,
     rmapshaper,
     rvest,
+    sf,
     sp,
     data.table
 URL: https://biogeographylab.github.io/gridder.github.io/
