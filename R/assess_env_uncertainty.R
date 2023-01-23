@@ -56,7 +56,12 @@
 #' }
 #'
 assess_env_uncertainty <- function(x, y, by = 1000, scale = 1000) {
-  y_len <- y$size()$getInfo()
+  
+  #add by xf
+  if( type (x) is a gee object  & flag_GEE ){
+    
+    
+    y_len <- y$size()$getInfo()
   for (i in seq(1, y_len, by)) {
     index <- i - 1
     print(sprintf("Extracting information [%s/%s]...", index, y_len))
@@ -81,6 +86,28 @@ assess_env_uncertainty <- function(x, y, by = 1000, scale = 1000) {
       )
       dataset <- rbind(dataset, db_local)
     }
-  }
+      
+     
+    # add by xf
+    }# end of for loop
+  }# end of gee processing 
+   if(!flag_GEE) {
+    #do something locally    
+    for (i in seq(1, y_len, 1)) { # loop through every grid polygon
+      temp_extractedValue = raster::extract(x,y[i,])
+      temp_sd = sd (temp_extractedValue)
+      temp_sd = data.frame(id=i,sd=temp_sd)
+      if(i==1){
+        dataset = temp_sd
+      } else{
+        dataset = rbind(dataset, temp_sd)
+      }
+    }# end of for loop
+  } # end of local processing
+    
+    
+    
+    
+    
   return(dataset)
 }
