@@ -55,7 +55,7 @@
 #' std_dev <- gridder::assess_env_uncertainty(x= nasadem, y= grid)
 #' }
 #'
-assess_env_uncertainty <- function(x, y, by = 1000, scale = 1000,) {
+assess_env_uncertainty <- function(x, y, by = 1000, scale = 1000) {
   
   #add by xf
   if( "ee.image.Image" %in% class(x)  ){
