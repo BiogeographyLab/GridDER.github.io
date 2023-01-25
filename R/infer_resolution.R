@@ -61,18 +61,24 @@ infer_resolution = function(input_coord,digits=1,
     uniqv[which.max(tabulate(match(v, uniqv)))]
   }
 
-  if(flag_unit=="meter"){
+#  if(flag_unit=="meter"){
+#    y_s = signif (distance_4[1,],digits  = 1)
+#    x_s = signif (distance_4[2,],digits  = 1)
+#    distance_on_y_freq = getmode( y_s )
+#    distance_on_x_freq = getmode( x_s )
+#
+#  } else if (flag_unit=="degree") {
+#    y_s = signif (distance_4[1,],digits  = 1)
+#    x_s = signif (distance_4[2,],digits  = 1)
+#    distance_on_y_freq = getmode(y_s )
+#    distance_on_x_freq = getmode(x_s )
+
+   if(flag_unit=="meter" | flag_unit=="degree" | flag_unit=="ft" | flag_unit=="us-ft"){
     y_s = signif (distance_4[1,],digits  = 1)
     x_s = signif (distance_4[2,],digits  = 1)
     distance_on_y_freq = getmode( y_s )
     distance_on_x_freq = getmode( x_s )
-
-  } else if (flag_unit=="degree") {
-    y_s = signif (distance_4[1,],digits  = 1)
-    x_s = signif (distance_4[2,],digits  = 1)
-    distance_on_y_freq = getmode(y_s )
-    distance_on_x_freq = getmode(x_s )
-
+      
   } else if (flag_unit=="minute") {
     y_s = signif (distance_4[1,]*60,digits  = 1)
     x_s = signif (distance_4[2,]*60,digits  = 1)
@@ -98,7 +104,8 @@ infer_resolution = function(input_coord,digits=1,
   names(freq_table_y)[1] = "res_y"
 
 
-  if(flag_unit=="meter"){
+#  if(flag_unit=="meter"){
+   if(flag_unit=="meter" | flag_unit=="degree" | flag_unit=="ft" | flag_unit=="us-ft"){
   } else if (flag_unit=="minute") {
     freq_table_x$res_x = freq_table_x$res_x/60
     freq_table_y$res_y = freq_table_y$res_y/60
