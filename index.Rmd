@@ -132,7 +132,7 @@ input_occ = gridder::load_occ(occs_unique)
 
 ```{r infer_resolution2}
 input_occ_prj = sp::spTransform(input_occ,crs(paste0("+init=epsg:","2154")))
-result_res = gridder::infer_resolution(input_coord=input_occ_prj@coords,flag_unit="meter")
+result_res = gridder::infer_resolution(input_coord=input_occ_prj@coords)
 print(result_res$res_x)
 print(result_res$res_y)
 
