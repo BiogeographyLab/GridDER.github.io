@@ -159,7 +159,6 @@ print(result_ext)
 
 simulated_grid = gridder::grid_generation(res_x=result_res$res_x, # resolution along x-axis
                                           res_y=result_res$res_y, # resolution along y-axis
-                                          unit="m",               # unit of resolution
                                           flag_crs=TRUE,          # user provides a CRS code
 					  crs_num=results_crs$selected$code[1], # use the inferred CRS 
                                           country="France",       # the spatial file will be masked by country
@@ -215,8 +214,7 @@ Here, we simulated a grid based on the spatial attributes we just inferred.
 ```{r grid_matching2 }
 grid_metadata = data.frame(grid_ID=c("88"),
                            resolution_x=c(10000),
-                           resolution_y=c(10000),
-                           resolution_unit=c("m"))
+                           resolution_y=c(10000)  )
 
 temp_result = gridder::grid_matching(input_occ=point_all,
                                      input_grid=simulated_grid,
@@ -283,4 +281,98 @@ rgee::ee_check() # Checks if everything is OK. Optinal command .
 ```
 
 
+## A simplified workflow for grid inference and matching   
 
+```{r demo_workflow, eval=FALSE}
+library(GridDER)
+
+#1. (mandatory) specify input coordinates (dataframe, tibble, or the path of a csv) with columns "decimalLatitude" "decimalLongitude"
+input_occ = occs_unique # a demo dataset is used here
+
+#2. (optional) specify the crs. flag_crs=NULL will activate the crs inferring process, specifying a EPSG code of a crs will skip the crs inferring process
+flag_crs = NULL
+possible_true_crs = "2154" #a crs code that will be used as a reference, to be compared with many other crs codes; 2154 is the original crs for the demo dataset.
+cup_num = 15 # number of cpus to be used in the inferring process
+
+#3. (optional) specify the resolution of the grid along x and y, e.g. flag_res= c(1000,1000). NULL will activate the resolution inferring process
+flag_res = NULL
+
+#4. (optional) specify the spatial extent of the grid, e.g. flag_extent= c(xmin, ymin, xmax, ymax). NULL will activate the extent inferring process 
+flag_extent = NULL
+
+#5. (optional) generate a grid based on crs, resolution, extent.
+flag_generateGrid = TRUE
+
+#6. (optional) match input coordinates to the simulated grid
+flag_matchOccToGrid = TRUE
+
+#7. (optional) plot input coordinates and grid
+flag_plot = TRUE
+
+#######################
+if(is.null(flag_crs)) {
+#1.1 Infer coordinate reference system
+result_crs = infer_crs(occ_path=input_occ,
+                       truth_crs_num = possible_true_crs,
+                       cup_num =cup_num)
+#results_crs = readRDS(system.file("extdata", "results_crs.rds", package = "GridDER"))
+flag_crs = 	results_crs$selected$code[1]
+}
+print(flag_crs)				 
+
+if( is.null(flag_res) ){
+ temp_occ = load_occ(input_occ)
+ input_occ_prj = sp::spTransform(temp_occ,crs(paste0("+init=epsg:",flag_crs)))
+ result_res = infer_resolution(input_coord=input_occ_prj@coords) 
+ flag_res = c(result_res$res_x,result_res$res_y)
+}
+print(flag_res)				 
+
+
+if( is.null(flag_extent) ){
+result_ext = infer_extent(method = "crs_extent",
+                          crs_grid = flag_crs,
+                          flag_adjust_by_res = TRUE,
+                          res_x = flag_res[1],
+                          res_y = flag_res[1])
+flag_extent = result_ext
+}
+print(flag_extent)
+
+if(flag_generateGrid  ){
+simulated_grid = grid_generation(res_x = flag_res[1],
+                                 res_y = flag_res[2],
+                                 extent_unit="empirical_occ_extent",
+                                 input_extent=result_ext,
+                                 flag_offset=c(0,-flag_res[2]*10,
+                                               flag_res[1]*10,0),
+								                 crs_num = flag_crs,
+								                 flag_maskByCountry = FALSE)
+}
+
+
+
+if(flag_matchOccToGrid){
+  point_grid = load_occ(input_occ)
+
+  grid_metadata = data.frame(grid_ID= c("simulatedGrid"),
+                            resolution_x=flag_res[1],
+                            resolution_y=flag_res[2] ) 
+ 
+  temp_result = grid_matching(input_occ = point_grid,
+                                input_grid = simulated_grid,
+                                grid_metadata=grid_metadata,
+                                flag_relativeTHD = 0.1,
+                                flag_absoluteTHD = 100)
+  table(temp_result@data$grid_closest_both)
+}
+
+if(flag_plot){
+  temp_result_prj = sp::spTransform(temp_result,crs(paste0("+init=epsg:",flag_crs)))
+  simulated_grid_crop = crop(simulated_grid,extent(temp_result_prj))
+  plot(simulated_grid_crop )
+  plot(temp_result_prj,add=T,col="blue")
+}
+
+
+```
