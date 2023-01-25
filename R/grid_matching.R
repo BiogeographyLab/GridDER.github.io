@@ -22,7 +22,7 @@ grid_matching <- function(input_occ,
                           country = NULL,
                           grid_metadata = NULL,
                           flag_relativeTHD = NULL,
-                          flag_rm_Large_outlier = TRUE,
+                          flag_rm_Large_outlier = FALSE,
                           flag_absoluteTHD = NULL) {
   printf <- function(...) cat(sprintf(...))
 
@@ -165,22 +165,22 @@ grid_matching <- function(input_occ,
 
       res_x <- as.numeric(sel_metadata$resolution_x[i])
       res_y <- as.numeric(sel_metadata$resolution_y[i])
-      res_unit <- sel_metadata$resolution_unit[i]
+      #res_unit <- sel_metadata$resolution_unit[i]
       grid_ID <- sel_metadata$grid_ID[i]
 
 
-      if (res_unit %in% c("km", "m")) {
-        flag_degree <- FALSE
-      }
-      if (res_unit %in% c("second", "minute", "degree")) {
-        flag_degree <- TRUE
-      }
+      #if (res_unit %in% c("km", "m")) {
+      #  flag_degree <- FALSE
+      #}
+      #if (res_unit %in% c("second", "minute", "degree")) {
+      #  flag_degree <- TRUE
+      #}
 
 
       d_matrix <- raster::pointDistance(
         p1 = occ_prj,
         p2 = one_grid_center,
-        lonlat = flag_degree,
+        #lonlat = flag_degree,
         allpairs = T
       )
 
@@ -195,19 +195,21 @@ grid_matching <- function(input_occ,
       }
 
 
-      if (res_unit == "m") {
-        sizex <- res_x
-        sizey <- res_y
-      }
+      #if (res_unit == "m") {
+      #  sizex <- res_x
+      #  sizey <- res_y
+      #}
 
-      if (res_unit == "km") {
-        sizex <- res_x * 1000
-        sizey <- res_y * 1000
-      }
-      if (res_unit == "minute") {
-        sizex <- 100000 * res_x / 60
-        sizey <- 100000 * res_y / 60
-      }
+      #if (res_unit == "km") {
+      #  sizex <- res_x * 1000
+      #  sizey <- res_y * 1000
+      #}
+      #if (res_unit == "minute") {
+      #  sizex <- 100000 * res_x / 60
+      #  sizey <- 100000 * res_y / 60
+      #}
+      sizex <- res_x
+      sizey <- res_y
       one_unit_D <- (sizex^2 + sizey^2)^0.5
 
 
