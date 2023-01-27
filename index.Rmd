@@ -49,7 +49,7 @@ knitr::kable(table_2)
 # Install the GridDER package
 
 ```{r install package, echo= TRUE,warning=FALSE,eval=FALSE}
-remotes::install_github("BiogeographyLab/gridder")
+remotes::install_github("BiogeographyLab/GridDER")
 
 ```
 
@@ -106,7 +106,7 @@ ggplot2::ggplot() +
 The coordinates have been projected to WGS84 (which is the same for occurrences from GBIF), which could be different from the CRS where the grid system was defined. So here we use infer_crs() to infer the correct CRS.
 
 ```{r infer_crs, eval=FALSE}
-results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
+results_crs = GridDER::infer_crs(occ_path = occs_unique, # input of coordinates
                                  truth_crs_num = "2154", # (optional) here we know the true CRS, just add it here for a comparison with the inferred CRS ,
                                  #flag_debug = c(4363,5451,5981,5982,5991,5992,5425,5424,5422,3901), # (optional) only evaluate a few CRS
                                  cup_num = 4) # the function will loop through many CRS, so using multiple cores can speed up the process. The default uses 2 cores, but you can adjust it to your preferred number. 
@@ -115,7 +115,7 @@ results_crs = gridder::infer_crs(occ_path = occs_unique, # input of coordinates
 It may take minutes - hours to complete the inference. If you want to quickly look at the output, you can load the results we calculated earlier.     
     
 ```{r load_results}
-results_crs = system.file("extdata", "results_crs.rds", package = "gridder")
+results_crs = system.file("extdata", "results_crs.rds", package = "GridDER")
 results_crs = readRDS(results_crs)
 # Now, let's take a look at the output. The CRS code "2154" is ranked the first.
 print(results_crs$selected[1:10, c("code", "note")])
@@ -127,12 +127,12 @@ print(results_crs$selected[1:10, c("code", "note")])
 data("occs_unique") # Dataframe of occurrences
 
 # Transform the coordinates to be spatial objects
-input_occ = gridder::load_occ(occs_unique)
+input_occ = GridDER::load_occ(occs_unique)
 ```
 
 ```{r infer_resolution2}
 input_occ_prj = sp::spTransform(input_occ,crs(paste0("+init=epsg:","2154")))
-result_res = gridder::infer_resolution(input_coord=input_occ_prj@coords)
+result_res = GridDER::infer_resolution(input_coord=input_occ_prj@coords)
 print(result_res$res_x)
 print(result_res$res_y)
 
@@ -143,7 +143,7 @@ The inferred resolution is 10km on x & y axes
 ## Infer the spatial extent
 
 ```{r infer_extent}
-result_ext = gridder::infer_extent(method="crs_extent",
+result_ext = GridDER::infer_extent(method="crs_extent",
                           crs_grid=results_crs$selected$code[1],
                           flag_adjust_by_res=TRUE,
                           res_x=result_res$res_x,
@@ -157,7 +157,7 @@ print(result_ext)
 
 ```{r grid_generation}
 
-simulated_grid = gridder::grid_generation(res_x=result_res$res_x, # resolution along x-axis
+simulated_grid = GridDER::grid_generation(res_x=result_res$res_x, # resolution along x-axis
                                           res_y=result_res$res_y, # resolution along y-axis
                                           flag_crs=TRUE,          # user provides a CRS code
 					  crs_num=results_crs$selected$code[1], # use the inferred CRS 
@@ -216,7 +216,7 @@ grid_metadata = data.frame(grid_ID=c("88"),
                            resolution_x=c(10000),
                            resolution_y=c(10000)  )
 
-temp_result = gridder::grid_matching(input_occ=point_all,
+temp_result = GridDER::grid_matching(input_occ=point_all,
                                      input_grid=simulated_grid,
                                      grid_metadata=grid_metadata,
                                      flag_relativeTHD=0.1,
@@ -248,7 +248,7 @@ grid = grid_ID_9 |>
 
 # Compute standard deviation
 
-std_dev <- gridder::assess_env_uncertainty(x= nasadem, y= grid)
+std_dev <- GridDER::assess_env_uncertainty(x= nasadem, y= grid)
 
 print(std_dev, n=5)
 

@@ -1,5 +1,5 @@
 #' @title  Generate a grid system
-#' @description This function is used to generate (simulate) a grid system based on metadata. The gridder package provided an example metadata to simulate some grid systems (2_simulate_grid.Rmd). To access the metadata file using download_demoGrid function.
+#' @description This function is used to generate (simulate) a grid system based on metadata. The GridDER package provided an example metadata to simulate some grid systems (2_simulate_grid.Rmd). To access the metadata file using download_demoGrid function.
 #' @author Xiao Feng
 #'
 #' @param res_x A numeric input of longitude resolution.
@@ -45,7 +45,7 @@
 #' }
 #'
 #' # Simulate grid system
-#' NL_grid <- gridder::grid_generation(res_x = as.numeric(grid_metadata$resolution_x[iii]),
+#' NL_grid <- GridDER::grid_generation(res_x = as.numeric(grid_metadata$resolution_x[iii]),
 #'                 res_y = as.numeric(grid_metadata$resolution_y[iii]),
 #'                 unit = grid_metadata$resolution_unit[iii],
 #'                 flag_crs=TRUE,
@@ -128,12 +128,12 @@ grid_generation <- function(res_x = 10,
     flag_loadCountryPolygon <- TRUE
   }
   if (flag_loadCountryPolygon) {
-    data(ne_10m_admin_0_countries, package = "gridder", envir = environment())
+    data(ne_10m_admin_0_countries, package = "GridDER", envir = environment())
     ne_10m_admin_0_countries
 
     country_shp <- ne_10m_admin_0_countries
-    # country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
-    # country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
+    # country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "GridDER"))
+    # country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "GridDER"))
     # country_shp = load(country_shp)
     # country_shp = raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp")
     # country_shp = data("data/ne_10m_admin_0_countries.rda", envir=environment())

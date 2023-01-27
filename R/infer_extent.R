@@ -1,5 +1,5 @@
 #' @title Infer extent
-#' @description Return an extent in the order of xmin, xmax, ymin, ymax
+#' @description Return an extent in the order of xmin, xmax, ymin, ymax.
 #' @author Xiao Feng
 #'
 #' @param method Character. A string, country_extent, crs_extent, occ_extent
@@ -32,7 +32,7 @@ infer_extent <- function(method = "",
         country <- gsub('"', "", country)
         country <- strsplit(country, ",")[[1]]
       }
-      data(ne_10m_admin_0_countries, package = "gridder", envir = environment())
+      data(ne_10m_admin_0_countries, package = "GridDER", envir = environment())
       country_shp <- ne_10m_admin_0_countries
       # country_shp = load("data/ne_10m_admin_0_countries.rda")
       one_country <- subset(country_shp, ADMIN %in% country)

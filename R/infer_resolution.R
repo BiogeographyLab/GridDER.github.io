@@ -1,5 +1,5 @@
 #' @title Infer Resolution
-#' @description Compute the resolution of the grid system
+#' @description Compute the resolution of the grid system.
 #'
 #' @author Xiao Feng
 #'
@@ -106,7 +106,6 @@ infer_resolution = function(input_coord,digits=1,
 #    freq_table_x$res_x = freq_table_x$res_x/3600
 #    freq_table_y$res_y = freq_table_y$res_y/3600
 #  }
-
 
 
   return( list(res_x=distance_on_x_freq,

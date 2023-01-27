@@ -1,5 +1,5 @@
 #' @title Download grid systems
-#' @description This functions load from Zenodo the metadata with all grid systems compiled.
+#' @description This functions load from zenodo the metadata with all grid systems compiled.
 #' @author  Xiao Feng
 #'
 #' @param downloadNew Logical. TRUE to download the zip file containing all grid systems
@@ -7,7 +7,7 @@
 download_demoGrid <- function(downloadNew = F) {
   share_url <- "https://zenodo.org/record/6447902/files/2_clean_grid.zip?download=1"
 
-  local_path <- system.file(package = "gridder")
+  local_path <- system.file(package = "GridDER")
   # local_path = system.file(package="dismo")
 
   zip_path <- paste0(local_path, "/data/demoGrid.zip")

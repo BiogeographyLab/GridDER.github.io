@@ -2,7 +2,7 @@
 % Please edit documentation in R/infer_origin.R
 \name{infer_origin}
 \alias{infer_origin}
-\title{Infer Origin}
+\title{Infer origin}
 \usage{
 infer_origin(
   input_occ,

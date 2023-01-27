@@ -2,7 +2,7 @@
 % Please edit documentation in R/grid_adjustment.R
 \name{grid_adjustment}
 \alias{grid_adjustment}
-\title{Adjust the Grid System}
+\title{Adjust the grid system}
 \usage{
 grid_adjustment(input_grid, input_occ_grid)
 }

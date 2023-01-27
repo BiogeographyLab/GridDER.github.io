@@ -1,4 +1,4 @@
-#' @title Adjust the Grid System
+#' @title Adjust the grid system
 #' @description Given a grid system and occurrences, this function tries to shift the grid system, in order to minimize the distance between the grid system and input occurrences.
 #' @author Xiao Feng
 #'

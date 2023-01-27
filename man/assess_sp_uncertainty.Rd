@@ -2,7 +2,7 @@
 % Please edit documentation in R/assess_sp_uncertainty.R
 \name{assess_sp_uncertainty}
 \alias{assess_sp_uncertainty}
-\title{Assess the Spatial Uncertainty}
+\title{Assess the spatial uncertainty}
 \usage{
 assess_sp_uncertainty(
   input_grid,

@@ -1,4 +1,4 @@
-#' @title Load Occurrence Records
+#' @title Load occurrence records
 #' @description This function read a GBIF dataset, then return the unique coordinates in spatial format.
 #' @author Xiao Feng
 #'
@@ -21,7 +21,7 @@ load_occ = function(path,crs_num=NULL){
   library(sp)
   library(data.table)
   # temp_occ = data.table::fread(path,sep="\t",header = T)
-  
+
   if (any(grepl("data.frame", class(path)))) {
     temp_occ = path
     setDT(temp_occ)

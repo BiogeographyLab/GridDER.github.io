@@ -47,7 +47,6 @@ find_crs_extent <- function(crs_num = "2154") {
     ymax <- as.numeric(strsplit(trimws(temp3[7]), " ")[[1]][2])
   }
 
-
   # temp3 = strsplit(temp2, "\n")[[1]]
   # xmin = as.numeric(strsplit(glue::trim(temp3[3]), " ")[[1]][1])
   # ymin = as.numeric(strsplit(glue::trim(temp3[3]), " ")[[1]][2])

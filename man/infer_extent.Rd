@@ -36,7 +36,7 @@ infer_extent(
 \item{crs_gridCharacter}{EPSG code for a coordinate reference system}
 }
 \description{
-Return an extent in the order of xmin, xmax, ymin, ymax
+Return an extent in the order of xmin, xmax, ymin, ymax.
 }
 \author{
 Xiao Feng

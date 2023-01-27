@@ -1,4 +1,4 @@
-#' @title Infer Origin
+#' @title Infer origin
 #' @description Find the minimum and maximum of occurrence. Here the minimum and maximum should match the resolution of the grid.
 #' @author Xiao Feng
 #'

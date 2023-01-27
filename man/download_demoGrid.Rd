@@ -10,7 +10,7 @@ download_demoGrid(downloadNew = F)
 \item{downloadNew}{Logical. TRUE to download the zip file containing all grid systems}
 }
 \description{
-This functions load from Zenodo the metadata with all grid systems compiled.
+This functions load from zenodo the metadata with all grid systems compiled.
 }
 \author{
 Xiao Feng

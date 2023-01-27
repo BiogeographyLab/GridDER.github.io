@@ -60,7 +60,7 @@ grid <- raster::rasterToPolygons(grid_to_raster, fun=NULL, na.rm=TRUE, dissolve=
 rgee::Map$addLayer(grid)
 
 # Compute standard deviation
-std_dev <- gridder::assess_env_uncertainty(x= nasadem, y= grid)
+std_dev <- GridDER::assess_env_uncertainty(x= nasadem, y= grid)
 }
 
 }

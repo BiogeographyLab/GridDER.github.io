@@ -12,7 +12,7 @@ infer_resolution(input_coord, digits = 1, ...)
 \item{...}{Additional parameters}
 }
 \description{
-Compute the resolution of the grid system
+Compute the resolution of the grid system.
 }
 \author{
 Xiao Feng

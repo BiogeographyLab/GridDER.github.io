@@ -2,7 +2,7 @@
 % Please edit documentation in R/infer_crs.R
 \name{infer_crs}
 \alias{infer_crs}
-\title{Infer Crs}
+\title{Infer crs}
 \usage{
 infer_crs(
   occ_path,

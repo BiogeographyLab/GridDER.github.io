@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_occ.R
 \name{load_occ}
 \alias{load_occ}
-\title{Load Occurrence Records}
+\title{Load occurrence records}
 \usage{
 load_occ(path, crs_num = NULL)
 }

@@ -51,7 +51,7 @@ grid_generation(
 The function returns a shapefile.
 }
 \description{
-This function is used to generate (simulate) a grid system based on metadata. The gridder package provided an example metadata to simulate some grid systems (2_simulate_grid.Rmd). To access the metadata file using download_demoGrid function.
+This function is used to generate (simulate) a grid system based on metadata. The GridDER package provided an example metadata to simulate some grid systems (2_simulate_grid.Rmd). To access the metadata file using download_demoGrid function.
 }
 \examples{
  \dontrun{
@@ -76,7 +76,7 @@ empirical_occ_extent = as.numeric(strsplit(empirical_occ_extent,",")[[1]])
 }
 
 # Simulate grid system
-NL_grid <- gridder::grid_generation(res_x = as.numeric(grid_metadata$resolution_x[iii]),
+NL_grid <- GridDER::grid_generation(res_x = as.numeric(grid_metadata$resolution_x[iii]),
                 res_y = as.numeric(grid_metadata$resolution_y[iii]),
                 unit = grid_metadata$resolution_unit[iii],
                 flag_crs=TRUE,

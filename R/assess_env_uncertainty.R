@@ -52,11 +52,11 @@
 #' rgee::Map$addLayer(grid)
 #'
 #' # Compute standard deviation
-#' std_dev <- gridder::assess_env_uncertainty(x= nasadem, y= grid)
+#' std_dev <- GridDER::assess_env_uncertainty(x= nasadem, y= grid)
 #' }
 #'
 assess_env_uncertainty <- function(x, y, by = 1000, scale = 1000) {
-  
+
   #add by xf
   if( "ee.image.Image" %in% class(x)  ){
 
@@ -85,13 +85,13 @@ assess_env_uncertainty <- function(x, y, by = 1000, scale = 1000) {
       )
       dataset <- rbind(dataset, db_local)
     }
-      
-     
+
+
     # add by xf
     }# end of for loop
-  }# end of gee processing 
+  }# end of gee processing
    else  {
-    #do something locally    
+    #do something locally
     for (i in seq(1, y_len, 1)) { # loop through every grid polygon
       temp_extractedValue = raster::extract(x,y[i,])
       temp_sd = sd (temp_extractedValue)
@@ -103,10 +103,9 @@ assess_env_uncertainty <- function(x, y, by = 1000, scale = 1000) {
       }
     }# end of for loop
   } # end of local processing
-    
-    
-    
-    
-    
+
+
+
+
   return(dataset)
 }

@@ -1,4 +1,4 @@
-#' @title Infer Crs
+#' @title Infer crs
 #' @description This function will project occurrences to a list of ~6600 crs, find  nearest 4 points, find the angle to the 4 points, then take reminder %%90, the smaller the better also find the distance to the 4 points, then all the distance is standardized to 0 mean and 1sd  then do a histogram, and calculate the freq of each bin,  pick the bin with highest freq ideally, the true crs will lead to the highest freq in that bin.
 #' @author Xiao Feng
 #'
@@ -48,7 +48,7 @@ infer_crs <- function(occ_path,
       occ_path = "df"
   }
 
-  crs_list <- data(crs_list_prj, package = "gridder", envir = environment())
+  crs_list <- data(crs_list_prj, package = "GridDER", envir = environment())
   crs_list <- crs_list_prj
   if (any(flag_debug > 0)) crs_list <- crs_list[flag_debug, ]
 
