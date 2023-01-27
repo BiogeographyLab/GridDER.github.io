@@ -40,8 +40,7 @@ knitr::include_graphics("inst/workflow.png")
 
 # Overview of functions in GridDER
 
-```{r table_2, echo=FALSE}
-#table_2 <- readr::read_csv("inst/table_2.csv") # Taina, table_2 is local file, not availaboe from Github.
+```{r table_2, echo=FALSE, warning=FALSE}
 table_2 <- gsheet::gsheet2tbl("https://docs.google.com/spreadsheets/d/1gj0EHmPpLNCNHZV09PQqt-ixG526Mvowjegk_z7oPyY/edit#gid=0")
 knitr::kable(table_2)
 ```
