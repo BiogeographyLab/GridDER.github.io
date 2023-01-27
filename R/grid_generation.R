@@ -5,7 +5,6 @@
 #' @param res_x A numeric input of longitude resolution.
 #' @param res_y A numeric input of latitude resolution.
 #' @param unit Character vector of unite in arc-minute ("minute") or kilometre ("km").
-#' @param flag_crs Logical. Flag the CRS.
 #' @param extent_unit Character vector. It can be "crs_countryPolygon", "crs_web_extent", "empirical_occ_extent", "shapefile_extent", "shifted_shapefile_extent".
 #' @param input_extent A vector of 4 numbers c(xmin,ymin,xmax,ymax).
 #' @param country Character vector of country name where the grid system is from, e.g. "Germany", it can be used to extract spatial extent and the final grid could be masked by country polygons.
@@ -91,9 +90,9 @@ grid_generation <- function(res_x = 10,
   #   country <- gsub('"', "", country)
   #   country <- strsplit(country, ",")[[1]]
   # }
-  
-  
-  
+
+
+
   if (!is.null(crs_num)) {
     crs_grid <- sp::CRS(paste0("+init=epsg:", crs_num))
   } else {
@@ -124,7 +123,7 @@ grid_generation <- function(res_x = 10,
   #print(sizex)
   #print(sizey)
   #print(unit)
-  
+
   if (extent_unit == "crs_countryPolygon") {
     flag_loadCountryPolygon <- TRUE
   }
@@ -135,14 +134,14 @@ grid_generation <- function(res_x = 10,
     print("load CountryPolygon")
     data(ne_10m_admin_0_countries, package = "GridDER", envir = environment())
     ne_10m_admin_0_countries
-    
+
     country_shp <- ne_10m_admin_0_countries
     # country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
     # country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
     # country_shp = load(country_shp)
     # country_shp = raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp")
     # country_shp = data("data/ne_10m_admin_0_countries.rda", envir=environment())
-    
+
     if (grepl(",", country)) {
       country <- gsub('"', "", country)
       country <- strsplit(country, ",")[[1]]
@@ -155,27 +154,27 @@ grid_generation <- function(res_x = 10,
     if (extent_unit == "crs_countryPolygon") {
       print("crs_countryPolygon")
       ext_temp <- raster::extent(one_country)
-      
+
       crs_ext_full <- rep(NA, 4)
       crs_ext_full[1] <- ext_temp[1]
       crs_ext_full[2] <- ext_temp[3]
       crs_ext_full[3] <- ext_temp[2]
       crs_ext_full[4] <- ext_temp[4]
-      
+
       crs_ext_full[1] <- crs_ext_full[1] - crs_ext_full[1] %% sizex
       crs_ext_full[2] <- crs_ext_full[2] - crs_ext_full[2] %% sizey
       crs_ext_full[3] <- crs_ext_full[3] - crs_ext_full[3] %% sizex
       crs_ext_full[4] <- crs_ext_full[4] - crs_ext_full[4] %% sizey
-      
+
       #print(crs_ext_full)
     }
-    
+
     if (!is.null(crs_num)) {
       if (crs_num == "4326" & !exists("crs_ext_full")) {
         crs_ext_full <- c(-180, -90, 180, 90)
       }
     }
-    
+
     if (extent_unit == "crs_web_extent") {
       crs_ext <- find_crs_extent(crs_num)
       crs_ext_full <- crs_ext
@@ -198,7 +197,7 @@ grid_generation <- function(res_x = 10,
   gradient_x <- seq(from = crs_ext_full[1], to = crs_ext_full[3], by = sizex)
   gradient_y <- seq(from = crs_ext_full[2], to = crs_ext_full[4], by = sizey)
   # }
-  
+
   if (TRUE) {
     gradient_x <- gradient_x + sizex / 2
     gradient_y <- gradient_y + sizey / 2
@@ -208,14 +207,14 @@ grid_generation <- function(res_x = 10,
   names(grid_xy) <- c("x", "y")
   sp::coordinates(grid_xy) <- ~ x + y
   raster::crs(grid_xy) <- crs_grid
-  
-  
+
+
   sp::gridded(grid_xy) <- TRUE
   one_grid_ly <- raster::raster(grid_xy)
   one_grid_polygon <- raster::rasterToPolygons(one_grid_ly, dissolve = F)
   raster::crs(one_grid_polygon) <- raster::crs(grid_xy)
-  
-  
+
+
   if (flag_maskByCountry) {
     if (!is.null(flag_buffer)) {
       one_country <- raster::buffer(one_country, width = max(sizex, sizey) * flag_buffer)
