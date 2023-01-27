@@ -159,8 +159,7 @@ print(result_ext)
 
 simulated_grid = GridDER::grid_generation(res_x=result_res$res_x, # resolution along x-axis
                                           res_y=result_res$res_y, # resolution along y-axis
-                                          flag_crs=TRUE,          # user provides a CRS code
-					  crs_num=results_crs$selected$code[1], # use the inferred CRS 
+                                          crs_num=results_crs$selected$code[1], # use the inferred CRS 
                                           country="France",       # the spatial file will be masked by country
 					  flag_maskByCountry=TRUE,
                                           extent_unit="empirical_occ_extent",
