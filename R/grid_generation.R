@@ -72,10 +72,12 @@
 #'
 #'
 #'  }
+
+
 grid_generation <- function(res_x = 10,
                             res_y = 10,
-                            unit = "km",
-                            flag_crs = TRUE,
+                            #unit = "km",
+                            #flag_crs = TRUE,
                             extent_unit = NULL,
                             input_extent = NULL,
                             country = NULL,
@@ -84,43 +86,45 @@ grid_generation <- function(res_x = 10,
                             flag_offset = NULL,
                             flag_maskByCountry = FALSE,
                             flag_buffer = 2,
-                            flag_loadCountryPolygon = TRUE) {
-  if (grepl(",", country)) {
-    country <- gsub('"', "", country)
-    country <- strsplit(country, ",")[[1]]
-  }
-
-
-
+                            flag_loadCountryPolygon = FALSE) {
+  # if (grepl(",", country)) {
+  #   country <- gsub('"', "", country)
+  #   country <- strsplit(country, ",")[[1]]
+  # }
+  
+  
+  
   if (!is.null(crs_num)) {
     crs_grid <- sp::CRS(paste0("+init=epsg:", crs_num))
   } else {
     crs_grid <- crs_obj
   }
-  if (unit == "km") {
-    sizex <- res_x * 1000
-    sizey <- res_y * 1000
-  }
-  if (unit == "meter" | unit == "m") {
-    sizex <- res_x
-    sizey <- res_y
-  }
-  if (unit == "minute") {
-    sizex <- res_x / 60
-    sizey <- res_y / 60
-  }
-  if (unit == "second") {
-    sizex <- res_x
-    sizey <- res_y
-  }
-  if (unit == "degree") {
-    sizex <- res_x / 3600
-    sizey <- res_y / 3600
-  }
-  print(sizex)
-  print(sizey)
-  print(unit)
-
+  # if (unit == "km") {
+  #   sizex <- res_x * 1000
+  #   sizey <- res_y * 1000
+  # }
+  # if (unit == "meter" | unit == "m") {
+  #   sizex <- res_x
+  #   sizey <- res_y
+  # }
+  # if (unit == "minute") {
+  #   sizex <- res_x / 60
+  #   sizey <- res_y / 60
+  # }
+  # if (unit == "second") {
+  #   sizex <- res_x
+  #   sizey <- res_y
+  # }
+  # if (unit == "degree") {
+  #   sizex <- res_x / 3600
+  #   sizey <- res_y / 3600
+  # }
+     sizex <- res_x
+     sizey <- res_y
+  #print(sizex)
+  #print(sizey)
+  #print(unit)
+  
   if (extent_unit == "crs_countryPolygon") {
     flag_loadCountryPolygon <- TRUE
   }
@@ -128,45 +132,50 @@ grid_generation <- function(res_x = 10,
     flag_loadCountryPolygon <- TRUE
   }
   if (flag_loadCountryPolygon) {
+    print("load CountryPolygon")
     data(ne_10m_admin_0_countries, package = "GridDER", envir = environment())
     ne_10m_admin_0_countries
-
+    
     country_shp <- ne_10m_admin_0_countries
-    # country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "GridDER"))
-    # country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "GridDER"))
+    # country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
+    # country_shp = load("data/ne_10m_admin_0_countries.rda", envir=system.file(package = "gridder"))
     # country_shp = load(country_shp)
     # country_shp = raster::shapefile("data/0_basemap/ne_10m_admin_0_countries.shp")
     # country_shp = data("data/ne_10m_admin_0_countries.rda", envir=environment())
+    
+    if (grepl(",", country)) {
+      country <- gsub('"', "", country)
+      country <- strsplit(country, ",")[[1]]
+    }
     one_country <- subset(country_shp, ADMIN %in% country)
-
     one_country <- spTransform(one_country, crs_grid)
   }
-
-  if (flag_crs) {
+#  if (flag_crs) {
+  if (TRUE) {
     if (extent_unit == "crs_countryPolygon") {
       print("crs_countryPolygon")
       ext_temp <- raster::extent(one_country)
-
+      
       crs_ext_full <- rep(NA, 4)
       crs_ext_full[1] <- ext_temp[1]
       crs_ext_full[2] <- ext_temp[3]
       crs_ext_full[3] <- ext_temp[2]
       crs_ext_full[4] <- ext_temp[4]
-
+      
       crs_ext_full[1] <- crs_ext_full[1] - crs_ext_full[1] %% sizex
       crs_ext_full[2] <- crs_ext_full[2] - crs_ext_full[2] %% sizey
       crs_ext_full[3] <- crs_ext_full[3] - crs_ext_full[3] %% sizex
       crs_ext_full[4] <- crs_ext_full[4] - crs_ext_full[4] %% sizey
-
-      print(crs_ext_full)
+      
+      #print(crs_ext_full)
     }
-
+    
     if (!is.null(crs_num)) {
       if (crs_num == "4326" & !exists("crs_ext_full")) {
         crs_ext_full <- c(-180, -90, 180, 90)
       }
     }
-
+    
     if (extent_unit == "crs_web_extent") {
       crs_ext <- find_crs_extent(crs_num)
       crs_ext_full <- crs_ext
@@ -185,11 +194,11 @@ grid_generation <- function(res_x = 10,
     crs_ext_full[1] <- crs_ext_full[1] - flag_offset[1]
     crs_ext_full[2] <- crs_ext_full[2] - flag_offset[2]
   }
-  print(crs_ext_full)
+  #print(crs_ext_full)
   gradient_x <- seq(from = crs_ext_full[1], to = crs_ext_full[3], by = sizex)
   gradient_y <- seq(from = crs_ext_full[2], to = crs_ext_full[4], by = sizey)
   # }
-
+  
   if (TRUE) {
     gradient_x <- gradient_x + sizex / 2
     gradient_y <- gradient_y + sizey / 2
@@ -199,14 +208,14 @@ grid_generation <- function(res_x = 10,
   names(grid_xy) <- c("x", "y")
   sp::coordinates(grid_xy) <- ~ x + y
   raster::crs(grid_xy) <- crs_grid
-
-
+  
+  
   sp::gridded(grid_xy) <- TRUE
   one_grid_ly <- raster::raster(grid_xy)
   one_grid_polygon <- raster::rasterToPolygons(one_grid_ly, dissolve = F)
   raster::crs(one_grid_polygon) <- raster::crs(grid_xy)
-
-
+  
+  
   if (flag_maskByCountry) {
     if (!is.null(flag_buffer)) {
       one_country <- raster::buffer(one_country, width = max(sizex, sizey) * flag_buffer)
@@ -220,4 +229,5 @@ grid_generation <- function(res_x = 10,
   }
   return(one_grid_polygon)
 }
+
 
