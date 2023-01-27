@@ -10,7 +10,7 @@
 #' @import kit
 #'
 infer_resolution = function(input_coord,digits=1,
-                            flag_unit="meter",
+                            #flag_unit="meter",
                             ...){
   demo = input_coord
   myD = dist( demo )
@@ -56,29 +56,35 @@ infer_resolution = function(input_coord,digits=1,
     uniqv[which.max(tabulate(match(v, uniqv)))]
   }
 
-  if(flag_unit=="meter"){
+#  if(flag_unit=="meter"){
+#    y_s = signif (distance_4[1,],digits  = 1)
+#    x_s = signif (distance_4[2,],digits  = 1)
+#    distance_on_y_freq = getmode( y_s )
+#    distance_on_x_freq = getmode( x_s )
+#
+#  } else if (flag_unit=="degree") {
+#    y_s = signif (distance_4[1,],digits  = 1)
+#    x_s = signif (distance_4[2,],digits  = 1)
+#    distance_on_y_freq = getmode(y_s )
+#    distance_on_x_freq = getmode(x_s )
+
+#   if(flag_unit=="meter" | flag_unit=="degree" | flag_unit=="ft" | flag_unit=="us-ft"){
     y_s = signif (distance_4[1,],digits  = 1)
     x_s = signif (distance_4[2,],digits  = 1)
     distance_on_y_freq = getmode( y_s )
     distance_on_x_freq = getmode( x_s )
-
-  } else if (flag_unit=="degree") {
-    y_s = signif (distance_4[1,],digits  = 1)
-    x_s = signif (distance_4[2,],digits  = 1)
-    distance_on_y_freq = getmode(y_s )
-    distance_on_x_freq = getmode(x_s )
-
-  } else if (flag_unit=="minute") {
-    y_s = signif (distance_4[1,]*60,digits  = 1)
-    x_s = signif (distance_4[2,]*60,digits  = 1)
-    distance_on_y_freq = getmode(y_s )/60
-    distance_on_x_freq = getmode(x_s )/60
-  } else if(flag_unit=="second"){
-    y_s = signif (distance_4[1,]*3600,digits  = 1)
-    x_s = signif (distance_4[2,]*3600,digits  = 1)
-    distance_on_y_freq = getmode(y_s )/3600
-    distance_on_x_freq = getmode(x_s  )/3600
-  }
+      
+#  } else if (flag_unit=="minute") {
+#    y_s = signif (distance_4[1,]*60,digits  = 1)
+#    x_s = signif (distance_4[2,]*60,digits  = 1)
+#    distance_on_y_freq = getmode(y_s )/60
+#    distance_on_x_freq = getmode(x_s )/60
+#  } else if(flag_unit=="second"){
+#    y_s = signif (distance_4[1,]*3600,digits  = 1)
+#    x_s = signif (distance_4[2,]*3600,digits  = 1)
+#    distance_on_y_freq = getmode(y_s )/3600
+#    distance_on_x_freq = getmode(x_s  )/3600
+#  }
 
   freq_table_x = table(x_s)
   freq_table_x = data.frame(freq_table_x)
@@ -92,15 +98,15 @@ infer_resolution = function(input_coord,digits=1,
   freq_table_y$y_s = as.numeric(as.character(freq_table_y$y_s))
   names(freq_table_y)[1] = "res_y"
 
-
-  if(flag_unit=="meter"){
-  } else if (flag_unit=="minute") {
-    freq_table_x$res_x = freq_table_x$res_x/60
-    freq_table_y$res_y = freq_table_y$res_y/60
-  } else if(flag_unit=="second"){
-    freq_table_x$res_x = freq_table_x$res_x/3600
-    freq_table_y$res_y = freq_table_y$res_y/3600
-  }
+#  if(flag_unit=="meter"){
+#   if(flag_unit=="meter" | flag_unit=="degree" | flag_unit=="ft" | flag_unit=="us-ft"){
+#  } else if (flag_unit=="minute") {
+#    freq_table_x$res_x = freq_table_x$res_x/60
+#    freq_table_y$res_y = freq_table_y$res_y/60
+#  } else if(flag_unit=="second"){
+#    freq_table_x$res_x = freq_table_x$res_x/3600
+#    freq_table_y$res_y = freq_table_y$res_y/3600
+#  }
 
 
 
