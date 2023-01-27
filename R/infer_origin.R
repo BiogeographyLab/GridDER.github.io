@@ -8,10 +8,6 @@
 #
 #' @param filters
 #'
-#' @return
-#' @export
-#'
-#' @examples
 infer_origin = function(input_occ,
                         fun=min,
                         flag_unit="meter",

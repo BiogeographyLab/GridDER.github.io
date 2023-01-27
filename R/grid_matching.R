@@ -11,12 +11,9 @@
 #' @param flag_rm_Large_outlier Give a pool of distances, then remove outliers (based on R boxplot algorithm).
 #' @param flag_absoluteTHD Numerical. An absolute distance, beyond of which an occurrence is excluded.
 #'
-#' @return
-#' @export
 #' @import raster gsheet
 #' @import sp
 #'
-#' @examples
 grid_matching <- function(input_occ,
                           input_grid = NULL,
                           country = NULL,

@@ -1,19 +1,14 @@
 #' @title Infer Resolution
-#' @description
+#' @description Compute the resolution of the grid system
 #'
 #' @author Xiao Feng
 #'
 #' @param input_coord
-#' @param digits
 #' @param flag_unit
 #' @param ...
 #'
-#' @return
-#' @export
-#'
 #' @import kit
 #'
-#' @examples
 infer_resolution = function(input_coord,digits=1,
                             flag_unit="meter",
                             ...){

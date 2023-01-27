@@ -6,10 +6,6 @@
 #' @param input_v Vector? X or Y coordinates
 #' @param round_num Numeric
 #'
-#' @return
-#' @export
-#'
-#' @examples
 get_dist_freq <- function(input_v,
                           round_num = 0) {
   distance_on_x <- as.numeric(dist(input_v))

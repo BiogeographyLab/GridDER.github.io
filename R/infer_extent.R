@@ -5,21 +5,18 @@
 #' @param method Character. A string, country_extent, crs_extent, occ_extent
 #' @param country Character. A string of country
 #' @param occ
-#' @param crs_grid
-#' @param flag_adjust_by_res Logical.
-#' @param res_x
-#' @param res_y
+#' @param crs_gridCharacter
+#' @param flag_adjust_by_res Logical. True or False to adjust by resolution
+#' @param res_x Numeric. X resolution
+#' @param res_y Numeric. Y resolution
 #' @param flag_adjust_origin
 #' @param flag_unit Character. A a string; default value is meter "meter". It also can "degree","minute","second"
 #
 #'
-#' @return
-#' @export
 #'
 #' @import raster rgdal
 #' @import sp
 #'
-#' @examples
 infer_extent <- function(method = "",
                          country = NULL,
                          occ = NULL,

@@ -10,13 +10,12 @@
 #' @param cup_num Numerical. To define the number of cores to use. Default is 2.
 #' @param flag_debug Numerical. Default -1.
 #'
-#' @return
 #' @export
 #' @note Using 15 cores, it took ~10-20 minutes to finish this workflow.
 #'
 #' @import data.table doParallel
 #' @import raster rgdal
-#' @examples
+#'
 infer_crs <- function(occ_path,
                      truth_crs_num = NA,
                      flag_saveTemp = TRUE,
@@ -37,7 +36,7 @@ infer_crs <- function(occ_path,
     dir.create(dirname(temp_path))
     dir.create(temp_path)
   }
-  
+
 # if( any(grepl("data.frame", class(occ_path)))   ){
 #  occ1 = occ_path
 #}
@@ -48,7 +47,7 @@ infer_crs <- function(occ_path,
   if( any(grepl("data.frame", class(occ_path)))   ){
       occ_path = "df"
   }
-  
+
   crs_list <- data(crs_list_prj, package = "gridder", envir = environment())
   crs_list <- crs_list_prj
   if (any(flag_debug > 0)) crs_list <- crs_list[flag_debug, ]

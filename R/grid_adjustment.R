@@ -9,7 +9,6 @@
 #' @export
 #' @import raster sp
 #'
-#' @examples
 grid_adjustment <- function(input_grid,
                             input_occ_grid) {
   if (class(input_grid) == "character") {

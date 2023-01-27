@@ -4,8 +4,6 @@
 #'
 #' @param downloadNew Logical. TRUE to download the zip file containing all grid systems
 #'
-#'
-#' @examples
 download_demoGrid <- function(downloadNew = F) {
   share_url <- "https://zenodo.org/record/6447902/files/2_clean_grid.zip?download=1"
 

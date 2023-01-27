@@ -5,10 +5,6 @@
 #' @param M
 #' @param N
 #'
-#' @return
-#' @export
-#'
-#' @examples
 cal_angle <- function(M,
                       N) {
   N <- c(N[1] - M[1], N[2] - M[2])
