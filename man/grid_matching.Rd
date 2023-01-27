@@ -10,7 +10,7 @@ grid_matching(
   country = NULL,
   grid_metadata = NULL,
   flag_relativeTHD = NULL,
-  flag_rm_Large_outlier = TRUE,
+  flag_rm_Large_outlier = FALSE,
   flag_absoluteTHD = NULL
 )
 }

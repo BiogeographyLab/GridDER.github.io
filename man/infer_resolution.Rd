@@ -4,13 +4,15 @@
 \alias{infer_resolution}
 \title{Infer Resolution}
 \usage{
-infer_resolution(input_coord, digits = 1, flag_unit = "meter", ...)
+infer_resolution(input_coord, digits = 1, ...)
 }
 \arguments{
-\item{...}{}
+\item{input_coord}{Coordinates of spatial points}
+
+\item{...}{Additional parameters}
 }
 \description{
-Infer Resolution
+Compute the resolution of the grid system
 }
 \author{
 Xiao Feng

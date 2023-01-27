@@ -12,9 +12,13 @@ infer_origin(
 )
 }
 \arguments{
+\item{input_occ}{Spatial points}
+
+\item{fun}{Function used to infer the origin}
+
 \item{flag_unit}{Character. Should be a string; default value is meter It also can "degree","minute","second".}
 
-\item{filters}{}
+\item{filters}{A series of values used as dividend of the coordinates to find the origin}
 }
 \description{
 Find the minimum and maximum of occurrence. Here the minimum and maximum should match the resolution of the grid.

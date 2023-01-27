@@ -4,12 +4,12 @@
 #'
 #' @param method Character. A string, country_extent, crs_extent, occ_extent
 #' @param country Character. A string of country
-#' @param occ
-#' @param crs_gridCharacter
+#' @param occ Spatial points
+#' @param crs_gridCharacter EPSG code for a coordinate reference system
 #' @param flag_adjust_by_res Logical. True or False to adjust by resolution
 #' @param res_x Numeric. X resolution
 #' @param res_y Numeric. Y resolution
-#' @param flag_adjust_origin
+#' @param flag_adjust_origin Boolean parameter for adjust the origin of the grid
 #' @param flag_unit Character. A a string; default value is meter "meter". It also can "degree","minute","second"
 #
 #'

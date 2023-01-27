@@ -27,7 +27,7 @@ assess_sp_uncertainty(
 The function computes spatial uncertainty of a grid system by calculating the distance between grid centroids toward gridded coordinates and non-gridded coordinates (e.g. iNaturalist data).
 }
 \examples{
-\dontrun{
+ \dontrun{
 
 distance <- cal_emp_G_distance(input_grid = "data/2_clean_grid/grid_ID_2_polygon_masked.shp",
 input_occ_grid = "data/france_datasetID10/0068190-210914110416597.csv",

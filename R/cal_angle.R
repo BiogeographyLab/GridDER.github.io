@@ -1,9 +1,9 @@
 #' @title Cal Angle function
-#' @description
+#' @description This function calculates the angle between two points. It uses one point as the reference center. 0 degree means top, 90 degree means right, 180 degree means below, and 270 degree means left.
 #' @author Xiao Feng
 #'
-#' @param M
-#' @param N
+#' @param M Coordinate of the reference point
+#' @param N Coordinate of the reference point
 #'
 cal_angle <- function(M,
                       N) {

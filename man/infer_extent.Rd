@@ -21,9 +21,19 @@ infer_extent(
 
 \item{country}{Character. A string of country}
 
-\item{flag_adjust_by_res}{Logical.}
+\item{occ}{Spatial points}
+
+\item{flag_adjust_by_res}{Logical. True or False to adjust by resolution}
+
+\item{res_x}{Numeric. X resolution}
+
+\item{res_y}{Numeric. Y resolution}
+
+\item{flag_adjust_origin}{Boolean parameter for adjust the origin of the grid}
 
 \item{flag_unit}{Character. A a string; default value is meter "meter". It also can "degree","minute","second"}
+
+\item{crs_gridCharacter}{EPSG code for a coordinate reference system}
 }
 \description{
 Return an extent in the order of xmin, xmax, ymin, ymax

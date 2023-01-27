@@ -2,11 +2,11 @@
 #' @description Find the minimum and maximum of occurrence. Here the minimum and maximum should match the resolution of the grid.
 #' @author Xiao Feng
 #'
-#' @param input_occ
-#' @param fun
+#' @param input_occ Spatial points
+#' @param fun Function used to infer the origin
 #' @param flag_unit Character. Should be a string; default value is meter It also can "degree","minute","second".
 #
-#' @param filters
+#' @param filters A series of values used as dividend of the coordinates to find the origin
 #'
 infer_origin = function(input_occ,
                         fun=min,
