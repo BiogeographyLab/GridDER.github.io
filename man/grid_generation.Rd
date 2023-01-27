@@ -7,8 +7,6 @@
 grid_generation(
   res_x = 10,
   res_y = 10,
-  unit = "km",
-  flag_crs = TRUE,
   extent_unit = NULL,
   input_extent = NULL,
   country = NULL,
@@ -17,17 +15,13 @@ grid_generation(
   flag_offset = NULL,
   flag_maskByCountry = FALSE,
   flag_buffer = 2,
-  flag_loadCountryPolygon = TRUE
+  flag_loadCountryPolygon = FALSE
 )
 }
 \arguments{
 \item{res_x}{A numeric input of longitude resolution.}
 
 \item{res_y}{A numeric input of latitude resolution.}
-
-\item{unit}{Character vector of unite in arc-minute ("minute") or kilometre ("km").}
-
-\item{flag_crs}{Logical. Flag the CRS.}
 
 \item{extent_unit}{Character vector. It can be "crs_countryPolygon", "crs_web_extent", "empirical_occ_extent", "shapefile_extent", "shifted_shapefile_extent".}
 
@@ -46,6 +40,8 @@ grid_generation(
 \item{flag_buffer}{Draw an additional buffer (e.g. 2 additional grids) along the simulated grid system, this can help cover the areas along the coastal line.}
 
 \item{flag_loadCountryPolygon}{Load Natural Earth 10meter country polygon data (ne_10m_admin_0_countries).}
+
+\item{unit}{Character vector of unite in arc-minute ("minute") or kilometre ("km").}
 }
 \value{
 The function returns a shapefile.
