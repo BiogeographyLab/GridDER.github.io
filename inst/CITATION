@@ -1,0 +1,23 @@
+citHeader("To cite GridDER in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "GridDER: Grid Detection and Evaluation in R",
+  author   = personList(as.person("Xiao Feng"),
+                   as.person("Tainá Rocha"),
+                   as.person("Hanna Thammavong"),
+                   as.person("Rima Tulaiha"),
+                   as.person("Xin Chen"),
+                   as.person("Yingying Xie"),
+                   as.person("Daniel Park")),,
+  journal  = "EcoEvoRxiv"",
+  year     = "2022",
+  volume   = "",
+  number   = "",
+  pages    = "1-22",
+  url      = "https://doi.org/10.32942/osf.io/6qy5u",
+  textVersion = paste("Feng X, Rocha T, Thammavong H, Tulaiha R, Chen X, Xie Y, Park D (2020).",
+  "GridDER: Grid Detection and Evaluation in R",
+  "EcoEvoRxiv"",
+  "URL https://doi.org/10.32942/osf.io/6qy5u")
+)
