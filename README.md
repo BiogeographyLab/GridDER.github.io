@@ -17,7 +17,7 @@ Currently **gridder** can be installed from GitHub:
 
 # Without vignette
 
-remotes::install_github("BiogeographyLab/gridder")
+remotes::install_github("BiogeographyLab/GridDER")
 
 
 ```
