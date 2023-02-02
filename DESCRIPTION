@@ -15,7 +15,7 @@ Description: A set of funtions for identifying biodiversity records that have be
 License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Imports: 
     doParallel,
     ggplot2,
