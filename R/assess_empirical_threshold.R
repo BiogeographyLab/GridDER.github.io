@@ -104,7 +104,6 @@ assess_empirical_threshold <- function(input_grid,
     plot(iNaturalist_subset_prj, add = T, col = "gray")
     plot(input_occ_grid, add = T, col = "blue")
 
-    library(ggplot2)
     d1 <- data.frame(d_grid_occ_min)
     d2 <- data.frame(d_random_occ_min)
     names(d1) <- "distance"
