@@ -30,12 +30,11 @@ Imports:
     sf,
     sp,
     data.table
-URL: https://biogeographylab.github.io/gridder.github.io/
-BugReports: https://github.com/BiogeographyLab/gridder.github.io/issues
+URL: https://biogeographylab.github.io/GridDER.github.io/
+BugReports: https://github.com/BiogeographyLab/GridDER.github.io/issues
 Depends: 
     R (>= 2.10)
 LazyData: true
 Suggests: 
     knitr,
     rmarkdown
-VignetteBuilder: knitr
