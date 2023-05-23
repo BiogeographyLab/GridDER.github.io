@@ -28,7 +28,7 @@ The functions with prefix "ee_" is based on rgee package for interacting with Go
 \item{Python >= v3.5}
 \item{EarthEngine Python API (Python package)}
 }
-If the strict dependencies are not installed, rgee just will not work. It highly recommended seeing the installations and activation instructions in \href{https://cran.r-project.org/web/packages/rgee/vignettes/rgee01.html#6_Installation}{rgee} documentation
+If the strict dependencies are not installed, rgee just will not work. It highly recommended seeing the installations and activation instructions in \href{https://r-spatial.github.io/rgee/}{rgee} documentation.
 }
 \examples{
 \dontrun{
@@ -65,7 +65,7 @@ std_dev <- GridDER::assess_env_uncertainty(x= nasadem, y= grid)
 
 }
 \seealso{
-\href{https://csaybar.github.io/rgee-examples/}{rgee examples} and \href{https://cran.r-project.org/web/packages/rgee/vignettes/rgee01.html}{rgee cran documentation}.
+\href{https://csaybar.github.io/rgee-examples/}{rgee examples}.
 }
 \author{
 Tainá Rocha

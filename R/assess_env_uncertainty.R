@@ -14,8 +14,8 @@
 #' \item{Python >= v3.5}
 #' \item{EarthEngine Python API (Python package)}
 #' }
-#' If the strict dependencies are not installed, rgee just will not work. It highly recommended seeing the installations and activation instructions in \href{https://cran.r-project.org/web/packages/rgee/vignettes/rgee01.html#6_Installation}{rgee} documentation
-#' @seealso \href{https://csaybar.github.io/rgee-examples/}{rgee examples} and \href{https://cran.r-project.org/web/packages/rgee/vignettes/rgee01.html}{rgee cran documentation}.
+#' If the strict dependencies are not installed, rgee just will not work. It highly recommended seeing the installations and activation instructions in \href{https://r-spatial.github.io/rgee/}{rgee} documentation.
+#' @seealso \href{https://csaybar.github.io/rgee-examples/}{rgee examples}.
 #' @export
 #'
 #' @import rgee rmapshaper
