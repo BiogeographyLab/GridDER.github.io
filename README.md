@@ -23,7 +23,7 @@ remotes::install_github("BiogeographyLab/GridDER")
 ```
 
 ### vignette 
-A short guide of using gridder can be found here: https://biogeographylab.github.io/gridder.github.io/
+A short guide of using gridder can be found here: https://biogeographylab.github.io/GridDER.github.io/
 
 
 ### To see the internal data use the fution `data()` or `str()`
