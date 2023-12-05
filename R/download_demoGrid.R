@@ -5,7 +5,7 @@
 #' @param downloadNew Logical. TRUE to download the zip file containing all grid systems
 #'
 download_demoGrid <- function(downloadNew = F) {
-  share_url <- "https://zenodo.org/record/6447902/files/2_clean_grid.zip?download=1"
+  share_url <- "https://zenodo.org/record/10263092/files/2_clean_grid.zip?download=1"
 
   local_path <- system.file(package = "GridDER")
   # local_path = system.file(package="dismo")
