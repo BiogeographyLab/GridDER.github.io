@@ -5,7 +5,7 @@ The package is a tool for identifying biodiversity records that have been design
 
 
 ### Citation
-Xiao Feng, Tainá Rocha, Hanna TThammavong,Rima Tulaiha, Xin Chen,Yingying Xie, Daniel Park (2022) GridDER: Grid Detection and Evaluation in R. https://doi.org/10.32942/osf.io/6qy5u
+Feng, X., Rocha, T., Thammavong, H. T., Tulaiha, R., Chen, X., Xie, Y., & Park, D. S. (2024). GridDER: Grid Detection and Evaluation in R. *Ecological Informatics*, *79*, 102391. [https://doi.org/10.32942/osf.io/6qy5u](https://doi.org/10.1016/j.ecoinf.2023.102391)
 
 
 
